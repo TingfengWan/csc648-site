@@ -1,0 +1,26 @@
+#header {
+    background-color: blueviolet;
+    color: white;
+}
+
+#about-body {
+    font-family: verdana;
+    text-align: center;
+    background-color: white;
+    color: black;
+    height: 70vh;
+}
+
+.white-font {
+    color:white;
+}
+
+.border {
+    border-bottom-style: solid;
+}
+.button {
+    background: white;
+    border-style: solid;
+    border-color: blueviolet;
+    border-radius: 5px;
+}
