@@ -7,10 +7,10 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP
-2. SSH username
-3. SSH password or key.
-    <br> If a ssh key is used please upload the key to the credentials folder.
+1. Server URL: http://ec2-3-12-102-210.us-east-2.compute.amazonaws.com:3000/
+2. Key is in the credentials folder called "CSC648.pem".
+    <br> Command used: ssh -i (key's location) ubuntu@ec2-3-12-102-210.us-east-2.compute.amazonaws.com
+3. App is running on port 3000.
 4. Database URL or IP and port used.
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
 5. Database username
