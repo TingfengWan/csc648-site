@@ -1,6 +1,8 @@
 {
   "name": "sfsu-trade",
   "version": "1.0.0",
+  "private": true,
+  "proxy": "http://localhost:3000",
   "description": "Application for CSC 648",
   "main": "index.js",
   "scripts": {

@@ -1,13 +1,23 @@
 const express = require('express');
-const path = require('path');
+const httpProxy = require('http-proxy');
+const { gatewayPort, staticServerPort, postServerPort} = require('../documentation/lib/consts.js');
 
 const app = express();
+const apiProxy = httpProxy.createProxyServer(app);
 
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index/index.html'));
+apiProxy.on('error', (err, req, res) => {
+  console.log(err);
+  res.status(500).send('Proxy is down');
 });
 
-app.listen(3000);
+// if /post prefix
+app.all('/post*', (req, res) => {
+  apiProxy.web(req, res, { target: postServerPort });
+});
 
+// else route to static file server
+app.all('/*', (req, res) => {
+  apiProxy.web(req, res, { target: staticServerPort });
+});
+
+app.listen(gatewayPort);

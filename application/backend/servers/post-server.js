@@ -25,6 +25,27 @@ const app = express();
 app.use(cookieParser());
 app.use(bodyParser());
 
+// returns list of categories
+app.get('/post/categories', (req, res) => {
+    const query = `
+        SELECT category FROM PostCategories;
+    `;
+    database.query(query, (err, result) => {
+        if ( err ) {
+            res.status(400);
+            res.send({
+                status: 400,
+                message: 'Invalid query'
+            });
+            return ;
+        }
+        res.send({
+            categories: result
+        });
+    });
+
+});
+
 // ie. /post/search?title=BobInAHat&categories=math,science
 app.get('/post/search', (req, res) => {
     let title = sanitizer(req.query.title);
