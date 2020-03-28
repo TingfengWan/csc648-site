@@ -12,12 +12,15 @@ apiProxy.on('error', (err, req, res) => {
 
 // if /post prefix
 app.all('/post*', (req, res) => {
-  apiProxy.web(req, res, { target: postServerPort });
+  console.log('Proxying to post server.');
+  apiProxy.web(req, res, { target: `http://localhost:${postServerPort}` });
 });
 
 // else route to static file server
 app.all('/*', (req, res) => {
-  apiProxy.web(req, res, { target: staticServerPort });
+  console.log('Proxyign to static server.');
+  apiProxy.web(req, res, { target: `http://localhost:${staticServerPort}` });
 });
 
+console.log('Listening on port: ', gatewayPort);
 app.listen(gatewayPort);
