@@ -48,44 +48,53 @@ app.get('/post/categories', (req, res) => {
 
 // ie. /post/search?title=BobInAHat&categories=math,science
 app.get('/post/search', (req, res) => {
-    let title = sanitizer(req.query.title);
-    let category = sanitizer(req.query.category).split(',');
+    console.log(`Title: ${req.query.title}`);
+    console.log(`Category: ${req.query.category}`);
+    let title = sanitizer(req.query.title) || '';
+    let category = sanitizer(req.query.category) || '';
     let query = 'SELECT * FROM Posts';
 
-    if ( title !== '' || category.length > 0 ) {
+    console.log(`Sanitized Title: ${title}`);
+    console.log(`Sanitized Category: ${category}`);
+
+    if ( title || category ) {
         // if no query params, return all posts
-        query += 'AS P WHERE ';
+        query += ' AS P WHERE ';
         let whereConditions = '';
 
-        if ( title !== '' ) {
+        if ( title ) {
             // if there is title, add clause
-            whereConditions += `P.title LIKE "%title%"`;
+            whereConditions += `P.title LIKE "%${title}%"`;
         }
-        if ( category.length > 0 ) {
+        if ( category ) {
+	    category = category.split(',');
             if ( whereConditions !== '' ) {
                 // if there was previous clause, add conjunction
                 whereConditions += ` AND `;
             }
             whereConditions += `
-                P.id IN (SELECT PC0.post_id 
+                P.id IN (SELECT PC0.post_id
                     FROM PostCategories AS PC0
                     WHERE P.id = PC0.post_id
-                    AND PC0.category = ${category[0]})
+                    AND PC0.category = "${category[0]}")
                 `;
             for ( let i = 1; i < category.length; i++ ) {
                 // join all other categories with AND conjunctions
                 whereConditions += `
-                    AND P.id IN (SELECT PC${i}.post_id 
+                    AND P.id IN (SELECT PC${i}.post_id
                         FROM PostCategories AS PC${i}
                         WHERE P.id = PC${i}.post_id
-                        AND PC${i}.category = ${category[i]})
+                        AND PC${i}.category = "${category[i]}")
                     `;
             }
         }
         query += whereConditions;
     }
+    query += ';';
+    console.log(query);
     database.query(query, (err, result) => {
         if ( err ) {
+	    console.log(err);
             res.status(400);
             res.send({
                 status: 400,

@@ -18,7 +18,7 @@ app.all('/post*', (req, res) => {
 
 // else route to static file server
 app.all('/*', (req, res) => {
-  console.log('Proxyign to static server.');
+  console.log('Proxying to static server.');
   apiProxy.web(req, res, { target: `http://localhost:${staticServerPort}` });
 });
 

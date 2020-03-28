@@ -4,6 +4,8 @@ module.exports = {
     staticServerPort: 5000,
     gatewayPort: 3000,
     sanitizer: (str) => {
+	if ( !str || str === '')
+		return '';
         const map = {
             '&': '&amp;',
             '<': '&lt;',
@@ -13,6 +15,6 @@ module.exports = {
             "/": '&#x2F;',
         };
         const reg = /[&<>"'/]/ig;
-        return string.replace(reg, (match)=>(map[match]));
+        return str.replace(reg, (match)=>(map[match]));
     }
 }
