@@ -22,7 +22,7 @@ database.connect((err) => {
     console.log('Connected to test database');
     database.query(`USE ${process.env.db_name}`);
     database.query('INSERT INTO Posts(creator_email,title,media_preview,media_content,file_name,has_file,approver_email,post_body,is_approved) VALUES (\
-        student_test@sfsu.edu,\
+        "student_test@sfsu.edu",\
         "Rubber Ducky",\
         BINARY(:data),\
         BINARY(:data),\
@@ -33,7 +33,7 @@ database.connect((err) => {
         true\
     )', {data});
     database.query('INSERT INTO Posts(creator_email,title,media_preview,media_content,file_name,has_file,approver_email,post_body,is_approved) VALUES (\
-        student_test@sfsu.edu,\
+        "student_test@sfsu.edu",\
         "Science floating thingy",\
         BINARY(:data),\
         BINARY(:data),\
@@ -44,7 +44,7 @@ database.connect((err) => {
         true\
     )', {data});
     database.query('INSERT INTO Posts(creator_email,title,media_preview,media_content,file_name,has_file,cost,approver_email,post_body,is_approved) VALUES (\
-        student_test@sfsu.edu,\
+        "student_test@sfsu.edu",\
         "Van Gough Duck",\
         BINARY(:data),\
         BINARY(:data),\
