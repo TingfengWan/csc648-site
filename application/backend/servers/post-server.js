@@ -28,7 +28,7 @@ app.use(bodyParser());
 // returns list of categories
 app.get('/post/categories', (req, res) => {
     const query = `
-        SELECT category FROM PostCategories;
+        SELECT DISTINCT category FROM PostCategories;
     `;
     database.query(query, (err, result) => {
         if ( err ) {
