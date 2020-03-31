@@ -1,36 +1,32 @@
 
 function search() {
     var request = new XMLHttpRequest();
-    var URL = 'http://ec2-3-21-156-235.us-east-2.compute.amazonaws.com:3000/post/search?';
+    var URL = 'http://3.22.78.154:3000/post/search?';
 
 
-    var userInput = document.getElementById('search-input').value;
+    var userInput = document.getElementById('search').value;
     var category = document.getElementById("categories").value;
 
-    var searchTitle = 'tite='.concat(userInput);
+    var searchTitle = 'title='.concat(userInput);
     var categoryTerm = 'category='.concat(category);
     var searchURL = URL.concat(searchTitle, '&', categoryTerm);
-
-    console.log(categoryTerm);
-    console.log(searchTitle);
+    searchURL = encodeURI(searchURL);
+    
+    console.log(categoryTerm + searchTitle);
     console.log(searchURL);
 
-    /**
-    request.onload = function () {
-        console.log(request.reponseText);
-    }
-
-    request.open('GET', searchURL, true);
-    request.send();
-     */
+        fetch(
+          searchURL
+        )
+          .then(data => {
+            return data.json();
+          })
+          .then(json_data => console.log(json_data))
+          .catch(err => {
+            console.log(err);
+          });
 
 }
 
-/**
-function search() {
-    var userInput = document.getElementById('search-input').value;
-    console.log(userInput);
-}
 
-*/
-
+    
