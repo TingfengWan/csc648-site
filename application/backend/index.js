@@ -10,6 +10,11 @@ apiProxy.on('error', (err, req, res) => {
   res.status(500).send('Proxy is down');
 });
 
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+  });
 // if /post prefix
 app.all('/post*', (req, res) => {
   console.log('Proxying to post server.');
