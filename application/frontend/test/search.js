@@ -41,6 +41,9 @@ function appendData(data) {
 
     var mainContainer = document.getElementById("search-results");
 
+    if(data.posts.length == 0) {
+        mainContainer.innerHTML = 'No results';
+    }
     for(var i = 0; i < data.posts.length; i++) {
 
         var post = data.posts[i];
