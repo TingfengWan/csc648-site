@@ -21,10 +21,26 @@ function search() {
           .then(data => {
             return data.json();
           })
-          .then(json_data => console.log(json_data))
+          .then(function (data) {
+            console.log(data);
+            appendData(data);
+          })
           .catch(err => {
             console.log(err);
           });
+
+}
+
+function appendData(data) {
+
+    var mainContainer = document.getElementById("search-results");
+
+    for(var i = 0; i < data.posts.length; i++) {
+        console.log(data.posts[i].title);
+        var div = document.createElement("div");
+        div.innerHTML = 'Title: ' + data.posts[i].title;
+        mainContainer.appendChild(div);
+    }
 
 }
 
