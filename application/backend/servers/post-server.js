@@ -125,7 +125,7 @@ app.get('/post/search', (req, res) => {
 		is_approved: post.is_approved,
                 media_preview: bufferToBase64(post.media_preview),
             }
-	))l
+	));
         res.send({
             posts: result
 	});
