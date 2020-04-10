@@ -17,11 +17,23 @@
   <!-- Search Bar -->
   <div id="cover">
     <form method="get" action="">
-      <div class="tb">
-        <div class="td">
-          <input type="text" placeholder="Search" required>
+      <div class="table">
+        <div>
+          <div class = "box">
+            <select id="categories">
+              <option>Categories</option>
+              <option>Math</option>
+              <option>Science</option>
+              <option>Physical Education</option>
+              <option>Astronomy</option>
+              <option>Swimming</option>
+            </select>
+          </div>
         </div>
-        <div class="td" id="s-cover">
+        <div class="tablecell">
+          <input id="searchPlaceHolder" type="text" placeholder="Search" required>
+        </div>
+        <div class="tablecell" id="s-cover">
           <button type="submit">
             <div id="s-circle"></div>
             <span></span>
@@ -29,6 +41,10 @@
         </div>
       </div>
     </form>
+  </div>
+  <!-- Display Items -->
+  <div class="itemContainer">
+    
   </div>
 </body>
 

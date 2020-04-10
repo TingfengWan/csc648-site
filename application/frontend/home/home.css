@@ -2,13 +2,13 @@ body {
     margin: 0;
   }
   
+  /* Navigation Bar */
   /* Add a black background color to the top navigation bar */
   .topnav {
     overflow: hidden;
     background-color: #330033;
     margin: 0;
   }
-  
   /* Style the links inside the navigation bar */
   .topnav a {
     float: left;
@@ -17,23 +17,20 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
     font-family: sans-serif;
+    font-size: 17px;
     font-weight: bold;
   }
-  
   /* Change the color of links on hover */
   .topnav a:hover {
     background-color: #ddd;
     color: black;
   }
-  
   /* Style the "active" element to highlight the current page */
   .topnav a.active {
     background-color: #2196F3;
     color: white;
   }
-  
   /* Style the search box inside the navigation bar */
   .topnav input[type=text] {
     float: right;
@@ -43,22 +40,20 @@ body {
     margin-right: 16px;
     font-size: 17px;
   }
-  
   .topnav .user {
     float: right;
   }
-  
-  .tb
+
+  .table
   {
       display: table;
       width: 100%;
-      /* margin-top: 20%; */
-  }
-  
-  .td
+    }
+  .tablecell
   {
       display: table-cell;
       vertical-align: middle;
+      width: 100%;
   }
   
   input, button
@@ -71,17 +66,20 @@ body {
       background-color: transparent;
   }
   
+
+  /* Search Bar */
   #cover
   {
-      margin: 0 auto;
-      background-color: #330033;
-      border-radius: 20px;
-      transform: scale(0.6);
+    position: absolute;
+    width: 100%;
+    background-color: #330033;
+    border-radius: 20px;
+    transform: scale(0.6);
   }
-  
+
   form
   {
-      height: 10%;
+    height: 10%;
   }
   
   input[type="text"]
@@ -195,8 +193,45 @@ body {
       background-color: #fff;
   }
   
+  /* Category Drop Down */
+.box {
+  position: relative;
+  height: 100px;
+  width: 300px;
+}
+
+  .box select {
+    background-color: #330033;
+    color: white;
+    padding: 0px;
+    height: 100%;
+    border: none;
+    border-radius: 20px;
+    font-size: 35px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+
+  .box select option {
+    font-size: 20px;
+    padding: 30px;
+  }
+
+  #searchPlaceHolder {
+    position: relative;
+    padding-left: 35px;
+    width: fit-content;
+    margin: 0;
+  }
   
-  
+  #categories {
+    padding-top: 5px;
+    padding-left: 10px;
+  }
+
+
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
     .topnav a, .topnav input[type=text] {
@@ -210,4 +245,8 @@ body {
     .topnav input[type=text] {
       border: 1px solid #ccc;
     }
+  }
+
+  .itemContainer {
+    background: #330033;
   }
