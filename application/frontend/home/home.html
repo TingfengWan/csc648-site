@@ -3,48 +3,184 @@
 <head>
   <title>Home</title>
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
   <!-- Navigation bar -->
   <div class="topnav">
     <a class="active" href="/">Home</a>
-    <a href="about">About</a>
+    <a href="../about/about.html">About</a>
     <a href="contact">Contact</a>
     <a class="user" href="register">Register</a>
     <a class="user" href="login">Login</a>
   </div>
   <!-- Search Bar -->
-  <div id="cover">
-    <form method="get" action="">
-      <div class="table">
-        <div>
-          <div class = "box">
-            <select id="categories">
-              <option>Categories</option>
-              <option>Math</option>
-              <option>Science</option>
-              <option>Physical Education</option>
-              <option>Astronomy</option>
-              <option>Swimming</option>
-            </select>
-          </div>
+  <div class="container">
+    <form action="">
+      <div class="input-group mb-1 mt-5">
+        <div class="input-group-prepend">
+          <select class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <option>All</option>
+            <option>Math</option>
+            <option>Astronomy</option>
+            <option>Physical Education</option>
+            <option>Business</option>
+          </select>
+          </select>
         </div>
-        <div class="tablecell">
-          <input id="searchPlaceHolder" type="text" placeholder="Search" required>
-        </div>
-        <div class="tablecell" id="s-cover">
-          <button type="submit">
-            <div id="s-circle"></div>
-            <span></span>
-          </button>
-        </div>
+        <input type="text" class="form-control text-white mh-100" aria-label="Text input with dropdown button"
+          placeholder="Search">
       </div>
     </form>
   </div>
+  <!-- Department Categories -->
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-sm">
+        <a class="department" href="" alt="">Math</a>
+      </div>
+      <div class="col-sm">
+        <a class="department" href="" alt="">Science</a>
+      </div>
+      <div class="col-sm">
+        <a class="department" href="" alt="">Business</a>
+      </div>
+      <div class="col-sm">
+        <a class="department" href="" alt="">Theatre</a>
+      </div>
+      <div class="col-sm">
+        <a class="department" href="" alt="">Ethnic Studies</a>
+      </div>
+      <div class="col-sm">
+        <a class="department" href="" alt="">Liberal Arts</a>
+      </div>
+    </div>
+  </div>
   <!-- Display Items -->
-  <div class="itemContainer">
-    
+  <div class="container-fluid">
+    <h1>Top Purchases</h1>
+    <div class="row">
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <h1>Recent Posting</h1>
+    <div class="row">
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="itemContainer">
+          <div class="col pt-3">
+            <h1 class="itemname">Item Name</h1>
+            <img class="thumbnail">
+            <h3 class="itemname">$$$</h5>
+              <h3 class="itemname">Description</h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </body>
 
