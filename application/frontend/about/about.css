@@ -71,6 +71,20 @@
     float: right;
   }
 
+  .previous {
+    background-color: #330033;
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+  }
+
+  .round {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 50%;
+  }
+
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
     .topnav a, .topnav {
