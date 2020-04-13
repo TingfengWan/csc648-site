@@ -45,13 +45,22 @@
   }
 
   #image {
-      margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 
-  .input-group-text {
-    background-color: purple;
-    color: white;
+  #image-preview-div {
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items:center;
+    justify-content: center;
   }
+
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
     .topnav a, .topnav {

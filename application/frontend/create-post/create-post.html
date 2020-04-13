@@ -39,14 +39,14 @@
             <div class="form-group">
                 <label for="category-field">Category:*</label>
                 <select class="form-control" id="category-field">
-                    <option>1</option>
+                    <option></option>
                     <option>2</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="media-type-field">Media Type:*</label>
                 <select class="form-control" id="media-type-field">
-                    <option>1</option>
+                    <option></option>
                     <option>2</option>
                 </select>
             </div>
@@ -81,26 +81,30 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <img class="thumbnail" id="image" src="https://via.placeholder.com/150">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Image Preview</span>
-                    </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image-preview">
-                        <label class="custom-file-label" for="image-preview">Choose file</label>
-                    </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Image Preview</span>
                 </div>
-                <p style="font-style:italic;">Note: The image inserted is used as the preview for the post. It is not for uploading a file.</p>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="image" accept="image/*"
+                        onchange="displayImagePreview()">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
             </div>
 
-
-
+            <div class="form-group">
+                <div id="image-preview-div">
+                    <img class="thumbnail" id="image-preview" src="">
+                </div>
+                <p style="font-style:italic;">Note: The image inserted is used as the preview for the post. It is not
+                    for uploading a file.</p>
+            </div>
 
             <div>
                 <p style="font-size: small;">* denotes required field</p>
             </div>
+            
             <div class="container text-center">
                 <button type="submit" class="btn btn-primary">Create Post</button>
             </div>
@@ -109,5 +113,13 @@
     </form>
 
 </body>
+
+<!-- gets file name and prints it into field-->
+<script>
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 
 </html>
