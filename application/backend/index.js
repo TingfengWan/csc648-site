@@ -21,6 +21,12 @@ app.all('/post*', (req, res) => {
   apiProxy.web(req, res, { target: `http://localhost:${postServerPort}` });
 });
 
+// if /user prefix
+app.all('/user*', (req, res) => {
+  console.log('Proxying to user server.');
+  apiProxy.web(req, res, { target: `http://localhost:${userServerPort}` });
+});
+
 // else route to static file server
 app.all('/*', (req, res) => {
   console.log('Proxying to static server.');

@@ -2,6 +2,7 @@
 module.exports = {
     postServerPort: 4000,
     staticServerPort: 5000,
+    userServerPort: 6000,
     gatewayPort: 3000,
     sanitizer: (str) => {
 	if ( !str || str === '')
