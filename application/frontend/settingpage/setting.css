@@ -144,11 +144,19 @@ Display Items
   border-radius: 10px;
 }
 
-.setting{
+.edit{
   background: #C4C4C4;
   border-radius: 4px; 
   text-align: center;
   font-style: normal;
   font-weight: normal;
+  
+}
+
+.setting{
+  color: white;
+  font-family: sans-serif;
+  font-size: 18px;
+ 
 }
 

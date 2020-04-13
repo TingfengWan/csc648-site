@@ -110,6 +110,7 @@ body {
     color: white;
     font-family: sans-serif;
     font-size: 18px;
+    text-align: center;
    
   }
 
@@ -122,6 +123,7 @@ body {
     color: white;
     font-family: sans-serif;
     font-size: 18px;
+    text-align: center;
    
   }
 
@@ -154,6 +156,4 @@ body {
   #itemBg {
     background: #330033;
     border-radius: 10px;
-    
-
   }
