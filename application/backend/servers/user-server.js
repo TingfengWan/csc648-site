@@ -73,9 +73,10 @@ app.post('/user/login', (req, res) => {
     let query = `
         SELECT * \
         FROM Users \
-        WHERE email=${body.email} \
-            AND hashed_password=${body.hashed_password} \
+        WHERE email=\"${body.email}\" \
+            AND hashed_password=\"${body.hashed_password}\" \
         `;
+
     database.query(query, (err, result) => {
         if ( err || !result ) {
             res.status(400);
@@ -103,13 +104,13 @@ app.post('/user/signup', (req, res) => {
     let query = `
         INSERT INTO Users(email,first_name,last_name,is_faculty,is_admin,hashed_password,phone_number) \
         VALUES (\
-            ${body.email}, \
-            ${body.first_name}, \
-            ${body.last_name}, \
+            \"${body.email}\", \
+            \"${body.first_name}\", \
+            \"${body.last_name}\", \
             ${body.is_faculty}, \
             ${body.is_admin}, \
-            ${body.hashed_password}, \
-            ${body.phone_number} \
+            \"${body.hashed_password}\", \
+            \"${body.phone_number}\" \
         )\
         `;
     database.query(query, (err, result) => {
