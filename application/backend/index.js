@@ -1,6 +1,6 @@
 const express = require('express');
 const httpProxy = require('http-proxy');
-const { gatewayPort, staticServerPort, postServerPort} = require('./documentation/lib/consts.js');
+const { gatewayPort, staticServerPort, postServerPort, userServerPort} = require('./documentation/lib/consts.js');
 
 const app = express();
 const apiProxy = httpProxy.createProxyServer(app);
