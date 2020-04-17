@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <title>Create Post | CSC648 </title>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="create-post.js"></script>
+    <link rel="stylesheet" type="text/css" href="create-post.css">
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <div class="topnav">
+        <a href="../home/home.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a class="user" href="../register/register.html">Register</a>
+        <a class="user" href="login">Login</a>
+    </div>
+
+    <form class="container">
+        <div>
+            <h1>Create a Post</h1>
+            <div class="form-group">
+                <label for="title-field">Title:*</label>
+                <input class="form-control" id="title-field" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="category-field">Category:*</label>
+                <select class="form-control" id="category-field">
+                    <option></option>
+                    <option>2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="media-type-field">Media Type:*</label>
+                <select class="form-control" id="media-type-field">
+                    <option></option>
+                    <option>2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price-field">Price:*</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" class="form-control" id="price-field" min="0" step="0.01" placeholder="0.00">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description-field">Description:</label>
+                <textarea class="form-control" rows="4" id="description-field"
+                    placeholder="Enter description here..."></textarea>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" onclick="displayUploadFileEle()" id="physical-field">
+                <label class="form-check-label" for="physical-field"> Physical object?</label>
+            </div>
+            <div class="form-group" id="upload-div">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Upload File</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file-upload">
+                        <label class="custom-file-label" for="file-upload">Choose file</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Image Preview</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="image" accept="image/*"
+                        onchange="displayImagePreview()">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div id="image-preview-div">
+                    <img class="thumbnail" id="image-preview" src="">
+                </div>
+                <p style="font-style:italic;">Note: The image inserted is used as the preview for the post. It is not
+                    for uploading a file.</p>
+            </div>
+
+            <div>
+                <p style="font-size: small;">* denotes required field</p>
+            </div>
+            
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary">Create Post</button>
+            </div>
+
+        </div>
+    </form>
+
+</body>
+
+<!-- gets file name and prints it into field-->
+<script>
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+</html>
