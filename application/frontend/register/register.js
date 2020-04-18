@@ -1,3 +1,5 @@
+//http://3.22.78.154:3000/user/signup
+
 function validateFields() {
 
     const firstNameField = "first-name-field";
@@ -6,14 +8,14 @@ function validateFields() {
     const confirmPasswordField = "confirm-password-field";
     let fields = document.getElementById("register-form").elements;
     let valid = true;
-
+    
     for (let i = 0; i < fields.length; i++) {
         let field = fields[i];
         let errorMsg = "";
         field.style.border = "";
 
         if (field.type == "text") {
-            if (field.value == "") {
+            if (field.value.trim().length == 0) {
                 errorMsg = "Please enter a " + field.name + ".";
                 field.style.border = "1px solid red";
                 valid = false;
@@ -38,17 +40,25 @@ function validateFields() {
         }
 
         else if (field.type == "password") {
-            if (fields[passwordField].value != fields[confirmPasswordField].value) {
+
+
+            if(field.value.indexOf(" ") !== -1) {
                 field.style.border = "1px solid red";
-                errorMsg = "Passwords do not match.";
+                errorMsg = "Please enter a valid password. (Passwords cannot contain spaces)";
                 valid = false;
             }
-            else if (field.value == "") {
+
+            else if (field.value.length == 0) {
                 field.style.border = "1px solid red";
                 errorMsg = "Please enter a password.";
                 valid = false;
             }
-            
+
+            else if (fields[passwordField].value != fields[confirmPasswordField].value) {
+                field.style.border = "1px solid red";
+                errorMsg = "Passwords do not match.";
+                valid = false;
+            }
             document.getElementById("password-error").innerHTML = errorMsg;
         }
 
