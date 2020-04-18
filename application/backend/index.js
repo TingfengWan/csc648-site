@@ -1,6 +1,6 @@
 const express = require('express');
 const httpProxy = require('http-proxy');
-const { gatewayPort, staticServerPort, postServerPort} = require('./documentation/lib/consts.js');
+const { gatewayPort, staticServerPort, postServerPort, userServerPort} = require('./documentation/lib/consts.js');
 
 const app = express();
 const apiProxy = httpProxy.createProxyServer(app);
@@ -19,6 +19,12 @@ app.all('/', function(req, res, next) {
 app.all('/post*', (req, res) => {
   console.log('Proxying to post server.');
   apiProxy.web(req, res, { target: `http://localhost:${postServerPort}` });
+});
+
+// if /user prefix
+app.all('/user*', (req, res) => {
+  console.log('Proxying to user server.');
+  apiProxy.web(req, res, { target: `http://localhost:${userServerPort}` });
 });
 
 // else route to static file server

@@ -112,23 +112,21 @@ app.get('/post/search', (req, res) => {
             });
             return ;
         }
-	result = result.map(post => (
-	    {
-		id: post.id,
-		creator_email: post.creator_email,
-		title: post.title,
-		file_name: post.file_name,
-		has_file: post.has_file,
-		cost: post.cost,
-		approver_email: post.approver_email,
-		post_body: post.post_body,
-		is_approved: post.is_approved,
-                media_preview: bufferToBase64(post.media_preview),
-            }
-	));
+        result = result.map(post => ({
+            id: post.id,
+            creator_email: post.creator_email,
+            title: post.title,
+            file_name: post.file_name,
+            has_file: post.has_file,
+            cost: post.cost,
+            approver_email: post.approver_email,
+            post_body: post.post_body,
+            is_approved: post.is_approved,
+            media_preview: bufferToBase64(post.media_preview),
+        }));
         res.send({
             posts: result
-	});
+        });
     });
 });
 
