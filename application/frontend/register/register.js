@@ -1,3 +1,7 @@
+/**
+ * Takes the inputs from the form and puts them into the
+ * database on the server using axios. 
+ */
 function createUser(event) {
     event.preventDefault();
 
@@ -36,6 +40,12 @@ function createUser(event) {
     }
 }
 
+/**
+ * checks if the fields are valid and required fields are filled
+ * if any fields are invalid, puts a red border around the input field
+ * and an error message
+ * else the red border and error message are removed
+ */
 function validateFields() {
 
     let fields = document.getElementById("register").elements;
@@ -118,6 +128,12 @@ function validateFields() {
     return valid;
 }
 
+/**
+ * checks if the phone number is in the correct formats:
+ * 1234567890
+ * (123)-456-7890
+ * +(123)-456-7890
+ */
 function validatePhoneNumber(phoneNumber) {
     let phone1 = /^\d{10}$/;
     let phone2 = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -135,7 +151,7 @@ function validatePhoneNumber(phoneNumber) {
 
 
 
-//FOLLOWING md5 CODE WAS TAKEN FROM https://github.com/blueimp/JavaScript-MD5. It was not created by us.
+//FOLLOWING md5 CODE WAS TAKEN FROM https://github.com/blueimp/JavaScript-MD5.
 
 /*
  * JavaScript MD5

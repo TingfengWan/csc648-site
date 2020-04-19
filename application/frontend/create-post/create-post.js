@@ -1,3 +1,7 @@
+/**
+ * if the item is a physical object, hides the
+ * upload file option in the form
+ */
 function displayUploadFileDiv() {
 
     const physicalField = document.getElementById("physical-field");
@@ -15,6 +19,10 @@ function displayUploadFileDiv() {
     }
 }
 
+/**
+ * detects a change in the file upload field for image preview
+ * if there is a change it will check and load the file into a div
+ */
 function displayImagePreview() {
     const imgPreview = document.getElementById("image-preview");
     const imgPreviewTxt = document.getElementById("image-preview-text");
@@ -32,6 +40,12 @@ function displayImagePreview() {
 
 }
 
+/**
+ * checks for any invalid or empty fields
+ * if the input is invalid it will put a red border around the input
+ * and display an error message
+ * else the red border and error message are removed
+ */
 function validatePost() {
 
     let fields = document.getElementById("create-post-form").elements;
@@ -116,7 +130,10 @@ function validatePost() {
 
 }
 
-
+/**
+ * pulls the categories from the database and 
+ * puts them into the categories select tag
+ */
 function getCategories() {
     let URL = "http://3.22.78.154:3000/post/categories";
 
@@ -141,5 +158,4 @@ function getCategories() {
         .catch(err => {
             console.log(err);
         });
-
 }
