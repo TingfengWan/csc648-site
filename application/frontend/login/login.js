@@ -1,9 +1,18 @@
 function loginUser(event) {
+    //prevents refresh when form is submitted
     event.preventDefault();
+    
+    //grabbing user input
     let email = document.forms["loginForm"]["email"].value;
     let hashed_password = md5(document.forms["loginForm"]["password"].value);
     let errMsg = "";
 
+    //IF STATEMENT CHECKS:
+    //Checks if inputs are empty
+    //If empty return error that they need to fill it in
+    //if not empty AXIOS REQUEST is triggered
+    //If axios returns true .then alerts user that its a success
+    //if fail then .catch tells user that their account does not exist
     if (email && hashed_password != "") {
         axios.post('http://3.22.78.154:3000/user/login', {
             email,
