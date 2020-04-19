@@ -111,7 +111,8 @@ app.post('/user/signup', (req, res) => {
         )\
         `;
     database.query(query, (err, result) => {
-        if ( err || !result.length ) {
+	console.log(result);
+        if ( err || !result ) {
             res.status(400);
             res.send({
                 status: 400,
