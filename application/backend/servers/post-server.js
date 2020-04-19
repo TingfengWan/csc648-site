@@ -111,6 +111,7 @@ app.get('/post/search', (req, res) => {
             id: post.id,
             creator_email: post.creator_email,
             title: post.title,
+	    create_time: post.create_time,
             file_name: post.file_name,
             has_file: post.has_file,
             cost: post.cost,
