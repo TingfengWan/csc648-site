@@ -24,16 +24,11 @@ const app = express();
 // express middlewares
 app.use(cookieParser());
 app.use(bodyParser());
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-});
 
 const inputValidationAndSanitization = (body, forLogin) => {
     // validate
     const email = sanitizer(body.email);
-    if (!email.endsWith('@sfsu.edu')) {
+    if (!email.endsWith('sfsu.edu')) {
         return null;
     }
     const hashed_password = sanitizer(body.hashed_password);
@@ -63,6 +58,7 @@ const inputValidationAndSanitization = (body, forLogin) => {
 };
 
 app.post('/user/login', (req, res) => {
+    console.log(res.getHeaders());
     const body = inputValidationAndSanitization(req.body, true);
     if (!body) {
         res.status(400);
@@ -78,7 +74,8 @@ app.post('/user/login', (req, res) => {
         `;
 
     database.query(query, (err, result) => {
-        if ( err || !result ) {
+	console.log(result);
+        if ( err || !result.length ) {
             res.status(400);
             res.send({
                 status: 400,
@@ -114,6 +111,7 @@ app.post('/user/signup', (req, res) => {
         )\
         `;
     database.query(query, (err, result) => {
+	console.log(result);
         if ( err || !result ) {
             res.status(400);
             res.send({
