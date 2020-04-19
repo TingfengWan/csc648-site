@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="create-post.css">
 </head>
 
-<body>
+<body onload="getCategories()">
     <!-- Navigation bar -->
     <div class="topnav">
         <a href="../home/home.html">Home</a>
@@ -41,7 +41,6 @@
                 <label for="category-field">Category:*</label>
                 <select class="form-control" id="category-field" name="category" required>
                     <option></option>
-                    <option value="2">2</option>
                 </select>
                 <div class="error" id="category-error-field"></div>
             </div>
