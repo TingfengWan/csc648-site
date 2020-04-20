@@ -31,3 +31,10 @@ function loadTopPurchases() {
 function loadRecentPosts() {
     alert('load recent posting method');
 }
+
+function redirectToSearchResults() {
+    var catergory = document.getElementById('category-field').value;
+    var userInput = document.getElementById('userInput').value;
+    var url = 'http://3.22.78.154:3000/post/search?title=' + userInput + '&category:' + catergory;
+    document.location.href = url;
+}
