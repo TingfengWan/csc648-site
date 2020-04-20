@@ -24,11 +24,6 @@ const app = express();
 // express middlewares
 app.use(cookieParser());
 app.use(bodyParser());
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
-  });
 
 const bufferToBase64 = (buf) => {
     // TODO: Base prefix off of file types...
@@ -116,6 +111,7 @@ app.get('/post/search', (req, res) => {
             id: post.id,
             creator_email: post.creator_email,
             title: post.title,
+	    create_time: post.create_time,
             file_name: post.file_name,
             has_file: post.has_file,
             cost: post.cost,
