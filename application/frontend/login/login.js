@@ -1,6 +1,9 @@
 function loginUser(event) {
     //prevents refresh when form is submitted
     event.preventDefault();
+    document.getElementById("login-error").innerHTML = "";
+    document.getElementById("email-error").innerHTML = "";
+    document.getElementById("password-error").innerHTML = "";
     
     //grabbing user input
     let email = document.forms["loginForm"]["email"].value;

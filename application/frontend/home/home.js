@@ -23,3 +23,11 @@ function getCategories() {
             console.log(err);
         });
 }
+
+function loadTopPurchases() {
+    alert('load top purchases method');
+}
+
+function loadRecentPosts() {
+    alert('load recent posting method');
+}
