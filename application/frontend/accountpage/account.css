@@ -103,14 +103,28 @@ body {
 
 
   /* 
-  Department Categories
+  My post Categories
   */
 
-  .department {
-    color: black;
+  .post {
+    color: white;
     font-family: sans-serif;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+   
+  }
+
+
+  /* 
+  My purchased Categories
+  */
+
+  .purchased {
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    text-align: center;
+   
   }
 
 
@@ -144,3 +158,6 @@ body {
     border-radius: 10px;
   }
 
+  .p {
+    text-indent: 5em;
+  }

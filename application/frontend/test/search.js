@@ -33,6 +33,7 @@ function search() {
 
 }
 
+
 /**
  * displays the data
  * from the server into HTML
@@ -63,7 +64,6 @@ function appendData(data) {
         mainContainer.appendChild(preview);
         mainContainer.appendChild(divDesc);
     }
-
 }
 
 

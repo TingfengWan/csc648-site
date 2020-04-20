@@ -1,13 +1,3 @@
-.btn-primary {
-    height: 40px;
-}
-
-.margin-top {
-  margin-top: 20px;
-}
-.bigger-margin {
-  width: 50%;
-}
   /* Add a black background color to the top navigation bar */
   .topnav {
     overflow: hidden;
@@ -54,14 +44,27 @@
     float: right;
   }
 
-  .error {
-    color: red;
-    font-size: small;
+  #image {
+    margin-bottom: 15px;
   }
 
-  #login-error {
-    font-size: x-large;
+  #image-preview-div {
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items:center;
+    justify-content: center;
   }
+
+  .error {
+    color: red;
+  }
+
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
     .topnav a, .topnav {
@@ -71,10 +74,6 @@
       width: 100%;
       margin: 0;
       padding: 14px;
-    }
-
-    .bigger-margin {
-      width:100%;
     }
   }
 
