@@ -9,7 +9,7 @@ function searching(event) {
 
     var userInput = document.getElementById('search').value;
     var category = document.getElementById("categories").value;
-    console.log("User Input: " +userInput);
+    console.log("User Input: " + userInput);
 
     var searchTitle = 'title='.concat(userInput);
     var categoryTerm = 'category='.concat(category);
@@ -46,7 +46,7 @@ function appendData(data) {
     var userInput = document.getElementById('search').value;
 
 
-    if(data.posts.length == 0) {
+    if (data.posts.length == 0) {
         mainContainer.innerHTML = 'No results';
         resultContainer.innerHTML = `<p>${data.posts.length} of ${data.posts.length} results for "${userInput}"</p>`;
     } else {
@@ -54,7 +54,7 @@ function appendData(data) {
         mainContainer.innerHTML = "";
     }
 
-    for(var i = 0; i < data.posts.length; i++) {
+    for (var i = 0; i < data.posts.length; i++) {
 
         var post = data.posts[i];
 
@@ -75,7 +75,7 @@ function appendData(data) {
         //assigning the elements from http://3.22.78.154:3000/post/search
         divTitle.innerHTML = `<h3>${post.title}</h3>`;
         divPostTime.innerHTML = `<p>${post.create_time}</p>`;
-        if(post.cost == 0){
+        if (post.cost == 0) {
             divCost.innerHTML = '<p>Free</p>';
         } else {
             divCost.innerHTML = `<p>${post.cost}</p>`;
@@ -105,7 +105,7 @@ function getCategories() {
             const categories = data.categories;
             const categoriesSelect = document.getElementById("categories"); //your <select> id goes here
 
-            for(let i = 0; i < categories.length; i++) {
+            for (let i = 0; i < categories.length; i++) {
                 let node = document.createElement("option");
                 node.value = categories[i].category;
                 let text = document.createTextNode(categories[i].category);
@@ -116,4 +116,26 @@ function getCategories() {
         .catch(err => {
             console.log(err);
         });
+}
+
+function homeOnLoad() {
+    var url = document.location.href;
+    var params = url.split('?')[1];
+    var URL = 'http://3.22.78.154:3000/post/search?' + params;
+    URL = encodeURI(URL);
+
+    fetch(
+        URL
+    )
+        .then(data => {
+            return data.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            appendData(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
 }
