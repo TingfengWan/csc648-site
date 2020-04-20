@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
-
+const formidable = require('formidable');
 
 const {postServerPort, sanitizer} = require('../documentation/lib/consts.js');
 
@@ -29,6 +29,19 @@ const bufferToBase64 = (buf) => {
     // TODO: Base prefix off of file types...
     return 'data:image/png;base64, ' + buf.toString('base64');
 };
+
+// POST Request to create a POST.
+app.post('/post', (req, res) =>{
+    const form = formidable({ multiples: true });
+    const body = req.body;
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        res.status(400).send({status: 400, message: 'Could not parse request'});
+        return;
+      }
+      res.send(fields, files);
+    });
+});
 
 // returns list of categories
 app.get('/post/categories', (req, res) => {
@@ -119,7 +132,7 @@ app.get('/post/search', (req, res) => {
             id: post.id,
             creator_email: post.creator_email,
             title: post.title,
-	    create_time: post.create_time,
+	        create_time: post.create_time,
             file_name: post.file_name,
             has_file: post.has_file,
             cost: post.cost,
