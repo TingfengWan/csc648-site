@@ -82,6 +82,7 @@ function appendData(data) {
         }
         preview.src = post.media_preview;
 
+        //displaying the actual elements
         mainContainer.appendChild(boarderContainer);
         boarderContainer.appendChild(listingContainer);
         listingContainer.appendChild(divTitle);
