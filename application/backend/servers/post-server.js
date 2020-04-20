@@ -37,10 +37,13 @@ app.post('/post', (req, res) =>{
     console.log(body);
     form.parse(req, (err, fields, files) => {
       if (err) {
-        res.status(400).send({status: 400, message: 'Could not parse request'});
+        res.status(400);
+	res.send({status: 400, message: 'Could not parse request'});
         return;
       }
-      res.send(fields, files);
+      console.log(fields);
+      console.log(files);
+      res.send({fields, files});
     });
 });
 
