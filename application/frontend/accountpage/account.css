@@ -157,3 +157,7 @@ body {
     background: #330033;
     border-radius: 10px;
   }
+
+  .p {
+    text-indent: 5em;
+  }
