@@ -33,8 +33,9 @@ function loadRecentPosts() {
 }
 
 function redirectToSearchResults() {
-    var catergory = document.getElementById('category-field').value;
+    event.preventDefault();
+    var category = document.getElementById('category-field').value;
     var userInput = document.getElementById('userInput').value;
-    var url = 'http://3.22.78.154:3000/post/search?title=' + userInput + '&category:' + catergory;
-    document.location.href = url;
+    var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
+    document.location.href =  url;
 }
