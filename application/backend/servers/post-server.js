@@ -34,6 +34,7 @@ const bufferToBase64 = (buf) => {
 app.post('/post', (req, res) =>{
     const form = formidable({ multiples: true });
     const body = req.body;
+    console.log(body);
     form.parse(req, (err, fields, files) => {
       if (err) {
         res.status(400).send({status: 400, message: 'Could not parse request'});
