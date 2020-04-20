@@ -63,7 +63,6 @@ function appendData(data) {
         mainContainer.appendChild(preview);
         mainContainer.appendChild(divDesc);
     }
-
 }
 
 
