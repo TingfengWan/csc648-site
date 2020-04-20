@@ -57,22 +57,30 @@ app.get('/post/search', (req, res) => {
     console.log(`Category: ${req.query.category}`);
     let title = sanitizer(req.query.title) || '';
     let category = sanitizer(req.query.category) || '';
+    let creator_email = sanitizer(req.query.creator_email) || '';
     let query = 'SELECT * FROM Posts';
 
     console.log(`Sanitized Title: ${title}`);
     console.log(`Sanitized Category: ${category}`);
+    console.log(`Sanitized Email: ${creator_email}`);
 
-    if ( title || category ) {
+    if ( title || category || creator_email ) {
         // if no query params, return all posts
         query += ' AS P WHERE ';
         let whereConditions = '';
-
+        if ( creator_email ) {
+            whereConditions += `P.creator_email = "${creator_email}"`
+        }
         if ( title ) {
             // if there is title, add clause
+            if ( whereConditions !== '' ) {
+                // if there was previous clause, add conjunction
+                whereConditions += ` AND `;
+            }
             whereConditions += `P.title LIKE "%${title}%"`;
         }
         if ( category ) {
-	    category = category.split(',');
+	        category = category.split(',');
             if ( whereConditions !== '' ) {
                 // if there was previous clause, add conjunction
                 whereConditions += ` AND `;
@@ -125,6 +133,8 @@ app.get('/post/search', (req, res) => {
         });
     });
 });
+
+// /post/user
 
 app.listen(postServerPort, () => {
     console.log(`Post Server listening on ${postServerPort}`);
