@@ -120,10 +120,16 @@ function getCategories() {
 
 function homeOnLoad() {
     var url = document.location.href;
-    var params = url.split('?')[1];
-    var URL = 'http://3.22.78.154:3000/post/search?' + params;
+    var params = url.split('?')[1].split('&');
+    var data = {}, tmp;
+    for (var i = 0, l = params.length; i < l; i++) {
+        tmp = params[i].split('=');
+        data[tmp[0]] = tmp[1];
+    }
+    var URL = 'http://3.22.78.154:3000/post/search?title=' + data.title + '&category=' + data.category;
     URL = encodeURI(URL);
 
+    document.getElementById('search').value = data.title;
     fetch(
         URL
     )
@@ -137,5 +143,4 @@ function homeOnLoad() {
         .catch(err => {
             console.log(err);
         });
-
 }
