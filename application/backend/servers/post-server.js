@@ -43,6 +43,7 @@ const validatePostInput = (fields, files) => {
     if ( files.media_content ) {
 	    fields.has_file = true;
     } else {
+	    files.media_content = { path: '' };
 	    fields.has_file = false;
     }
     if ( fields.cost < 0 || fields.cost > 100000) {
@@ -57,6 +58,7 @@ const validatePostInput = (fields, files) => {
     fields.title = sanitizer(fields.title) || '';
     fields.creator_email = sanitizer(fields.creator_email) || '';
     fields.post_body = sanitizer(fields.post_body) || '';
+
     if ( !fields.creator_email.endsWith('sfsu.edu') ) {
 	    return {};
     }
@@ -115,7 +117,7 @@ app.post('/post', (req, res) => {
             let cateQuery = `
                     INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
-            fields.categories = ['Art','Physical Education'];
+            fields.categories = fields.categories || ['Other'];
 		fields.categories.forEach((category, i) => {
                 cateQuery += `
                     (${result.insertId},"${category}")\ 
