@@ -31,41 +31,42 @@ const bufferToBase64 = (buf) => {
 };
 
 const validatePostInput = (fields, files) => {
-    //creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body
     // check constraints
     if ( files.media_content ) {
-	fields.has_file = true;
+	    fields.has_file = true;
     } else {
-	fields.has_file = false;
+	    fields.has_file = false;
     }
     if ( fields.cost < 0 || fields.cost > 100000) {
-	return {};
+	    return {};
     }
     if ( !files.media_preview ) {
-	files['media_preview'] = {
-	    path: defaultMediaPreviewPath
-	}
+        files['media_preview'] = {
+            path: defaultMediaPreviewPath
+        }
     }
     fields.create_time = new Date();
     fields.title = sanitizer(fields.title) || '';
     fields.creator_email = sanitizer(fields.creator_email) || '';
     fields.post_body = sanitizer(fields.post_body) || '';
     if ( !fields.creator_email.endsWith('sfsu.edu') ) {
-	return {};
+	    return {};
     }
     return {
-	creator_email: fields.creator_email,
-	create_time: fields.create_time,
-	title: fields.title,
-	media_preview: files.media_preview.path,
-	media_content: files.media_content.path || '',
-	file_name: files.media_content.name || '',
-	has_file: fields.has_file,
-	cost: fields.cost || 0.0,
-	post_body: fields.post_body
+        creator_email: fields.creator_email,
+        create_time: fields.create_time,
+        title: fields.title,
+        media_preview: files.media_preview.path,
+        media_content: files.media_content.path || '',
+        file_name: files.media_content.name || '',
+        has_file: fields.has_file,
+        cost: fields.cost || 0.0,
+        post_body: fields.post_body
     };
 };
+// app.get('/post', (req, res) => {
 
+// });
 // POST Request to create a POST.
 app.post('/post', (req, res) => {
     console.log(process.env.fs_root);
@@ -78,51 +79,47 @@ app.post('/post', (req, res) => {
             res.send({status: 400, message: 'Could not parse request'});
             return;
         }
-	const queryParams = validatePostInput(fields, files);	//
+        const queryParams = validatePostInput(fields, files);	//
         const query = `
-	        INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body) VALUES (\
-			        "${queryParams.creator_email}",\
-			        "${queryParams.create_time}",\
-			        "${queryParams.title}",\
-			        "${queryParams.media_preview}",\
-			        "${queryParams.media_content}",\
-			        "${queryParams.file_name}",\
-			        ${queryParams.has_file},\
-			        ${queryParams.cost},\
-			        "${queryParams.post_body}",\
-			    )
-	        `;
-	database.query(query, (err, result) => {
-	    if (err) {
-		res.status(400);
-		res.send({ status: 400, message: 'Broke at query'});
-		return;
-	    }
-	    // add categories
- 	    const post = result;
-	    fields.categories.forEach(category => {
-		const cateQuery = `
-		    	INSERT INTO PostCategories(post_id,category) VALUES (\
-				${post.id},\
-				${category}\
-			)
-		    `;
-		try {
-		    database.query(query, (err, result) => {
-		        if ( err ) {
-	      		    res.status(400);
-			    res.send({ status: 400, message: 'Could not enter categories' });
-			    throw "Could not enter categories";
-		        }
-		    });
-		} catch (e) {
-		    res.status(400);
- 		    res.send({status: 400, message: 'Could not enter categories'});
-		    return ;
-		}
-	    });
-	    res.send({post});
-	});
+            INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body) VALUES (\
+                    "${queryParams.creator_email}",\
+                    "${queryParams.create_time}",\
+                    "${queryParams.title}",\
+                    "${queryParams.media_preview}",\
+                    "${queryParams.media_content}",\
+                    "${queryParams.file_name}",\
+                    ${queryParams.has_file},\
+                    ${queryParams.cost},\
+                    "${queryParams.post_body}",\
+                )
+            `;
+        database.query(query, (err, result) => {
+            if (err) {
+                res.status(400);
+                res.send({ status: 400, message: 'Broke at query'});
+                return;
+            }
+            // add categories
+            const post = result;
+            let cateQuery = `
+                    INSERT INTO PostCategories(post_id,category) VALUES 
+                `;
+            fields.categories.forEach(category => {
+                cateQuery += `
+                    (${post.id},"${category}") 
+                `;
+            });
+            console.log(cateQuery);
+            database.query(cateQuery, (err, categoryResult) => {
+                if (err) {
+                    res.status(400);
+                    res.send({status: 400, message: 'Could not enter categories'});
+                    return ;
+                }
+                post.categories = fields.categories;
+                return res.send({post});
+            });
+        });
     });
 });
 
@@ -203,7 +200,7 @@ app.get('/post/search', (req, res) => {
     console.log(query);
     database.query(query, (err, result) => {
         if ( err ) {
-	    console.log(err);
+	        console.log(err);
             res.status(400);
             res.send({
                 status: 400,
@@ -211,6 +208,7 @@ app.get('/post/search', (req, res) => {
             });
             return ;
         }
+
         result = result.map(post => ({
             id: post.id,
             creator_email: post.creator_email,
@@ -222,7 +220,7 @@ app.get('/post/search', (req, res) => {
             approver_email: post.approver_email,
             post_body: post.post_body,
             is_approved: post.is_approved,
-            media_preview: bufferToBase64(post.media_preview),
+            media_preview: post.media_preview,
         }));
         res.send({
             posts: result
