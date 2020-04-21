@@ -23,6 +23,12 @@ module.exports = { // pm2 start process.config.js
             script: './servers/static-server.js',
             ignore_watch : ["node_modules"],
             watch: true,
+        },
+        {
+            name: 'user-content',
+            script: './servers/user-content-server.js',
+            ignore_watch : ["node_modules"],
+            watch: true,
         }
     ]
 };
