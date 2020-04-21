@@ -31,19 +31,19 @@ const bufferToBase64 = (buf) => {
 };
 
 // POST Request to create a POST.
-app.post('/post', (req, res) =>{
-    const form = formidable({ multiples: true });
+app.post('/post', (req, res) => {
+    const form = formidable({ multiples: false, uploadDir: process.env.FS_ROOT });
     const body = req.body;
     console.log(body);
     form.parse(req, (err, fields, files) => {
-      if (err) {
-        res.status(400);
-	res.send({status: 400, message: 'Could not parse request'});
-        return;
-      }
-      console.log(fields);
-      console.log(files);
-      res.send({fields, files});
+        if (err) {
+            res.status(400);
+            res.send({status: 400, message: 'Could not parse request'});
+            return;
+        }
+        console.log(fields);
+        console.log(files);
+        res.send({fields, files});
     });
 });
 
