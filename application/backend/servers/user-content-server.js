@@ -4,6 +4,11 @@ const { userContentServerPort, FS_ROOT } = require('../documentation/lib/consts.
 
 const app = express();
 
-app.use(express.static(FS_ROOT));
+//app.use(express.static(FS_ROOT));
+
+app.get('*', (req, res) => {
+  console.log(req.originalUrl);
+  res.sendFile(req.originalUrl);
+});
 
 app.listen(userContentServerPort);
