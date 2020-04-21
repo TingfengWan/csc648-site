@@ -3,37 +3,38 @@
  * fetches data for the search results
  * from the database and displays it
  */
-function searching(event) {
-    event.preventDefault();
-    var URL = 'http://3.22.78.154:3000/post/search?';
+// function searching(event) {
+//     event.preventDefault();
+//     var URL = 'http://3.22.78.154:3000/post/search?';
 
-    var userInput = document.getElementById('search').value;
-    var category = document.getElementById("categories").value;
-    console.log("User Input: " + userInput);
+//     var userInput = document.getElementById('search').value;
+//     var category = document.getElementById("categories").value;
+//     console.log("User Input: " + userInput);
 
-    var searchTitle = 'title='.concat(userInput);
-    var categoryTerm = 'category='.concat(category);
-    var searchURL = URL.concat(searchTitle, '&', categoryTerm);
-    searchURL = encodeURI(searchURL);
+//     var searchTitle = 'title='.concat(userInput);
+//     var categoryTerm = 'category='.concat(category);
+//     var searchURL = URL.concat(searchTitle, '&', categoryTerm);
+//     searchURL = encodeURI(searchURL);
 
-    console.log(categoryTerm + searchTitle);
-    console.log(searchURL);
+//     document.location.href = searchURL;
+//     console.log(categoryTerm + searchTitle);
+//     console.log(searchURL);
 
-    fetch(
-        searchURL
-    )
-        .then(data => {
-            return data.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            appendData(data);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+//     fetch(
+//         searchURL
+//     )
+//         .then(data => {
+//             return data.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//             appendData(data);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
 
-}
+// }
 
 /**
  * displays the data
@@ -118,7 +119,7 @@ function getCategories() {
         });
 }
 
-function homeOnLoad() {
+function loadSearchResults() {
     var url = document.location.href;
     var params = url.split('?')[1].split('&');
     var data = {}, tmp;

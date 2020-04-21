@@ -1,3 +1,4 @@
+//this function grabs the categories in the database onload
 function getCategories() {
     let URL = "http://3.22.78.154:3000/post/categories";
 
@@ -24,14 +25,21 @@ function getCategories() {
         });
 }
 
+//shall be a function that displays top 5 purchases on the home page
 function loadTopPurchases() {
     alert('load top purchases method');
 }
 
+//shall be a function that displays 5 recent postings to the home page
 function loadRecentPosts() {
     alert('load recent posting method');
 }
 
+//when the user enters something in the searchbar
+//the input is grabbed and processed into a url that
+//the software will redirect the user to
+//the user will go to the search results with the url
+//the url is parsed in the search page and submitted to show results
 function redirectToSearchResults() {
     event.preventDefault();
     var category = document.getElementById('category-field').value;
