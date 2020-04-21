@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 const formidable = require('formidable');
 
-const {postServerPort, sanitizer} = require('../documentation/lib/consts.js');
+const {postServerPort, sanitizer, defaultMediaPreviewPath} = require('../documentation/lib/consts.js');
 
 // create database connections
 const database = mysql.createConnection({
@@ -30,20 +30,99 @@ const bufferToBase64 = (buf) => {
     return 'data:image/png;base64, ' + buf.toString('base64');
 };
 
+const validatePostInput = (fields, files) => {
+    //creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body
+    // check constraints
+    if ( files.media_content ) {
+	fields.has_file = true;
+    } else {
+	fields.has_file = false;
+    }
+    if ( fields.cost < 0 || fields.cost > 100000) {
+	return {};
+    }
+    if ( !files.media_preview ) {
+	files['media_preview'] = {
+	    path: defaultMediaPreviewPath
+	}
+    }
+    fields.create_time = new Date();
+    fields.title = sanitizer(fields.title) || '';
+    fields.creator_email = sanitizer(fields.creator_email) || '';
+    fields.post_body = sanitizer(fields.post_body) || '';
+    if ( !fields.creator_email.endsWith('sfsu.edu') ) {
+	return {};
+    }
+    return {
+	creator_email: fields.creator_email,
+	create_time: fields.create_time,
+	title: fields.title,
+	media_preview: files.media_preview.path,
+	media_content: files.media_content.path || '',
+	file_name: files.media_content.name || '',
+	has_file: fields.has_file,
+	cost: fields.cost || 0.0,
+	post_body: fields.post_body
+    };
+};
+
 // POST Request to create a POST.
 app.post('/post', (req, res) => {
-    const form = formidable({ multiples: false, uploadDir: process.env.FS_ROOT });
-    const body = req.body;
-    console.log(body);
+    console.log(process.env.fs_root);
+    const fsRoot = process.env.fs_root || '/home/ubuntu/user-files/';
+    const form = formidable({ multiples: true, uploadDir: `${fsRoot}` });
+
     form.parse(req, (err, fields, files) => {
         if (err) {
             res.status(400);
             res.send({status: 400, message: 'Could not parse request'});
             return;
         }
-        console.log(fields);
-        console.log(files);
-        res.send({fields, files});
+	const queryParams = validatePostInput(fields, files);	//
+        const query = `
+	        INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body) VALUES (\
+			        "${queryParams.creator_email}",\
+			        "${queryParams.create_time}",\
+			        "${queryParams.title}",\
+			        "${queryParams.media_preview}",\
+			        "${queryParams.media_content}",\
+			        "${queryParams.file_name}",\
+			        ${queryParams.has_file},\
+			        ${queryParams.cost},\
+			        "${queryParams.post_body}",\
+			    )
+	        `;
+	database.query(query, (err, result) => {
+	    if (err) {
+		res.status(400);
+		res.send({ status: 400, message: 'Broke at query'});
+		return;
+	    }
+	    // add categories
+ 	    const post = result;
+	    fields.categories.forEach(category => {
+		const cateQuery = `
+		    	INSERT INTO PostCategories(post_id,category) VALUES (\
+				${post.id},\
+				${category}\
+			)
+		    `;
+		try {
+		    database.query(query, (err, result) => {
+		        if ( err ) {
+	      		    res.status(400);
+			    res.send({ status: 400, message: 'Could not enter categories' });
+			    throw "Could not enter categories";
+		        }
+		    });
+		} catch (e) {
+		    res.status(400);
+ 		    res.send({status: 400, message: 'Could not enter categories'});
+		    return ;
+		}
+	    });
+	    res.send({post});
+	});
     });
 });
 

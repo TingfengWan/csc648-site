@@ -4,6 +4,7 @@ module.exports = {
     staticServerPort: 5000,
     userServerPort: 6000,
     gatewayPort: 3000,
+    defaultMediaPreviewPath: '/home/ubuntu/user-files/upload_8ee9c61efd5ba0d59b73c9c85ec34185',
     sanitizer: (str) => {
 	if ( !str || str === '')
 		return '';
