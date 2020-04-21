@@ -30,6 +30,14 @@ const bufferToBase64 = (buf) => {
     return 'data:image/png;base64, ' + buf.toString('base64');
 };
 
+function twoDigits(d) {
+	    if(0 <= d && d < 10) return "0" + d.toString();
+	    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+	    return d.toString();
+}
+const getMysqlDatetime = (dtObj) => { return dtObj.getUTCFullYear() + "-" + twoDigits(1 + dtObj.getUTCMonth()) + "-" + twoDigits(dtObj.getUTCDate()) + " " + twoDigits(dtObj.getUTCHours()) + ":" + twoDigits(dtObj.getUTCMinutes()) + ":" + twoDigits(dtObj.getUTCSeconds());
+};
+
 const validatePostInput = (fields, files) => {
     // check constraints
     if ( files.media_content ) {
@@ -45,7 +53,7 @@ const validatePostInput = (fields, files) => {
             path: defaultMediaPreviewPath
         }
     }
-    fields.create_time = new Date();
+    fields.create_time = getMysqlDatetime(new Date());
     fields.title = sanitizer(fields.title) || '';
     fields.creator_email = sanitizer(fields.creator_email) || '';
     fields.post_body = sanitizer(fields.post_body) || '';
@@ -80,7 +88,7 @@ app.post('/post', (req, res) => {
             return;
         }
         const queryParams = validatePostInput(fields, files);	//
-        const query = `
+        const query = `\
             INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body) VALUES (\
                     "${queryParams.creator_email}",\
                     "${queryParams.create_time}",\
@@ -90,34 +98,41 @@ app.post('/post', (req, res) => {
                     "${queryParams.file_name}",\
                     ${queryParams.has_file},\
                     ${queryParams.cost},\
-                    "${queryParams.post_body}",\
-                )
+                    "${queryParams.post_body}"\
+                )\
             `;
         database.query(query, (err, result) => {
-            if (err) {
-                res.status(400);
+            console.log(query);
+		if (err) {
+                console.log(err.message);
+			res.status(400);
                 res.send({ status: 400, message: 'Broke at query'});
                 return;
             }
             // add categories
-            const post = result;
+            //const post = result;
+		//console.log(post);
             let cateQuery = `
-                    INSERT INTO PostCategories(post_id,category) VALUES 
+                    INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
-            fields.categories.forEach(category => {
+            fields.categories = ['Art','Physical Education'];
+		fields.categories.forEach((category, i) => {
                 cateQuery += `
-                    (${post.id},"${category}") 
+                    (${result.insertId},"${category}")\ 
                 `;
+			if ( i != fields.categories.length-1) {
+				cateQuery+=',';
+			}
             });
             console.log(cateQuery);
             database.query(cateQuery, (err, categoryResult) => {
                 if (err) {
+			console.log(err.message);
                     res.status(400);
                     res.send({status: 400, message: 'Could not enter categories'});
                     return ;
                 }
-                post.categories = fields.categories;
-                return res.send({post});
+                return res.send({post_id: result.insertId});
             });
         });
     });
