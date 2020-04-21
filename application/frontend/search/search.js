@@ -3,37 +3,38 @@
  * fetches data for the search results
  * from the database and displays it
  */
-function searching(event) {
-    event.preventDefault();
-    var URL = 'http://3.22.78.154:3000/post/search?';
+// function searching(event) {
+//     event.preventDefault();
+//     var URL = 'http://3.22.78.154:3000/post/search?';
 
-    var userInput = document.getElementById('search').value;
-    var category = document.getElementById("categories").value;
-    console.log("User Input: " + userInput);
+//     var userInput = document.getElementById('search').value;
+//     var category = document.getElementById("categories").value;
+//     console.log("User Input: " + userInput);
 
-    var searchTitle = 'title='.concat(userInput);
-    var categoryTerm = 'category='.concat(category);
-    var searchURL = URL.concat(searchTitle, '&', categoryTerm);
-    searchURL = encodeURI(searchURL);
+//     var searchTitle = 'title='.concat(userInput);
+//     var categoryTerm = 'category='.concat(category);
+//     var searchURL = URL.concat(searchTitle, '&', categoryTerm);
+//     searchURL = encodeURI(searchURL);
 
-    console.log(categoryTerm + searchTitle);
-    console.log(searchURL);
+//     document.location.href = searchURL;
+//     console.log(categoryTerm + searchTitle);
+//     console.log(searchURL);
 
-    fetch(
-        searchURL
-    )
-        .then(data => {
-            return data.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            appendData(data);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+//     fetch(
+//         searchURL
+//     )
+//         .then(data => {
+//             return data.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//             appendData(data);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
 
-}
+// }
 
 /**
  * displays the data
@@ -48,11 +49,8 @@ function appendData(data) {
 
     if (data.posts.length == 0) {
         mainContainer.innerHTML = 'No results';
-        resultContainer.innerHTML = `<p>${data.posts.length} of ${data.posts.length} results for "${userInput}"</p>`;
-    } else {
-        resultContainer.innerHTML = `<p>1-${data.posts.length} of ${data.posts.length} results for "${userInput}"</p>`;
-        mainContainer.innerHTML = "";
     }
+    resultContainer.innerHTML = `<p>${data.posts.length} of ${data.posts.length} results for "${userInput}"</p>`;
 
     for (var i = 0; i < data.posts.length; i++) {
 
@@ -112,13 +110,22 @@ function getCategories() {
                 node.appendChild(text);
                 categoriesSelect.appendChild(node);
             }
+
+            var url = document.location.href;
+            var params = url.split('?')[1].split('&');
+            var data = {}, tmp;
+            for (var i = 0, l = params.length; i < l; i++) {
+                tmp = params[i].split('=');
+                data[tmp[0]] = tmp[1];
+            }
+            document.getElementById('categories').value = data.category;
         })
         .catch(err => {
             console.log(err);
         });
 }
 
-function homeOnLoad() {
+function loadSearchResults() {
     var url = document.location.href;
     var params = url.split('?')[1].split('&');
     var data = {}, tmp;
@@ -143,4 +150,13 @@ function homeOnLoad() {
         .catch(err => {
             console.log(err);
         });
+}
+
+function redirectToSearchResults() {
+    event.preventDefault();
+    var category = document.getElementById('categories').value;
+    var userInput = document.getElementById('search').value;
+    var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
+    //var url = 'file:///C:/Users/bubbl/OneDrive/Desktop/School/CSC%20648/csc648-fa20-team03/application/frontend/search/search.html?title=' + userInput + '&category=' + category;
+    document.location.href = url;
 }
