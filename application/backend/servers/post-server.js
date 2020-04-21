@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 const formidable = require('formidable');
 
-const {postServerPort, sanitizer, defaultMediaPreviewPath} = require('../documentation/lib/consts.js');
+const {postServerPort, sanitizer, defaultMediaPreviewPath, FS_ROOT} = require('../documentation/lib/consts.js');
 
 // create database connections
 const database = mysql.createConnection({
@@ -77,9 +77,9 @@ const validatePostInput = (fields, files) => {
 // });
 // POST Request to create a POST.
 app.post('/post', (req, res) => {
-    console.log(process.env.fs_root);
-    const fsRoot = process.env.fs_root || '/home/ubuntu/user-files/';
-    const form = formidable({ multiples: true, uploadDir: `${fsRoot}` });
+    console.log(FS_ROOT);
+    // const fsRoot = process.env.fs_root || '/home/ubuntu/user-files/';
+    const form = formidable({ multiples: true, uploadDir: `${FS_ROOT}` });
 
     form.parse(req, (err, fields, files) => {
         if (err) {
