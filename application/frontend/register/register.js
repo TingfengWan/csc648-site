@@ -29,7 +29,6 @@ function createUser(event) {
         console.log(res.data);
 
         if (res.data.status) {
-          alert("Successfully Registered! \n Redirecting you to home page.");
           window.location = "register-success.html";
         }
       })
