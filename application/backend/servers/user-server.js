@@ -91,23 +91,18 @@ const getSetString = (setQuery, fieldName, val) => {
 };
 
 app.post('/user', (req, res) => {
-    const body = req.body;
     // sanitize allowed editable fields.
     const sanitizedBody = inputValidationAndSanitization(req.body, false);
-    // const password = ;
-    // const last_name = ;
-    // const first_name = ;
-    // const phone_number = ;
-    // const is_faculty = body.is_faculty?true: false;
+
     let query = `
         UPDATE Users\ 
     `;
     let setQuery = '';
-    setQuery += getSetString(setQuery, password, sanitizedBody.password);
-    setQuery += getSetString(setQuery, last_name, sanitizedBody.last_name);
-    setQuery += getSetString(setQuery, first_name, sanitizedBody.first_name);
-    setQuery += getSetString(setQuery, phone_number, sanitizedBody.phone_number);
-    setQuery += getSetString(setQuery, is_faculty, sanitizedBody.is_faculty);
+    setQuery += getSetString(setQuery, "hashed_password", sanitizedBody.hashed_password);
+    setQuery += getSetString(setQuery, "last_name", sanitizedBody.last_name);
+    setQuery += getSetString(setQuery, "first_name", sanitizedBody.first_name);
+    setQuery += getSetString(setQuery, "phone_number", sanitizedBody.phone_number);
+    setQuery += getSetString(setQuery, "is_faculty", sanitizedBody.is_faculty);
     query += setQuery + ` WHERE email=${sanitizedBody.email}`;
     console.log(query);
     database.query(query, (err, result) => {
@@ -116,7 +111,6 @@ app.post('/user', (req, res) => {
             return res.status(400).send({status: 400, message: err.message});
 
         }
-        // b/c media_content allowed, no need to map/filter.
         return res.send({
             result: result
         });
