@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 
 
-const {userServerPort, sanitizer} = require('../documentation/lib/consts.js');
+const {userServerPort, sanitizer, postMapper} = require('../documentation/lib/consts.js');
 
 // create database connections
 const database = mysql.createConnection({
@@ -56,6 +56,60 @@ const inputValidationAndSanitization = (body, forLogin) => {
         is_faculty
     };
 };
+
+app.get('/user/purchases', (req, res) => {
+    const userEmail = sanitizer(req.query.email);
+    if ( userEmail === "" || !userEmail.endsWith('sfsu.edu') ) {
+        return res.status(400).send({status:400, message: 'Invalid email address'});
+    }
+    let query = `
+        SELECT * \
+        FROM Purchases t1 \
+        INNER JOIN Posts t2 \
+        ON t1.post_id = t2.id \
+        WHERE t1.user_email=\"${userEmail}\";\
+    `;
+    database.query(query)
+    .then((result) => {
+        if ( !result ) {
+            throw "No result";
+        }
+        result = postMapper(result);
+        return res.send({
+            purchased_posts: result
+        });
+    })
+    .catch((err) => {
+        console.log(err.message);
+        return res.status(400).send({status: 400, message: err.message});
+    });
+});
+
+app.get('/user/posts', (req, res) => {
+    const userEmail = sanitizer(req.query.email);
+    if ( userEmail === "" || !userEmail.endsWith('sfsu.edu') ) {
+        return res.status(400).send({status:400, message: 'Invalid email address'});
+    }
+    let query = `
+        SELECT *\
+        FROM Posts\
+        WHERE creator_email=\"${userEmail}\"\
+    `;
+    database.query(query)
+    .then((result) => {
+        if ( !result ) {
+            throw "No result";
+        }
+        result = postMapper(result);
+        return res.send({
+            posts: result
+        });
+    })
+    .catch((err) => {
+        console.log(err.message);
+        return res.status(400).send({status: 400, message: err.message});
+    });
+});
 
 app.post('/user/login', (req, res) => {
     console.log(res.getHeaders());

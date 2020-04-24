@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 const formidable = require('formidable');
 
-const {postServerPort, sanitizer, defaultMediaPreviewPath, FS_ROOT} = require('../documentation/lib/consts.js');
+const {postServerPort, sanitizer, defaultMediaPreviewPath, FS_ROOT, postMapper} = require('../documentation/lib/consts.js');
 
 // create database connections
 const database = mysql.createConnection({
@@ -31,9 +31,9 @@ const bufferToBase64 = (buf) => {
 };
 
 function twoDigits(d) {
-	    if(0 <= d && d < 10) return "0" + d.toString();
-	    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-	    return d.toString();
+        if(0 <= d && d < 10) return "0" + d.toString();
+        if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+        return d.toString();
 }
 const getMysqlDatetime = (dtObj) => { return dtObj.getUTCFullYear() + "-" + twoDigits(1 + dtObj.getUTCMonth()) + "-" + twoDigits(dtObj.getUTCDate()) + " " + twoDigits(dtObj.getUTCHours()) + ":" + twoDigits(dtObj.getUTCMinutes()) + ":" + twoDigits(dtObj.getUTCSeconds());
 };
@@ -41,13 +41,13 @@ const getMysqlDatetime = (dtObj) => { return dtObj.getUTCFullYear() + "-" + twoD
 const validatePostInput = (fields, files) => {
     // check constraints
     if ( files.media_content ) {
-	    fields.has_file = true;
+        fields.has_file = true;
     } else {
-	    files.media_content = { path: '' };
-	    fields.has_file = false;
+        files.media_content = { path: '' };
+        fields.has_file = false;
     }
     if ( fields.cost < 0 || fields.cost > 100000) {
-	    return {};
+        return {};
     }
     if ( !files.media_preview ) {
         files['media_preview'] = {
@@ -60,7 +60,7 @@ const validatePostInput = (fields, files) => {
     fields.post_body = sanitizer(fields.post_body) || '';
 
     if ( !fields.creator_email.endsWith('sfsu.edu') ) {
-	    return {};
+        return {};
     }
     return {
         creator_email: fields.creator_email,
@@ -105,31 +105,31 @@ app.post('/post', (req, res) => {
             `;
         database.query(query, (err, result) => {
             console.log(query);
-		if (err) {
+        if (err) {
                 console.log(err.message);
-			res.status(400);
+            res.status(400);
                 res.send({ status: 400, message: 'Broke at query'});
                 return;
             }
             // add categories
             //const post = result;
-		//console.log(post);
+            //console.log(post);
             let cateQuery = `
                     INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
             fields.categories = fields.categories || ['Other'];
-		fields.categories.forEach((category, i) => {
+            fields.categories.forEach((category, i) => {
                 cateQuery += `
                     (${result.insertId},"${category}")\ 
                 `;
-			if ( i != fields.categories.length-1) {
-				cateQuery+=',';
-			}
+            if ( i != fields.categories.length-1) {
+                cateQuery+=',';
+            }
             });
             console.log(cateQuery);
             database.query(cateQuery, (err, categoryResult) => {
                 if (err) {
-			console.log(err.message);
+            console.log(err.message);
                     res.status(400);
                     res.send({status: 400, message: 'Could not enter categories'});
                     return ;
@@ -190,7 +190,7 @@ app.get('/post/search', (req, res) => {
             whereConditions += `P.title LIKE "%${title}%"`;
         }
         if ( category ) {
-	        category = category.split(',');
+            category = category.split(',');
             if ( whereConditions !== '' ) {
                 // if there was previous clause, add conjunction
                 whereConditions += ` AND `;
@@ -217,7 +217,7 @@ app.get('/post/search', (req, res) => {
     console.log(query);
     database.query(query, (err, result) => {
         if ( err ) {
-	        console.log(err);
+            console.log(err);
             res.status(400);
             res.send({
                 status: 400,
@@ -226,19 +226,7 @@ app.get('/post/search', (req, res) => {
             return ;
         }
 
-        result = result.map(post => ({
-            id: post.id,
-            creator_email: post.creator_email,
-            title: post.title,
-	        create_time: post.create_time,
-            file_name: post.file_name,
-            has_file: post.has_file,
-            cost: post.cost,
-            approver_email: post.approver_email,
-            post_body: post.post_body,
-            is_approved: post.is_approved,
-            media_preview: post.media_preview,
-        }));
+        result = postMapper(result);
         res.send({
             posts: result
         });
