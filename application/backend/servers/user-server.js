@@ -80,14 +80,20 @@ app.get('/user', (req, res) => {
     });
 });
 
-const getSetString = (setQuery, fieldName, val) => {
+const getSetString = (setQuery, fieldName, val, is_string=true) => {
     if (!val) {
         return '';
     }
-    if ( setQuery === '' ) {
-        return `SET ${fieldName}=${val} `;
+    let valString = '';
+    if (is_string) {
+        valString = `\"${val}\"`;
+    } else {
+        valString = `${val}`;
     }
-    return `,SET ${fieldName}=${val} `;
+    if ( setQuery === '' ) {
+        return `SET ${fieldName}=${valString} `;
+    }
+    return `,SET ${fieldName}=${valString} `;
 };
 
 app.post('/user', (req, res) => {
@@ -102,8 +108,8 @@ app.post('/user', (req, res) => {
     setQuery += getSetString(setQuery, "last_name", sanitizedBody.last_name);
     setQuery += getSetString(setQuery, "first_name", sanitizedBody.first_name);
     setQuery += getSetString(setQuery, "phone_number", sanitizedBody.phone_number);
-    setQuery += getSetString(setQuery, "is_faculty", sanitizedBody.is_faculty);
-    query += setQuery + ` WHERE email=${sanitizedBody.email}`;
+    setQuery += getSetString(setQuery, "is_faculty", sanitizedBody.is_faculty, false);
+    query += setQuery + ` WHERE email="${sanitizedBody.email}"`;
     console.log(query);
     database.query(query, (err, result) => {
         if ( err || !result ) {
