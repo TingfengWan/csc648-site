@@ -69,20 +69,18 @@ app.get('/user/purchases', (req, res) => {
         ON t1.post_id = t2.id \
         WHERE t1.user_email=\"${userEmail}\";\
     `;
-    database.query(query)
-    .then((result) => {
-        if ( !result ) {
-            throw "No result";
+    database.query(query, (err, result) => {
+        if ( err || !result ) {
+            console.log(err.message);
+            return res.status(400).send({status: 400, message: err.message});
+
         }
-        result = postMapper(result);
+        // b/c media_content allowed, no need to map/filter.
         return res.send({
             purchased_posts: result
         });
-    })
-    .catch((err) => {
-        console.log(err.message);
-        return res.status(400).send({status: 400, message: err.message});
     });
+   
 });
 
 app.get('/user/posts', (req, res) => {
@@ -95,19 +93,16 @@ app.get('/user/posts', (req, res) => {
         FROM Posts\
         WHERE creator_email=\"${userEmail}\"\
     `;
-    database.query(query)
-    .then((result) => {
-        if ( !result ) {
-            throw "No result";
+    database.query(query, (err, result) => {
+        if ( err || !result ) {
+            console.log(err.message);
+            return res.status(400).send({status: 400, message: err.message});
+
         }
-        result = postMapper(result);
+        // b/c media_content allowed for owner, no need to map/filter.
         return res.send({
             posts: result
         });
-    })
-    .catch((err) => {
-        console.log(err.message);
-        return res.status(400).send({status: 400, message: err.message});
     });
 });
 
