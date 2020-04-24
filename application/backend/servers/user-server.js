@@ -117,8 +117,12 @@ app.post('/user', (req, res) => {
             return res.status(400).send({status: 400, message: err.message});
 
         }
+        if ( result.affectedRows != 1 ) {
+            return res.send({ status: 500, message: "An unexpected number of rows have been updated" });
+        }
         return res.send({
-            result: result
+            status: 200,
+            message: "User has been updated"
         });
     });
 });
