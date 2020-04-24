@@ -93,7 +93,7 @@ const getSetString = (setQuery, fieldName, val, is_string=true) => {
     if ( setQuery === '' ) {
         return `SET ${fieldName}=${valString} `;
     }
-    return `,SET ${fieldName}=${valString} `;
+    return `, ${fieldName}=${valString} `;
 };
 
 app.post('/user', (req, res) => {
