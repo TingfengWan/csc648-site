@@ -74,9 +74,50 @@ const validatePostInput = (fields, files) => {
         post_body: fields.post_body
     };
 };
-// app.get('/post', (req, res) => {
+app.get('/post', (req, res) => {
+    const postId = req.query.id;
 
-// });
+    let locationQuery = `
+        SELECT location FROM PostLocations WHERE post_id=${postId};
+    `;
+    let categoryQuery = `
+        SELECT category FROM PostCategories WHERE post_id=${postId};
+    `;
+    let postQuery = `
+        SELECT * FROM Posts WHERE id=${postId};
+    `;
+    database.query(postQuery, (err, postResult) => {
+        console.log(postQuery);
+        if (err) {
+            console.log(err.message);
+            res.status(400);
+            return res.send({ status: 400, message: 'Broke at query'});
+        }
+        database.query(locationQuery, (err, locationResult) => {
+            console.log(locationQuery);
+            if (err) {
+                console.log(err.message);
+                res.status(400);
+                return res.send({ status: 400, message: 'Broke at query'});
+            }
+            database.query(categoryQuery, (err, categoryResult) => {
+                console.log(categoryQuery);
+                if (err) {
+                    console.log(err.message);
+                    res.status(400);
+                    return res.send({ status: 400, message: 'Broke at query'});
+                }
+                // redact media_content...
+                postResult.media_content = null;
+                // add location and categories
+                postResult.locations = locationResult;
+                postResult.categories = categoryResult;
+                res.send({post: postResult});
+            });
+        });
+    });
+});
+
 // POST Request to create a POST.
 app.post('/post', (req, res) => {
     console.log(FS_ROOT);
