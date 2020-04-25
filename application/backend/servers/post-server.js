@@ -187,7 +187,7 @@ app.post('/post', (req, res) => {
                     }
                 });
 
-                database.query(cateQuery, (err, locationResult) => {
+                database.query(locaQuery, (err, locationResult) => {
                     if (err) {
                         console.log(err.message);
                         res.status(400);
