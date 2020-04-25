@@ -86,8 +86,7 @@ app.post('/post', (req, res) => {
     form.parse(req, (err, fields, files) => {
         if (err) {
             res.status(400);
-            res.send({status: 400, message: 'Could not parse request'});
-            return;
+            return res.send({status: 400, message: 'Could not parse request'});
         }
         const queryParams = validatePostInput(fields, files);	//
         const query = `\
@@ -105,36 +104,56 @@ app.post('/post', (req, res) => {
             `;
         database.query(query, (err, result) => {
             console.log(query);
-        if (err) {
+            if (err) {
                 console.log(err.message);
-            res.status(400);
-                res.send({ status: 400, message: 'Broke at query'});
-                return;
+                res.status(400);
+                return res.send({ status: 400, message: 'Broke at query'});
             }
             // add categories
-            //const post = result;
-            //console.log(post);
             let cateQuery = `
                     INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
-            fields.categories = fields.categories || ['Other'];
+            if (!fields.categories || !fields.categories.length) {
+                fields.categories = ['Other'];
+            }
             fields.categories.forEach((category, i) => {
                 cateQuery += `
-                    (${result.insertId},"${category}")\ 
+                    (${result.insertId},"${sanitizer(category)}")\ 
                 `;
-            if ( i != fields.categories.length-1) {
-                cateQuery+=',';
-            }
+                if ( i != fields.categories.length-1) {
+                    cateQuery+=',';
+                }
             });
             console.log(cateQuery);
             database.query(cateQuery, (err, categoryResult) => {
                 if (err) {
-            console.log(err.message);
+                    console.log(err.message);
                     res.status(400);
-                    res.send({status: 400, message: 'Could not enter categories'});
-                    return ;
+                    return res.send({status: 400, message: 'Could not enter categories'});
                 }
-                return res.send({post_id: result.insertId});
+                let locaQuery = `
+                    INSERT INTO PostLocations(post_id,location) VALUES\ 
+                `;
+                if (!fields.locations || !fields.locations.length) {
+                    fields.locations = ['N/A'];
+                }
+                fields.locations.forEach((location, i) => {
+                    locaQuery += `
+                        (${result.insertId},"${sanitizer(location)}")\ 
+                    `;
+                    if ( i != fields.locations.length-1) {
+                        locaQuery+=',';
+                    }
+                });
+
+                database.query(cateQuery, (err, locationResult) => {
+                    if (err) {
+                        console.log(err.message);
+                        res.status(400);
+                        return res.send({status: 400, message: 'Could not enter locations'});
+                    }
+                    return res.send({post_id: result.insertId});
+                });
             });
         });
     });
@@ -233,7 +252,6 @@ app.get('/post/search', (req, res) => {
     });
 });
 
-// /post/user
 
 app.listen(postServerPort, () => {
     console.log(`Post Server listening on ${postServerPort}`);
