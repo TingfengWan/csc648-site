@@ -93,6 +93,8 @@ app.get('/post', (req, res) => {
             res.status(400);
             return res.send({ status: 400, message: 'Broke at query'});
         }
+        postResult = postResult[0]; // extract single element from array
+
         database.query(locationQuery, (err, locationResult) => {
             console.log(locationQuery);
             if (err) {
@@ -151,7 +153,6 @@ app.post('/post', (req, res) => {
                 return res.send({ status: 400, message: 'Broke at query'});
             }
             // add categories
-            result = result[0]; // extract single element from array
             let cateQuery = `
                     INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
