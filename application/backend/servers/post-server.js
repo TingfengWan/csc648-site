@@ -91,7 +91,7 @@ app.get('/post', (req, res) => {
         if (err) {
             console.log(err.message);
             res.status(400);
-            return res.send({ status: 400, message: 'Broke at query'});
+            return res.send({ status: 400, message: 'Broke at post query'});
         }
         postResult = postResult[0]; // extract single element from array
 
@@ -100,14 +100,14 @@ app.get('/post', (req, res) => {
             if (err) {
                 console.log(err.message);
                 res.status(400);
-                return res.send({ status: 400, message: 'Broke at query'});
+                return res.send({ status: 400, message: 'Broke at location query'});
             }
             database.query(categoryQuery, (err, categoryResult) => {
                 console.log(categoryQuery);
                 if (err) {
                     console.log(err.message);
                     res.status(400);
-                    return res.send({ status: 400, message: 'Broke at query'});
+                    return res.send({ status: 400, message: 'Broke at category query'});
                 }
                 // redact media_content...
                 postResult.media_content = null;
@@ -178,7 +178,7 @@ app.post('/post', (req, res) => {
                     INSERT INTO PostLocations(post_id,location) VALUES\ 
                 `;
                 if (!fields.locations || !fields.locations.length) {
-                    fields.locations = ['N/A'];
+                    fields.locations = ['anywhere'];
                 }
                 fields.locations.forEach((location, i) => {
                     locaQuery += `
