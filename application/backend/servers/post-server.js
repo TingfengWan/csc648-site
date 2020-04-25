@@ -151,6 +151,7 @@ app.post('/post', (req, res) => {
                 return res.send({ status: 400, message: 'Broke at query'});
             }
             // add categories
+            result = result[0]; // extract single element from array
             let cateQuery = `
                     INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
