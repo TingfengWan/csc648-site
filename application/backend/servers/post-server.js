@@ -156,9 +156,13 @@ app.post('/post', (req, res) => {
             let cateQuery = `
                     INSERT INTO PostCategories(post_id,category) VALUES\ 
                 `;
-            if (!fields.categories || !fields.categories.length) {
+	    console.log(fields.categories);
+	    let categories = JSON.parse(fields.categories);
+            if (!Array.isArray(categories) || !categories.length) {
                 fields.categories = ['Other'];
-            }
+            } else {
+		fields.categories = categories;
+	    }
             fields.categories.forEach((category, i) => {
                 cateQuery += `
                     (${result.insertId},"${sanitizer(category)}")\ 
@@ -177,9 +181,12 @@ app.post('/post', (req, res) => {
                 let locaQuery = `
                     INSERT INTO PostLocations(post_id,location) VALUES\ 
                 `;
-                if (!fields.locations || !fields.locations.length) {
-                    fields.locations = ['anywhere'];
-                }
+		let locations = JSON.parse(fields.locations);
+                if (!Array.isArray(locations) || !locations.length) {
+                    fields.locations = ['Anywhere'];
+                } else {
+		    fields.locations = locations;
+		}
                 fields.locations.forEach((location, i) => {
                     locaQuery += `
                         (${result.insertId},"${sanitizer(location)}")\ 
@@ -188,7 +195,7 @@ app.post('/post', (req, res) => {
                         locaQuery+=',';
                     }
                 });
-
+		console.log(locaQuery);
                 database.query(locaQuery, (err, locationResult) => {
                     if (err) {
                         console.log(err.message);

@@ -24,6 +24,7 @@ const app = express();
 // express middlewares
 app.use(cookieParser());
 app.use(bodyParser());
+app.use(express.json());
 
 const inputValidationAndSanitization = (body, forLogin) => {
     // validate
