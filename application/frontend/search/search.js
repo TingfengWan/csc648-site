@@ -81,7 +81,7 @@ function appendData(data) {
             divCost.innerHTML = `<p>${post.cost}</p>`;
         }
         preview.src = post.media_preview;
-
+        console.log(post.media_preview);
         mainContainer.appendChild(boarderContainer);
         boarderContainer.appendChild(listingContainer);
         listingContainer.appendChild(divTitle);
