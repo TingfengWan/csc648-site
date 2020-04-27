@@ -160,9 +160,9 @@ app.get('/user/posts', (req, res) => {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
-        SELECT *\
-        FROM Posts\
-        WHERE creator_email=\"${userEmail}\"\
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id
+        WHERE P.creator_email=\"${userEmail}\"\
     `;
     database.query(query, (err, result) => {
         if ( err || !result ) {

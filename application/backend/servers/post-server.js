@@ -77,14 +77,11 @@ const validatePostInput = (fields, files) => {
 app.get('/post', (req, res) => {
     const postId = req.query.id;
 
-    let locationQuery = `
-        SELECT location FROM PostLocations WHERE post_id=${postId};
-    `;
-    let categoryQuery = `
-        SELECT category FROM PostCategories WHERE post_id=${postId};
-    `;
     let postQuery = `
-        SELECT * FROM Posts WHERE id=${postId};
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id
+        WHERE P.id = ${postId}
+        GROUP BY P.id;
     `;
     database.query(postQuery, (err, postResult) => {
         console.log(postQuery);
@@ -95,30 +92,12 @@ app.get('/post', (req, res) => {
         }
         postResult = postResult[0]; // extract single element from array
 
-        database.query(locationQuery, (err, locationResult) => {
-            console.log(locationQuery);
-            if (err) {
-                console.log(err.message);
-                res.status(400);
-                return res.send({ status: 400, message: 'Broke at location query'});
-            }
-            database.query(categoryQuery, (err, categoryResult) => {
-                console.log(categoryQuery);
-                if (err) {
-                    console.log(err.message);
-                    res.status(400);
-                    return res.send({ status: 400, message: 'Broke at category query'});
-                }
-                // redact media_content...
-                if ( postResult.cost > 0 ) {
-                    postResult.media_content = null;
-                }
-                // add location and categories
-                postResult.locations = locationResult;
-                postResult.categories = categoryResult;
-                res.send({post: postResult});
-            });
-        });
+        // redact media_content...
+        if ( postResult.cost > 0 ) {
+            postResult.media_content = null;
+        }
+        res.send({post: postResult});
+        
     });
 });
 
@@ -239,7 +218,10 @@ app.get('/post/search', (req, res) => {
     let title = sanitizer(req.query.title) || '';
     let category = sanitizer(req.query.category) || '';
     let creator_email = sanitizer(req.query.creator_email) || '';
-    let query = 'SELECT * FROM Posts';
+    let query = `
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id
+    `;
 
     console.log(`Sanitized Title: ${title}`);
     console.log(`Sanitized Category: ${category}`);
@@ -260,7 +242,7 @@ app.get('/post/search', (req, res) => {
             }
             whereConditions += `P.title LIKE "%${title}%"`;
         }
-        if ( category ) {
+        if ( category && category.length ) {
             category = category.split(',');
             if ( whereConditions !== '' ) {
                 // if there was previous clause, add conjunction
@@ -284,7 +266,7 @@ app.get('/post/search', (req, res) => {
         }
         query += whereConditions;
     }
-    query += ';';
+    query += ' GROUP BY P.id;';
     console.log(query);
     database.query(query, (err, result) => {
         if ( err ) {
