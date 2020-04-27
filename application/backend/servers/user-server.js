@@ -133,8 +133,8 @@ app.get('/user/purchases', (req, res) => {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
-        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations \
-        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Purchases PS ON P.id = PS.post_id \
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations, U.phone_number creator_phone_number \
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Purchases PS ON P.id = PS.post_id LEFT JOIN Users U ON P.creator_email = U.email \
         WHERE PS.user_email = "${userEmail}" \
         GROUP BY P.id;
     `;
@@ -159,8 +159,8 @@ app.get('/user/posts', (req, res) => {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
-        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations
-        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations, U.phone_number creator_phone_number 
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Users U ON P.creator_email = U.email
         WHERE P.creator_email=\"${userEmail}\"
         GROUP BY P.id;\
     `;

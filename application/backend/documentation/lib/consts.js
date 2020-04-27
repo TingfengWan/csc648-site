@@ -40,6 +40,7 @@ module.exports = {
             return {
                 id: post.id,
                 creator_email: post.creator_email,
+                creator_phone_number: post.creator_phone_number,
                 title: post.title,
                 create_time: post.create_time,
                 file_name: post.file_name,
