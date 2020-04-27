@@ -1,7 +1,7 @@
 function accountPurchased(){
     let URL = "http://3.22.78.154:3000/user/purchases?email=fudget@sfsu.edu";
 
-    
+    alert(document.cookie);
     axios.get(URL) 
     
     .then ( res => {
