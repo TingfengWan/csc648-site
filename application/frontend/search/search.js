@@ -1,41 +1,3 @@
-
-/**
- * fetches data for the search results
- * from the database and displays it
- */
-// function searching(event) {
-//     event.preventDefault();
-//     var URL = 'http://3.22.78.154:3000/post/search?';
-
-//     var userInput = document.getElementById('search').value;
-//     var category = document.getElementById("categories").value;
-//     console.log("User Input: " + userInput);
-
-//     var searchTitle = 'title='.concat(userInput);
-//     var categoryTerm = 'category='.concat(category);
-//     var searchURL = URL.concat(searchTitle, '&', categoryTerm);
-//     searchURL = encodeURI(searchURL);
-
-//     document.location.href = searchURL;
-//     console.log(categoryTerm + searchTitle);
-//     console.log(searchURL);
-
-//     fetch(
-//         searchURL
-//     )
-//         .then(data => {
-//             return data.json();
-//         })
-//         .then(function (data) {
-//             console.log(data);
-//             appendData(data);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-
-// }
-
 /**
  * displays the data
  * from the server into HTML
@@ -56,29 +18,38 @@ function appendData(data) {
 
         var post = data.posts[i];
 
-        var boarderContainer = document.createElement("div");
-        var listingContainer = document.createElement("div");
-        var fittingContainer = document.createElement("div");
-        boarderContainer.classList.add("post-border");
-        listingContainer.classList.add("listing");
-        fittingContainer.classList.add("fitting");
+        var boarderContainer = document.createElement('div');
+        var listingContainer = document.createElement('div');
+        var fittingContainer = document.createElement('div');
+        boarderContainer.classList.add('post-border');
+        listingContainer.classList.add('listing');
+        fittingContainer.classList.add('fitting');
 
 
         //creating elements to use
         var divTitle = document.createElement('div');
         var divCost = document.createElement('div');
-        var divPostTime = document.createElement('div')
-        const preview = document.createElement('img')
+        var divPostTime = document.createElement('div');
+        const preview = document.createElement('img');
 
         //assigning the elements from http://3.22.78.154:3000/post/search
         divTitle.innerHTML = `<h3>${post.title}</h3>`;
-        divPostTime.innerHTML = `<p>${post.create_time}</p>`;
+        divPostTime.innerHTML = `<p>${formatDate(post.create_time)}</p>`;
         if (post.cost == 0) {
             divCost.innerHTML = '<p>Free</p>';
         } else {
             divCost.innerHTML = `<p>${post.cost}</p>`;
         }
         preview.src = post.media_preview;
+
+        //sets id and uses it to get post details
+        boarderContainer.id = post.id;
+
+        //makes modal appear when the container is clicked on
+        boarderContainer.setAttribute('data-toggle', 'modal');
+        boarderContainer.setAttribute('data-target', '#post');
+        boarderContainer.onclick = function() { postModal(this.id); };
+        boarderContainer.style = 'cursor: pointer';
 
         mainContainer.appendChild(boarderContainer);
         boarderContainer.appendChild(listingContainer);
@@ -88,6 +59,90 @@ function appendData(data) {
         fittingContainer.appendChild(divPostTime);
         fittingContainer.appendChild(divCost);
     }
+}
+
+
+/**
+ * Fetches the post details 
+ * from the database
+ * and updates the modal with
+ * the post information
+ */
+function postModal(id) {
+    let URL = 'http://3.22.78.154:3000/post?id=' + id;
+    console.log(URL);
+    fetch(
+        URL
+    )
+        .then(data => {
+            return data.json();
+        })
+        .then(function (data) {
+            postDetails(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+/**
+ * Takes the data received from the database
+ * and puts it into the modal
+ */
+function postDetails(data) {
+
+    let postTitleDiv = document.getElementById('post-title');
+    let postDetails = document.getElementById('post-details');
+    let postImageDiv = document.getElementById('post-image');
+
+    let postImage = document.createElement('img');
+    let postDesc = document.createElement('div');
+    let postPrice = document.createElement('div');
+    let date = document.createElement('div');
+
+    postDetails.innerHTML = "";
+    postImageDiv.innerHTML = ""; 
+    if (data.post.cost == 0) {
+        postPrice.innerHTML = 'Price: Free';
+    }
+    else {
+        postPrice.innerHTML = `Price: $${data.post.cost}`;
+    }
+    
+    postTitleDiv.innerHTML = data.post.title;
+    postDesc.innerHTML = `Description: ${data.post.post_body}`;
+    date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
+    postImage.src = data.post.media_preview;
+
+    postDetails.appendChild(postPrice);
+    postDetails.appendChild(postDesc);
+    postDetails.appendChild(date);
+
+    postImageDiv.appendChild(postImage);
+
+}
+
+/**
+ * formats the date into from ISO 8601 format
+ * to a more readable format (MM/DD/YY HH/MM PM:AM)
+ */
+function formatDate(date) {
+    let dateObj = new Date(date);
+    let month = dateObj.getMonth();
+    let day = dateObj.getDay();
+    let year = dateObj.getFullYear();
+    let hours = dateObj.getHours();
+    let minutes = dateObj.getMinutes();
+    let ampm = "am";
+
+    if(hours > 12) {
+        hours = hours%12;
+        ampm = "pm";
+    }
+
+    let newDate = `${month}/${day}/${year} ${hours}:${minutes}${ampm}`
+    return newDate;
+
 }
 
 function getCategories() {
@@ -157,6 +212,5 @@ function redirectToSearchResults() {
     var category = document.getElementById('categories').value;
     var userInput = document.getElementById('search').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    //var url = 'file:///C:/Users/bubbl/OneDrive/Desktop/School/CSC%20648/csc648-fa20-team03/application/frontend/search/search.html?title=' + userInput + '&category=' + category;
     document.location.href = url;
 }

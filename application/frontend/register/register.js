@@ -29,12 +29,12 @@ function createUser(event) {
         console.log(res.data);
 
         if (res.data.status) {
-          alert("Successfully Registered! \n Redirecting you to home page.");
-          window.location = "../home/home.html";
+          window.location = "register-success.html";
         }
       })
       .catch((err) => {
-        alert("Email already taken!\nPlease try again.");
+        document.getElementById("email-error").innerHTML = "Email already exists. Please enter another email.";
+        document.getElementById("email").style.border = "1px solid red";
         console.log(err)
       });
   }
