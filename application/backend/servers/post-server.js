@@ -280,7 +280,7 @@ app.get('/post/search', (req, res) => {
             return ;
         }
 
-        result = postMapper(result, true);
+        result = postMapper(result);
 
         res.send({
             posts: result
