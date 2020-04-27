@@ -1,6 +1,7 @@
 
 function setting() {
-    let URL = "http://3.22.78.154:3000/user?email=test@sfsu.edu";
+    let email = parseCookie(document.cookie);
+    let URL = "http://3.22.78.154:3000/user?email=" + email;
 
     fetch(URL)
         .then(data => {
@@ -42,7 +43,7 @@ function showModal(id) {
 
 function updateInfo() {
     let modalTitle = document.getElementById("ModalLabel").innerHTML;
-    let email = "test@sfsu.edu";
+    let email = parseCookie(document.cookie);
 
     if (modalTitle == "Password") {
         let hashed_password = md5(document.getElementById("modalInput").value);
@@ -92,6 +93,11 @@ function updateInfo() {
 
 
 
+}
+
+function parseCookie(cookie) {
+    var email = cookie.split('=').pop();
+    return email;
 }
 // WE ARE BORROWING THIS MD5 CODE
 // THIS IS NOT OUR OWN HASH ALGORITHM

@@ -1,7 +1,8 @@
 function accountPurchased(){
-    let URL = "http://3.22.78.154:3000/user/purchases?email=fudget@sfsu.edu";
+    let email = parseCookie(document.cookie);
 
-    alert(document.cookie);
+    let URL = "http://3.22.78.154:3000/user/purchases?email=" + email;
+
     axios.get(URL) 
     
     .then ( res => {
@@ -20,7 +21,9 @@ function accountPurchased(){
 }
 
 function accountPost(){
-    let URL = "http://3.22.78.154:3000/user/posts?email=student_test@sfsu.edu";
+    let email = parseCookie(document.cookie);
+
+    let URL = "http://3.22.78.154:3000/user/posts?email=" + email;
 
     
     axios.get(URL) 
@@ -41,7 +44,8 @@ function accountPost(){
 }
 
 function userInfo(){
-    let URL = "http://3.22.78.154:3000/user?email=test@sfsu.edu";
+    let email = parseCookie(document.cookie);
+    let URL = "http://3.22.78.154:3000/user?email=" + email;
     axios.get(URL)
 
     .then( res => {
@@ -74,4 +78,9 @@ function formatDate(date) {
     let newDate = `${month}/${day}/${year} ${hours}:${minutes}${ampm}`
     return newDate;
 
+}
+
+function parseCookie(cookie) {
+    var email = cookie.split('=').pop();
+    return email;
 }

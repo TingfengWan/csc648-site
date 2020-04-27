@@ -11,7 +11,7 @@ function createPost() {
     let location = document.forms["create-post"]["location"].value;
     let createTime = new Date();
     let fileName;
-    let creatorEmail = "test@sfsu.edu"; //test email, to be replaced with current user logged in
+    let creatorEmail = parseCookie(document.cookie);
 
     console.log(location);
     if (validatePost()) {
@@ -234,4 +234,9 @@ function displayImagePreview() {
         reader.readAsDataURL(file);
     }
 
+}
+
+function parseCookie(cookie) {
+    var email = cookie.split('=').pop();
+    return email;
 }
