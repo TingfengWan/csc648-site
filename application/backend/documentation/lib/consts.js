@@ -22,6 +22,14 @@ module.exports = {
         return str.replace(reg, (match)=>(map[match]));
     },
     postMapper: (result) => {
+        let locations = [];
+        let categories = [];
+        if ( post.locations ) {
+            locations = post.locations.split(", ")
+        }
+        if ( post.categories ) {
+            categories = post.categories.split(", ");
+        }
         return result.map(post => ({
             id: post.id,
             creator_email: post.creator_email,
@@ -34,8 +42,8 @@ module.exports = {
             post_body: post.post_body,
             is_approved: post.is_approved,
             media_preview: post.media_preview,
-            locations: post.locations && post.locations.split(", "),
-            categories: post.categories && post.categories.split(", ")
+            locations: locations,
+            categories: categories
         }));
     }
 }
