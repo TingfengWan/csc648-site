@@ -90,6 +90,7 @@ app.get('/post', (req, res) => {
             res.status(400);
             return res.send({ status: 400, message: 'Broke at post query'});
         }
+        postResult = postMapper(postResult);
         postResult = postResult[0]; // extract single element from array
 
         // redact media_content...
@@ -279,7 +280,8 @@ app.get('/post/search', (req, res) => {
             return ;
         }
 
-        result = postMapper(result);
+        result = postMapper(result, true);
+
         res.send({
             posts: result
         });

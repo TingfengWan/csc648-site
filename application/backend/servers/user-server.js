@@ -148,7 +148,7 @@ app.get('/user/purchases', (req, res) => {
         }
         // b/c media_content allowed, no need to map/filter.
         return res.send({
-            purchased_posts: result
+            purchased_posts: postMapper(result)
         });
     });
    
@@ -173,7 +173,7 @@ app.get('/user/posts', (req, res) => {
         }
         // b/c media_content allowed for owner, no need to map/filter.
         return res.send({
-            posts: result
+            posts: postMapper(result)
         });
     });
 });

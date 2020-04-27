@@ -21,7 +21,7 @@ module.exports = {
         const reg = /[&<>"'/]/ig;
         return str.replace(reg, (match)=>(map[match]));
     },
-    postMapper: (result) => {
+    postMapper: (result, hide_content=false) => {
         return result.map(post => {
             let locations = [];
             let categories = [];
@@ -30,6 +30,9 @@ module.exports = {
             }
             if ( post.categories ) {
                 categories = post.categories.split(", ");
+            }
+            if ( hide_content ) {
+                post.media_content = null;
             }
             return {
                 id: post.id,
@@ -43,6 +46,7 @@ module.exports = {
                 post_body: post.post_body,
                 is_approved: post.is_approved,
                 media_preview: post.media_preview,
+                media_content: post.media_content,
                 locations: locations,
                 categories: categories
             };
