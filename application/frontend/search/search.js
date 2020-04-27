@@ -38,7 +38,7 @@ function appendData(data) {
         if (post.cost == 0) {
             divCost.innerHTML = '<p>Free</p>';
         } else {
-            divCost.innerHTML = `<p>${post.cost}</p>`;
+            divCost.innerHTML = `<p>$${post.cost}</p>`;
         }
         preview.src = post.media_preview;
 
