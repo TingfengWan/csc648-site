@@ -31,6 +31,7 @@ function loginUser(event) {
                 console.log(res.data);
                 if (res.data.status) {
                     alert('Successfully Logged In!');
+                    document.cookie = `userAuth=${email}`;
                     window.location = "../home/home.html";
                 } else {
                     alert('Response status is false for some other reasons');
