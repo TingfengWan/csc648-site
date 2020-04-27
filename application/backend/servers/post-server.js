@@ -85,7 +85,7 @@ app.get('/post', (req, res) => {
     `;
     database.query(postQuery, (err, postResult) => {
         console.log(postQuery);
-        if (err) {
+        if (err || !postResult.length) {
             console.log(err.message);
             res.status(400);
             return res.send({ status: 400, message: 'Broke at post query'});
