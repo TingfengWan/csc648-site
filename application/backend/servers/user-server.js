@@ -162,7 +162,8 @@ app.get('/user/posts', (req, res) => {
     let query = `
         SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations
         FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id
-        WHERE P.creator_email=\"${userEmail}\"\
+        WHERE P.creator_email=\"${userEmail}\"
+        GROUP BY P.id;\
     `;
     database.query(query, (err, result) => {
         if ( err || !result ) {
