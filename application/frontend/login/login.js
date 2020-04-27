@@ -1,3 +1,9 @@
+//Login.js has a function called loginUser that will
+//first: grab userInput for login and password
+//second: call for a request to backend
+//third: receive a response whether it failed or passed
+//if passed redirect to home page
+
 function loginUser(event) {
     //prevents refresh when form is submitted
     event.preventDefault();

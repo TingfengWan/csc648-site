@@ -18,7 +18,7 @@
     <script src="search.js"></script>
 </head>
 
-<body onload="getCategories(); homeOnLoad();">
+<body onload="getCategories(); loadSearchResults();">
 <!-- Navigation bar -->
 <div class="topnav">
     <a class="active" href="../home/home.html">Home</a>
@@ -29,7 +29,7 @@
 
 <!-- Search Bar -->
 <div class="container">
-    <form onsubmit="searching(event)">
+    <form onsubmit="redirectToSearchResults()">
         <div class="input-group mb-1 mt-5">
             <div class="input-group-prepend">
                 <select id="categories" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
