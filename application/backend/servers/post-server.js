@@ -110,7 +110,9 @@ app.get('/post', (req, res) => {
                     return res.send({ status: 400, message: 'Broke at category query'});
                 }
                 // redact media_content...
-                postResult.media_content = null;
+                if ( postResult.cost > 0 ) {
+                    postResult.media_content = null;
+                }
                 // add location and categories
                 postResult.locations = locationResult;
                 postResult.categories = categoryResult;
