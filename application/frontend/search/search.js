@@ -48,7 +48,7 @@ function appendData(data) {
         //makes modal appear when the container is clicked on
         boarderContainer.setAttribute('data-toggle', 'modal');
         boarderContainer.setAttribute('data-target', '#post');
-        boarderContainer.onclick = function() { postModal(this.id); };
+        boarderContainer.onclick = function () { postModal(this.id); };
         boarderContainer.style = 'cursor: pointer';
 
         mainContainer.appendChild(boarderContainer);
@@ -101,14 +101,14 @@ function postDetails(data) {
     let date = document.createElement('div');
 
     postDetails.innerHTML = "";
-    postImageDiv.innerHTML = ""; 
+    postImageDiv.innerHTML = "";
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
     }
     else {
         postPrice.innerHTML = `Price: $${data.post.cost}`;
     }
-    
+
     postTitleDiv.innerHTML = data.post.title;
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
@@ -135,9 +135,12 @@ function formatDate(date) {
     let minutes = dateObj.getMinutes();
     let ampm = "am";
 
-    if(hours > 12) {
-        hours = hours%12;
+    if (hours > 12) {
+        hours = hours % 12;
         ampm = "pm";
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
     }
 
     let newDate = `${month}/${day}/${year} ${hours}:${minutes}${ampm}`
