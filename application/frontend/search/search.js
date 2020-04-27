@@ -211,7 +211,6 @@ function redirectToSearchResults() {
     event.preventDefault();
     var category = document.getElementById('categories').value;
     var userInput = document.getElementById('search').value;
-    //var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    var url = 'file:///C:/Users/marvi/Documents/GitHub/csc648-fa20-team03/application/frontend/search/search.html?title=' + userInput + '&category=' + category;
+    var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
     document.location.href = url;
 }
