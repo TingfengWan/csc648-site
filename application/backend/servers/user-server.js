@@ -74,7 +74,6 @@ app.get('/user', (req, res) => {
             return res.status(400).send({status: 400, message: err.message});
 
         }
-        // b/c media_content allowed for owner, no need to map/filter.
         return res.send({
             user: result
         });
