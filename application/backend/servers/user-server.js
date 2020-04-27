@@ -134,12 +134,12 @@ app.get('/user/purchases', (req, res) => {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
-        SELECT * \
-        FROM Purchases t1 \
-        INNER JOIN Posts t2 \
-        ON t1.post_id = t2.id \
-        WHERE t1.user_email=\"${userEmail}\";\
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations \
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Purchases PS ON P.id = PS.post_id \
+        WHERE PS.user_email = "${userEmail}" \
+        GROUP BY P.id;
     `;
+
     database.query(query, (err, result) => {
         if ( err || !result ) {
             console.log(err.message);
