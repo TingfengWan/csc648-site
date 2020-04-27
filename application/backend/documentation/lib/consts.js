@@ -34,6 +34,8 @@ module.exports = {
             post_body: post.post_body,
             is_approved: post.is_approved,
             media_preview: post.media_preview,
+            locations: post.locations.split(", "),
+            categories: post.categories.split(", ")
         }));
     }
 }
