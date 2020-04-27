@@ -230,7 +230,7 @@ app.get('/post/search', (req, res) => {
 
     if ( title || category || creator_email ) {
         // if no query params, return all posts
-        query += ' AS P WHERE ';
+        query += ' WHERE ';
         let whereConditions = '';
         if ( creator_email ) {
             whereConditions += `P.creator_email = "${creator_email}"`
