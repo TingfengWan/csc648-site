@@ -1,60 +1,104 @@
-//Login.js has a function called loginUser that will
-//first: grab userInput for login and password
-//second: call for a request to backend
-//third: receive a response whether it failed or passed
-//if passed redirect to home page
 
-function loginUser(event) {
-    //prevents refresh when form is submitted
-    event.preventDefault();
-    document.getElementById("login-error").innerHTML = "";
-    document.getElementById("email-error").innerHTML = "";
-    document.getElementById("password-error").innerHTML = "";
-    
-    //grabbing user input
-    let email = document.forms["loginForm"]["email"].value;
-    let hashed_password = md5(document.forms["loginForm"]["password"].value);
-    let errMsg = "";
+function setting() {
+    let email = parseCookie(document.cookie);
+    let URL = "http://3.22.78.154:3000/user?email=" + email;
 
-    //IF STATEMENT CHECKS:
-    //Checks if inputs are empty
-    //If empty return error that they need to fill it in
-    //if not empty AXIOS REQUEST is triggered
-    //If axios returns true .then alerts user that its a success
-    //if fail then .catch tells user that their account does not exist
-    if (email && hashed_password != "") {
-        axios.post('http://3.22.78.154:3000/user/login', {
-            email,
-            hashed_password,
+    fetch(URL)
+        .then(data => {
+            return data.json();
         })
-            .then((res) => {
-                console.log(res.data);
-                if (res.data.status) {
-                    alert('Successfully Logged In!');
-                    document.cookie = `userAuth=${email};path=/`;
-                    window.location = "../home/home.html";
-                } else {
-                    alert('Response status is false for some other reasons');
-                }
-            })
-            .catch((err) => {
-                document.getElementById("login-error").innerHTML = "User does not exist";
-                console.log(err);
-            })
-    } else {
-        if(email == "") {
-            errMsg = "Please enter an email.";
-            document.forms["loginForm"]["email"].style.border = "1px solid red";
-            document.getElementById("email-error").innerHTML = errMsg;
-        }
-        if (hashed_password == "d41d8cd98f00b204e9800998ecf8427e") {
-            document.forms["loginForm"]["password"].style.border = "1px solid red";
-            errMsg = "Please enter a password.";
-            document.getElementById("password-error").innerHTML = errMsg;
-        }
+        .then(function (data) {
+            console.log(data)
+            document.getElementById("firstName").innerHTML = "First Name: " + data.user[0].first_name
+            document.getElementById("lastName").innerHTML = "Last Name: " + data.user[0].last_name
+            document.getElementById("phoneNumber").innerHTML = "Phone Number: " + data.user[0].phone_number
+
+        })
+
+        .catch({
+
+        })
+}
+
+function showModal(id) {
+    console.log(id)
+    document.getElementById("modalInput").type = "text";
+
+    let modalTitle = document.getElementById("ModalLabel");
+    if (id == "passwordButton") {
+        modalTitle.innerHTML = "Password";
+        document.getElementById("modalInput").type = "password";
+    }
+    else if (id == "firstNameButton") {
+        modalTitle.innerHTML = "First Name";
+    }
+
+    else if (id == "lastNameButton") {
+        modalTitle.innerHTML = "Last Name";
+    }
+    else {
+        modalTitle.innerHTML = "Phone Number";
     }
 }
 
+function updateInfo() {
+    let modalTitle = document.getElementById("ModalLabel").innerHTML;
+    let email = parseCookie(document.cookie);
+
+    if (modalTitle == "Password") {
+        let hashed_password = md5(document.getElementById("modalInput").value);
+        axios.post('http://3.22.78.154:3000/user', {
+            email,
+            hashed_password,
+        }).then(res => {
+            console.log(res.data)
+            alert(res.data.message)
+            location.reload();
+        }).catch(err => console.log(err))
+    } else if (modalTitle == "First Name") {
+        let first_name = document.getElementById("modalInput").value;
+        axios.post('http://3.22.78.154:3000/user', {
+            email,
+            first_name,
+        }).then(res => {
+            console.log(res.data)
+            alert(res.data.message)
+            location.reload();
+        }).catch(err => console.log(err))
+
+
+    } else if (modalTitle == "Last Name") {
+        let last_name = document.getElementById("modalInput").value;
+        axios.post('http://3.22.78.154:3000/user', {
+            email,
+            last_name,
+        }).then(res => {
+            console.log(res.data)
+            alert(res.data.message)
+            location.reload();
+        }).catch(err => console.log(err))
+
+    } else {
+        let phone_number = document.getElementById("modalInput").value;
+        axios.post('http://3.22.78.154:3000/user', {
+            email,
+            phone_number,
+        }).then(res => {
+            console.log(res.data)
+            alert(res.data.message)
+            location.reload();
+        }).catch(err => console.log(err))
+
+    }
+
+
+
+}
+
+function parseCookie(cookie) {
+    var email = cookie.split('=').pop();
+    return email;
+}
 // WE ARE BORROWING THIS MD5 CODE
 // THIS IS NOT OUR OWN HASH ALGORITHM
 ; (function ($) {

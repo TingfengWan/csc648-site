@@ -15,32 +15,28 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <script src="home.js"></script>
 </head>
 
-<body>
+<body onload="getCategories()">
   <!-- Navigation bar -->
   <div class="topnav">
-    <a class="active" href="/">Home</a>
+    <a class="active" href="../home/home.html">Home</a>
     <a href="../about/about.html">About</a>
     <a class="user" href="../register/register.html">Register</a>
     <a class="user" href="../login/login.html">Login</a>
   </div>
   <!-- Search Bar -->
   <div class="container">
-    <form action="">
+    <form onsubmit="redirectToSearchResults()">
       <div class="input-group mb-1 mt-5">
         <div class="input-group-prepend">
-          <select class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          <select id="category-field" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <option>All</option>
-            <option>Math</option>
-            <option>Astronomy</option>
-            <option>Physical Education</option>
-            <option>Business</option>
-          </select>
+            <option value="">All</option>
           </select>
         </div>
-        <input type="text" class="form-control text-white mh-100" aria-label="Text input with dropdown button"
+        <input id="userInput" type="text" class="form-control text-white mh-100" aria-label="Text input with dropdown button"
           placeholder="Search">
       </div>
     </form>
