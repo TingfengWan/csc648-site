@@ -58,6 +58,50 @@ const inputValidationAndSanitization = (body, forLogin) => {
     };
 };
 
+// get User's messages sent and recieved
+app.get('/user/message', (req, res) => {
+    const userEmail = req.query.userEmail;
+    if ( !userEmail || !userEmail.endsWith('sfsu.edu') ) {
+        return res.status(400).send({status:400, message: 'Invalid email address'});
+    }
+    let query = `
+        SELECT UM.sender_email, U1.first_name sender_first_name, U1.last_name sender_last_name, UM.recipient_email, U2.first_name recipient_first_name, U2.last_name recipient_last_name, UM.message, UM.timestamp \
+        FROM UserMessages UM LEFT JOIN Users U1 ON UM.sender_email = U1.email LEFT JOIN Users U2 ON UM.recipient_email = U2.email \
+        WHERE recipient_email=\"${userEmail}\"
+        OR sender_email=\"${userEmail}\"
+    `;
+    database.query(query, (err, result) => {
+        if ( err || !result ) {
+            console.log(err.message);
+            return res.status(400).send({status: 400, message: err.message});
+        }
+        return res.send({
+            messages: result
+        });
+    });
+});
+
+app.post('/user/message', (req, res) => {
+    const sender = sanitizer(req.body.sender_email);
+    const receiver = sanitizer(req.body.recipient_email);
+    const message = sanitizer(req.body.message);
+
+    const query = `
+        INSERT INTO UserMessages(sender_email, recipient_email, message) \
+        VALUES (\"${sender}\",\"${receiver}\",\"${message}\"); 
+    `;
+    database.query(query, (err, result) => {
+        if ( err || !result ) {
+            console.log(err.message);
+            return res.status(400).send({status: 400, message: "Could not create message."});
+        }
+        return res.send({
+            status: 200,
+            message: "Message sent!"
+        });
+    });
+});
+
 app.get('/user', (req, res) => {
     const userEmail = sanitizer(req.query.email);
     if ( userEmail === "" || !userEmail.endsWith('sfsu.edu') ) {
@@ -74,7 +118,6 @@ app.get('/user', (req, res) => {
             return res.status(400).send({status: 400, message: err.message});
 
         }
-        // b/c media_content allowed for owner, no need to map/filter.
         return res.send({
             user: result
         });
@@ -134,12 +177,12 @@ app.get('/user/purchases', (req, res) => {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
-        SELECT * \
-        FROM Purchases t1 \
-        INNER JOIN Posts t2 \
-        ON t1.post_id = t2.id \
-        WHERE t1.user_email=\"${userEmail}\";\
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations, U.phone_number creator_phone_number \
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Purchases PS ON P.id = PS.post_id LEFT JOIN Users U ON P.creator_email = U.email \
+        WHERE PS.user_email = "${userEmail}" \
+        GROUP BY P.id;
     `;
+
     database.query(query, (err, result) => {
         if ( err || !result ) {
             console.log(err.message);
@@ -148,7 +191,7 @@ app.get('/user/purchases', (req, res) => {
         }
         // b/c media_content allowed, no need to map/filter.
         return res.send({
-            purchased_posts: result
+            purchased_posts: postMapper(result)
         });
     });
    
@@ -160,9 +203,10 @@ app.get('/user/posts', (req, res) => {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
-        SELECT *\
-        FROM Posts\
-        WHERE creator_email=\"${userEmail}\"\
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations, U.phone_number creator_phone_number 
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Users U ON P.creator_email = U.email
+        WHERE P.creator_email=\"${userEmail}\"
+        GROUP BY P.id;\
     `;
     database.query(query, (err, result) => {
         if ( err || !result ) {
@@ -172,7 +216,7 @@ app.get('/user/posts', (req, res) => {
         }
         // b/c media_content allowed for owner, no need to map/filter.
         return res.send({
-            posts: result
+            posts: postMapper(result)
         });
     });
 });
