@@ -221,5 +221,5 @@ function redirectToSearchResults() {
     var category = document.getElementById('categories').value;
     var userInput = document.getElementById('search').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    document.location.href = url;
+    document.location.href = encodeURI(url);
 }
