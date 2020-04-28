@@ -61,7 +61,7 @@ const inputValidationAndSanitization = (body, forLogin) => {
 // get User's messages sent and recieved
 app.get('/user/message', (req, res) => {
     const userEmail = req.query.userEmail;
-    if ( userEmail === "" || !userEmail.endsWith('sfsu.edu') ) {
+    if ( !userEmail || !userEmail.endsWith('sfsu.edu') ) {
         return res.status(400).send({status:400, message: 'Invalid email address'});
     }
     let query = `
