@@ -29,6 +29,7 @@
         <a href="../about/about.html">About</a>
         <a class="user active" href="../register/register.html">Register</a>
         <a class="user" href="../login/login.html">Login</a>
+        <a class="user" href="../create-post/create-post.html">Create Post</a>
     </div>
 
     <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
@@ -36,6 +37,8 @@
     <form class="container" id="register" onsubmit="createUser(event)">
         <div class="container bigger-margin margin-top border">
             <h1 class="text-center">Register</h1>
+            <p style="font-size: small;">* denotes required field</p>
+
             <div class="form-group">
                 <label>First Name:*</label>
                 <input type="text" class="form-control" name="first name" id="first-name"
@@ -82,7 +85,9 @@
                     I accept the <a href="">terms and conditions</a> .*
                 </label>
                 <div class="error" id="terms-and-cond-error"></div>
-                <p style="font-size: small;">* denotes required field</p>
+            </div>
+            <div>
+                ReCaptcha eventually
             </div>
             <div class="container text-center">
                 <button type="submit" class="btn btn-primary margin-top">Create Account</button>

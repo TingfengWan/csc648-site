@@ -28,7 +28,8 @@
         <a href="../home/home.html">Home</a>
         <a href="../about/about.html">About</a>
         <a class="user" href="../register/register.html">Register</a>
-        <a class="user" href="login">Login</a>
+        <a class="user" href="../login/login.html">Login</a>
+        <a class="user active" href="../create-post/create-post.html">Create Post</a>
     </div>
     
     <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
@@ -36,21 +37,23 @@
     <form class="container" id="create-post" onsubmit="createPost()" novalidate>
         <div>
             <h1>Create a Post</h1>
+            <p style="font-size: small;">* denotes required field</p>
+         
             <div class="form-group">
                 <label for="title">Title:*</label>
-                <input class="form-control" id="title" name="title" placeholder="Enter title" required>
+                <input class="form-control half-width" id="title" name="title" placeholder="Enter title" required>
                 <div class="error" id="title-error"></div>
             </div>
             <div class="form-group">
                 <label for="category">Category:*</label>
-                <select class="form-control" id="category" name="category" required>
+                <select class="form-control half-width" id="category" name="category" required>
                     <option value=""></option>
                 </select>
                 <div class="error" id="category-error"></div>
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group twenty-width">
                 <label for="price">Price:*</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -67,22 +70,10 @@
                 <input type="checkbox" class="form-check-input" onclick="displayUploadFileDiv()" id="physical">
                 <label class="form-check-label" for="physical"> Physical object?</label>
             </div>
-            <div class="form-group" id="file-upload-div">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Upload File*</span>
-                    </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="file-upload" name="file">
-                        <label class="custom-file-label" for="file-upload">Choose file</label>
-                    </div>
-                </div>
-            </div>
-            <div class="error" id="file-upload-error"></div>
 
             <div class="form-group" id="location-div" hidden>
                 <label for="location">Meetup Location:</label>
-                <select class="form-control" id="location" name="meetup location">
+                <select class="form-control half-width" id="location" name="meetup location">
                     <option value=""></option>
                     <option value="malcolm x plaza">Malcolm X Plaza</option>
                     <option value="student services building">Student Services Building</option>
@@ -97,8 +88,20 @@
                 <textarea class="form-control" rows="4" id="description" placeholder="Enter description here..."></textarea>
             </div>
             
+            <div class="form-group half-width" id="file-upload-div">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Upload File*</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file-upload" name="file">
+                        <label class="custom-file-label" for="file-upload">Choose file</label>
+                    </div>
+                </div>
+            </div>
+            <div class="error" id="file-upload-error"></div>
 
-            <div class="form-group">
+            <div class="form-group half-width">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Image Preview</span>
@@ -120,12 +123,12 @@
                 </p>
             </div>
 
-            <div>
-                <p style="font-size: small;">* denotes required field</p>
-            </div>
-
             <div class="container text-center">
+                <button class="btn btn-primary" style="margin-right: 20px;">Cancel Post</button>
                 <button type="submit" class="btn btn-primary">Create Post</button>
+                <div class="container" style="font-style: italic;">
+                    Please allow up to 24 hours for your post to be approved.
+                </div>
             </div>
 
         </div>
