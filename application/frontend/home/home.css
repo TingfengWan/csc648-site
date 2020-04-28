@@ -84,21 +84,35 @@ body {
     }
   }
 
+  #navBarLogo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  #titleLogo {
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+
   /* 
   Search Bar
   */
 
   input.form-control {
-    background-color: #330033!important;
+    background-color: #58195f!important;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
   }
 
   select.form-control{
-    background: #58195f!important;
+    background: #330033!important;
     color: white!important;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+  }
+  ::placeholder {
+    color: white!important;
+    opacity: 1; 
   }
 
 
