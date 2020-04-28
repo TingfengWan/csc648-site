@@ -163,12 +163,12 @@ app.post('/post', (req, res) => {
                 let locaQuery = `
                     INSERT INTO PostLocations(post_id,location) VALUES\ 
                 `;
-		let locations = JSON.parse(fields.locations);
-                if (!Array.isArray(locations) || !locations.length) {
-                    fields.locations = ['Anywhere'];
-                } else {
-		    fields.locations = locations;
-		}
+                let locations = JSON.parse(fields.locations);
+                        if (!Array.isArray(locations) || !locations.length) {
+                            fields.locations = ['Anywhere'];
+                        } else {
+                    fields.locations = locations;
+                }
                 fields.locations.forEach((location, i) => {
                     locaQuery += `
                         (${result.insertId},"${sanitizer(location)}")\ 
@@ -177,7 +177,7 @@ app.post('/post', (req, res) => {
                         locaQuery+=',';
                     }
                 });
-		console.log(locaQuery);
+		        console.log(locaQuery);
                 database.query(locaQuery, (err, locationResult) => {
                     if (err) {
                         console.log(err.message);

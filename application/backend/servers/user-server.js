@@ -58,6 +58,50 @@ const inputValidationAndSanitization = (body, forLogin) => {
     };
 };
 
+// get User's messages sent and recieved
+app.get('/user/message', (req, res) => {
+    const userEmail = req.query.userEmail;
+    if ( !userEmail || !userEmail.endsWith('sfsu.edu') ) {
+        return res.status(400).send({status:400, message: 'Invalid email address'});
+    }
+    let query = `
+        SELECT UM.sender_email, U1.first_name sender_first_name, U1.last_name sender_last_name, UM.recipient_email, U2.first_name recipient_first_name, U2.last_name recipient_last_name, UM.message, UM.timestamp \
+        FROM UserMessages UM LEFT JOIN Users U1 ON UM.sender_email = U1.email LEFT JOIN Users U2 ON UM.recipient_email = U2.email \
+        WHERE recipient_email=\"${userEmail}\"
+        OR sender_email=\"${userEmail}\"
+    `;
+    database.query(query, (err, result) => {
+        if ( err || !result ) {
+            console.log(err.message);
+            return res.status(400).send({status: 400, message: err.message});
+        }
+        return res.send({
+            messages: result
+        });
+    });
+});
+
+app.post('/user/message', (req, res) => {
+    const sender = sanitizer(req.body.sender_email);
+    const receiver = sanitizer(req.body.recipient_email);
+    const message = sanitizer(req.body.message);
+
+    const query = `
+        INSERT INTO UserMessages(sender_email, recipient_email, message) \
+        VALUES (\"${sender}\",\"${receiver}\",\"${message}\"); 
+    `;
+    database.query(query, (err, result) => {
+        if ( err || !result ) {
+            console.log(err.message);
+            return res.status(400).send({status: 400, message: "Could not create message."});
+        }
+        return res.send({
+            status: 200,
+            message: "Message sent!"
+        });
+    });
+});
+
 app.get('/user', (req, res) => {
     const userEmail = sanitizer(req.query.email);
     if ( userEmail === "" || !userEmail.endsWith('sfsu.edu') ) {
