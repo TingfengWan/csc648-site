@@ -10,13 +10,26 @@ function getCategories() {
         .then(function (data) {
             const categories = data.categories;
             const categoriesSelect = document.getElementById("category-field");
-
+            const departmentContainer = document.getElementById("categoryRow");
+            
             for(let i = 0; i < categories.length; i++) {
                 let node = document.createElement("option");
+                let categoryCol = document.createElement("div");
+                let categoryLink = document.createElement("a");
+                
+                categoryCol.classList.add('col-sm');
+                categoryLink.classList.add('department');
+                categoryLink.href = 'http://3.22.78.154:3000/search/search.html?title=&category=' + categories[i].category;
+
                 node.value = categories[i].category;
                 let text = document.createTextNode(categories[i].category);
+                categoryLink.innerHTML = `${categories[i].category}`;
+
+
                 node.appendChild(text);
                 categoriesSelect.appendChild(node);
+                departmentContainer.appendChild(categoryCol);
+                departmentContainer.appendChild(categoryLink);
             }
         })
         .catch(err => {

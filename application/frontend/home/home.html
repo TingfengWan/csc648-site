@@ -27,12 +27,14 @@
     <a class="user" href="../login/login.html">Login</a>
     <a class="user" href="../create-post/create-post.html">Create Post</a>
   </div>
-  <!-- Search Bar -->
-  <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
+  <!-- Static Texts -->
+  <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+    2020. For Demonstration Only</div>
   <h1 class="text-center font-weight-bold display-3">Gator<img id="titleLogo" src="../GT-Logo.png">Trade</h1>
   <h5 class="text-center">Welcome! This is a site where faculty
     and students can post school related content.</h5>
-  <div class="container shadow bg-white rounded">
+  <!-- Search Bar -->
+  <div class="container">
     <form onsubmit="redirectToSearchResults()">
       <div class="input-group mb-1 mt-5">
         <div class="input-group-prepend ">
@@ -41,17 +43,14 @@
             <option value="">All</option>
           </select>
         </div>
-        <input id="userInput" type="text" class="form-control text-white mh-100" aria-label="Text input with dropdown button"
-          placeholder="Search">
+        <input id="userInput" type="text" class="form-control text-white mh-100"
+          aria-label="Text input with dropdown button" placeholder="Search">
       </div>
     </form>
   </div>
   <!-- Department Categories -->
   <div class="container mb-3">
     <div class="row" id="categoryRow">
-      <div class="col-sm ">
-        <a class="department" href="" alt="">Math</a>
-      </div>
     </div>
   </div>
   <!-- Display Items -->
