@@ -21,16 +21,21 @@
 <body onload="getCategories()">
   <!-- Navigation bar -->
   <div class="topnav">
-    <a class="active" href="../home/home.html">Home</a>
+    <a class="active" href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
     <a href="../about/about.html">About</a>
     <a class="user" href="../register/register.html">Register</a>
     <a class="user" href="../login/login.html">Login</a>
+    <a class="user" href="../create-post/create-post.html">Create Post</a>
   </div>
   <!-- Search Bar -->
-  <div class="container">
+  <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
+  <h1 class="text-center font-weight-bold display-3">Gator<img id="titleLogo" src="../GT-Logo.png">Trade</h1>
+  <h5 class="text-center">Welcome! This is a site where faculty
+    and students can post school related content.</h5>
+  <div class="container shadow bg-white rounded">
     <form onsubmit="redirectToSearchResults()">
       <div class="input-group mb-1 mt-5">
-        <div class="input-group-prepend">
+        <div class="input-group-prepend ">
           <select id="category-field" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <option value="">All</option>
@@ -43,24 +48,9 @@
   </div>
   <!-- Department Categories -->
   <div class="container mb-3">
-    <div class="row">
-      <div class="col-sm">
+    <div class="row" id="categoryRow">
+      <div class="col-sm ">
         <a class="department" href="" alt="">Math</a>
-      </div>
-      <div class="col-sm">
-        <a class="department" href="" alt="">Science</a>
-      </div>
-      <div class="col-sm">
-        <a class="department" href="" alt="">Business</a>
-      </div>
-      <div class="col-sm">
-        <a class="department" href="" alt="">Theatre</a>
-      </div>
-      <div class="col-sm">
-        <a class="department" href="" alt="">Ethnic Studies</a>
-      </div>
-      <div class="col-sm">
-        <a class="department" href="" alt="">Liberal Arts</a>
       </div>
     </div>
   </div>
