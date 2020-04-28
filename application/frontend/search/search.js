@@ -94,6 +94,7 @@ function postDetails(data) {
     let postTitleDiv = document.getElementById('post-title');
     let postDetails = document.getElementById('post-details');
     let postImageDiv = document.getElementById('post-image');
+    let download = document.getElementById('download');
 
     let postImage = document.createElement('img');
     let postDesc = document.createElement('div');
@@ -102,11 +103,16 @@ function postDetails(data) {
 
     postDetails.innerHTML = "";
     postImageDiv.innerHTML = "";
+
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
+        download.href = 'http://3.22.78.154:3000' + data.post.media_content;
+        download.classList.remove('disabled');
     }
     else {
         postPrice.innerHTML = `Price: $${data.post.cost}`;
+        download.classList.add('disabled');
+        download.removeAttribute('href');
     }
 
     postTitleDiv.innerHTML = data.post.title;
