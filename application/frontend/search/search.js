@@ -182,8 +182,7 @@ function getCategories() {
                 tmp = params[i].split('=');
                 data[tmp[0]] = tmp[1];
             }
-            alert(encodeURI(document.getElementById('categories').value = data.category));
-            document.getElementById('categories').value = data.category;
+            document.getElementById('categories').value = decodeURI(data.category);
         })
         .catch(err => {
             console.log(err);
