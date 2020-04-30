@@ -27,9 +27,9 @@ function getCategories() {
 
 
                 node.appendChild(text);
-                categoriesSelect.appendChild(node);
-                departmentContainer.appendChild(categoryCol);
                 departmentContainer.appendChild(categoryLink);
+                departmentContainer.appendChild(categoryCol);
+                categoriesSelect.appendChild(node);
             }
         })
         .catch(err => {
