@@ -175,7 +175,7 @@ function getCategories() {
                 categoriesSelect.appendChild(node);
             }
 
-            var url = document.location.href;
+            var url = encodeURI(document.location.href);
             var params = url.split('?')[1].split('&');
             var data = {}, tmp;
             for (var i = 0, l = params.length; i < l; i++) {
