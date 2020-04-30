@@ -182,7 +182,7 @@ function getCategories() {
                 tmp = params[i].split('=');
                 data[tmp[0]] = tmp[1];
             }
-            document.getElementById('categories').value = data.category;
+            document.getElementById('categories').value = decodeURI(data.category);
         })
         .catch(err => {
             console.log(err);
@@ -221,5 +221,5 @@ function redirectToSearchResults() {
     var category = document.getElementById('categories').value;
     var userInput = document.getElementById('search').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    document.location.href = url;
+    document.location.href = encodeURI(url);
 }

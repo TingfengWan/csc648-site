@@ -19,7 +19,7 @@ function getCategories() {
                 
                 categoryCol.classList.add('col-sm');
                 categoryLink.classList.add('department');
-                categoryLink.href = 'http://3.22.78.154:3000/search/search.html?title=&category=' + categories[i].category;
+                categoryLink.href = encodeURI(`http://3.22.78.154:3000/search/search.html?title=&category=${categories[i].category}`);
 
                 node.value = categories[i].category;
                 let text = document.createTextNode(categories[i].category);
@@ -57,5 +57,5 @@ function redirectToSearchResults() {
     var category = document.getElementById('category-field').value;
     var userInput = document.getElementById('userInput').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    document.location.href =  url;
+    document.location.href =  encodeURI(url);
 }
