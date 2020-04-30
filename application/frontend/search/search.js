@@ -175,14 +175,14 @@ function getCategories() {
                 categoriesSelect.appendChild(node);
             }
 
-            var url = encodeURI(document.location.href);
+            var url = document.location.href;
             var params = url.split('?')[1].split('&');
             var data = {}, tmp;
             for (var i = 0, l = params.length; i < l; i++) {
                 tmp = params[i].split('=');
                 data[tmp[0]] = tmp[1];
             }
-            alert(document.getElementById('categories').value = data.category);
+            alert(encodeURI(document.getElementById('categories').value = data.category));
             document.getElementById('categories').value = data.category;
         })
         .catch(err => {
