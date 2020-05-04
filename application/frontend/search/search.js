@@ -94,6 +94,7 @@ function postDetails(data) {
     let postTitleDiv = document.getElementById('post-title');
     let postDetails = document.getElementById('post-details');
     let postImageDiv = document.getElementById('post-image');
+    let download = document.getElementById('download');
 
     let postImage = document.createElement('img');
     let postDesc = document.createElement('div');
@@ -102,11 +103,16 @@ function postDetails(data) {
 
     postDetails.innerHTML = "";
     postImageDiv.innerHTML = "";
+
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
+        download.href = 'http://3.22.78.154:3000' + data.post.media_content;
+        download.classList.remove('disabled');
     }
     else {
         postPrice.innerHTML = `Price: $${data.post.cost}`;
+        download.classList.add('disabled');
+        download.removeAttribute('href');
     }
 
     postTitleDiv.innerHTML = data.post.title;
@@ -176,7 +182,7 @@ function getCategories() {
                 tmp = params[i].split('=');
                 data[tmp[0]] = tmp[1];
             }
-            document.getElementById('categories').value = data.category;
+            document.getElementById('categories').value = decodeURI(data.category);
         })
         .catch(err => {
             console.log(err);
@@ -215,5 +221,5 @@ function redirectToSearchResults() {
     var category = document.getElementById('categories').value;
     var userInput = document.getElementById('search').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    document.location.href = url;
+    document.location.href = encodeURI(url);
 }

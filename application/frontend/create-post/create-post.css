@@ -65,6 +65,13 @@
     color: red;
   }
 
+  .half-width {
+    width: 50%;
+  }
+
+  .twenty-width {
+    width: 20%;
+  }
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
     .topnav a, .topnav {
@@ -74,6 +81,14 @@
       width: 100%;
       margin: 0;
       padding: 14px;
+    }
+
+    .half-width {
+      width: 80%;
+    }
+
+    .twenty-width {
+      width: 60%;
     }
   }
 
