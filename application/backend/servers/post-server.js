@@ -74,6 +74,7 @@ const validatePostInput = (fields, files) => {
         media_preview: files.media_preview.path,
         media_content: files.media_content.path || '',
         file_name: files.media_content.name || '',
+        file_type: files.media_content.type,
         has_file: fields.has_file,
         cost: fields.cost || 0.0,
         post_body: fields.post_body
@@ -120,13 +121,14 @@ app.post('/post', (req, res) => {
         }
         const queryParams = validatePostInput(fields, files);	//
         const query = `\
-            INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,has_file,cost,post_body) VALUES (\
+            INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,file_type,has_file,cost,post_body) VALUES (\
                     "${queryParams.creator_email}",\
                     "${queryParams.create_time}",\
                     "${queryParams.title}",\
                     "${queryParams.media_preview}",\
                     "${queryParams.media_content}",\
                     "${queryParams.file_name}",\
+                    "${queryParams.file_type}",\
                     ${queryParams.has_file},\
                     ${queryParams.cost},\
                     "${queryParams.post_body}"\
