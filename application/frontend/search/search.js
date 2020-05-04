@@ -1,6 +1,10 @@
 /**
  * displays the data
  * from the server into HTML
+ *
+ * Created by Samuel Bahlibi
+ * Made on 04/04/2020
+ *
  */
 function appendData(data) {
 
@@ -41,6 +45,7 @@ function appendData(data) {
             divCost.innerHTML = `<p>$${post.cost}</p>`;
         }
         preview.src = post.media_preview;
+
 
         //sets id and uses it to get post details
         boarderContainer.id = post.id;
