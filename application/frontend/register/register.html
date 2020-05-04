@@ -19,6 +19,8 @@
     <script src="register.js"></script>
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- reCaptcha-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <link rel="stylesheet" type="text/css" href="register.css">
 </head>
@@ -86,9 +88,8 @@
                 </label>
                 <div class="error" id="terms-and-cond-error"></div>
             </div>
-            <div>
-                ReCaptcha eventually
-            </div>
+            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+
             <div class="container text-center">
                 <button type="submit" class="btn btn-primary margin-top">Create Account</button>
             </div>
