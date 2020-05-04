@@ -1,3 +1,11 @@
+/* Created by Qian Hu */
+/* Helped by Marvin Nguyen and John Joshua Gutierrez*/
+/**
+ * Made on Mid-April
+ */
+
+
+ // This shows what items the user purchased
 function accountPurchased(){
     let email = parseCookie(document.cookie);
 
@@ -20,6 +28,7 @@ function accountPurchased(){
 
 }
 
+//This shows what items the user posted
 function accountPost(){
     let email = parseCookie(document.cookie);
 
@@ -43,6 +52,7 @@ function accountPost(){
 
 }
 
+//Shows the basic info of the user
 function userInfo(){
     let email = parseCookie(document.cookie);
     let URL = "http://3.22.78.154:3000/user?email=" + email;
@@ -58,6 +68,7 @@ function userInfo(){
 
 }
 
+//A function that parses date to make it look nicer
 function formatDate(date) {
     let dateObj = new Date(date);
     let month = dateObj.getMonth();

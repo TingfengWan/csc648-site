@@ -1,3 +1,6 @@
+/* Created by John Joshua Gutierrez */
+/* Made on Early April */
+
 //this function grabs the categories in the database onload
 function getCategories() {
     let URL = "http://3.22.78.154:3000/post/categories";
