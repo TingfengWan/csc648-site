@@ -61,7 +61,7 @@ NAVIGATION BAR
 
 #col{
     display: grid;
-    grid-template-columns: 40% 20% 40%;
+    grid-template-columns: 50% 50%;
 }
 
 #clickable{
@@ -83,24 +83,9 @@ NAVIGATION BAR
 }
 
 #main-image > img{
-   object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-#row{
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-}
-
-.side-image > img{
     object-fit: cover;
-    width: 100%;
-    max-height:100%;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    padding-bottom: .5rem;
+    width: 90%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 #item-title > h2{

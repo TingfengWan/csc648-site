@@ -1,3 +1,6 @@
+/* Created by John Joshua Gutierrez */
+/* Made on Early April */
+
 #header {
     background-color: blueviolet;
     color: white;
@@ -105,3 +108,9 @@
     width: 1.5rem;
     height: 1.5rem;
   }
+  
+  img#imgCenter {
+    margin: 0 auto;
+  }
+
+  

@@ -1,4 +1,11 @@
+/* Created by Qian Hu */
+/* Helped by Marvin Nguyen and John Joshua Gutierrez*/
+/**
+ * Made on Mid-April
+ */
 
+
+ //Displays the basic info of the user
 function setting() {
     let email = parseCookie(document.cookie);
     let URL = "http://3.22.78.154:3000/user?email=" + email;
@@ -20,6 +27,7 @@ function setting() {
         })
 }
 
+//When edit is pressed, it enables the user to change info
 function showModal(id) {
     console.log(id)
     document.getElementById("modalInput").type = "text";
@@ -41,6 +49,7 @@ function showModal(id) {
     }
 }
 
+//This method is the one making the post request to change user info
 function updateInfo() {
     let modalTitle = document.getElementById("ModalLabel").innerHTML;
     let email = parseCookie(document.cookie);
