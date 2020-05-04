@@ -1,6 +1,10 @@
 /**
  * displays the data
  * from the server into HTML
+ *
+ * Created by Samuel Bahlibi
+ * Made on 04/04/2020
+ *
  */
 function appendData(data) {
 
