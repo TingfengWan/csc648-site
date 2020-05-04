@@ -1,3 +1,7 @@
+/*
+Author: Eric Ngo, Ting Feng
+Date: April 1st, 2020
+*/
 const express = require('express');
 const httpProxy = require('http-proxy');
 const { gatewayPort, staticServerPort, postServerPort, userServerPort, userContentServerPort, FS_ROOT} = require('./documentation/lib/consts.js');

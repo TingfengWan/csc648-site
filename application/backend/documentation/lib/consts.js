@@ -1,3 +1,7 @@
+/*
+Author: Eric Ngo, Ting Feng
+Date: April 1st, 2020
+*/
 // constant file to hold consts in backend
 module.exports = {
     postServerPort: 4000,

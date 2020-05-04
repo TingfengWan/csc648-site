@@ -1,3 +1,8 @@
+/*
+Author: Eric Ngo, Ting Feng
+Date: April 1st, 2020
+*/
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -291,7 +296,7 @@ app.get('/post/search', (req, res) => {
 // defaults to top 5 posts
 // ie. /post/recent?limit=5
 app.get('/post/recent', (req, res) => {
-    let limitNum = req.query.limit || 5;
+    let limitNum = +req.query.limit || 5;
     let query = `
         SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations, U.phone_number creator_phone_number 
         FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Users U ON P.creator_email = U.email 
