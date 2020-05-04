@@ -1,3 +1,7 @@
+/*
+Author: Eric Ngo, Ting Feng
+Date: April 1st, 2020
+*/
 const mysql = require('mysql');
 const fs = require('fs');
 
