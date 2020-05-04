@@ -1,4 +1,13 @@
 /**
+ * Author: Marvin Nguyen
+ * Date: 4/1/2020
+ * Description: Javascript file for the register page.
+ * Contains function to validate text fields for the
+ * register page and create the user in the database.
+ * 
+ */
+
+/**
  * Takes the inputs from the form and puts them into the
  * database on the server using axios. 
  */
