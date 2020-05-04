@@ -288,6 +288,37 @@ app.get('/post/search', (req, res) => {
     });
 });
 
+// defaults to top 5 posts
+// ie. /post/recent?limit=5
+app.get('/post/recent', (req, res) => {
+    let limitNum = req.query.limit || 5;
+    let query = `
+        SELECT P.*,  GROUP_CONCAT(PC.category SEPARATOR ', ') categories, GROUP_CONCAT(PL.location SEPARATOR ', ') locations, U.phone_number creator_phone_number 
+        FROM Posts P LEFT JOIN PostCategories PC ON P.id = PC.post_id LEFT JOIN PostLocations PL ON P.id = PL.post_id LEFT JOIN Users U ON P.creator_email = U.email 
+        GROUP BY P.id
+        ORDER BY P.create_time DESC 
+        LIMIT ${limitNum};
+        `;
+    console.log(query);
+    database.query(query, (err, result) => {
+        if ( err ) {
+            console.log(err);
+            res.status(400);
+            res.send({
+                status: 400,
+                message: 'Invalid query'
+            });
+            return ;
+        }
+
+        result = postMapper(result);
+
+        res.send({
+            posts: result
+        });
+    });
+});
+
 
 app.listen(postServerPort, () => {
     console.log(`Post Server listening on ${postServerPort}`);
