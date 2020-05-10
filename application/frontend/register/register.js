@@ -9,8 +9,8 @@
 
 
 /**
- * checks if recaptcha is valid
- * if valid, send to createuser() to validate text fields and create user
+ * checks if text fields and recaptcha is valid
+ * if valid, send to createuser() to create user
  */
 function validateForm() {
   event.preventDefault();
@@ -19,29 +19,32 @@ function validateForm() {
   const url = `https://www.google.com/recaptcha/api/siteverify`;
   const captcha = document.querySelector('#g-recaptcha-reponse').value;
 
-  //sends captcha response to google to verify that it's correct
-  fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `secret=${key}&response=${captcha}`
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
+  if (validateFields()) {
 
-      if (data.success) {
-        document.getElementById("recaptcha-error").innerHTML = "";
-        createUser();
-      }
-
-      else {
-        document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
-      }
+    //sends captcha response to google to verify that it's correct
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${key}&response=${captcha}`
     })
-    .catch((err) => {
-      console.log(err);
-      document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.success) {
+          document.getElementById("recaptcha-error").innerHTML = "";
+          createUser();
+        }
+
+        else {
+          document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
+      });
+  }
 }
 
 /**
@@ -61,28 +64,27 @@ function createUser() {
     faculty = true;
   }
 
-  if (validateFields()) {
-    axios.post('http://3.22.78.154:3000/user/signup', {
-      email: email,
-      hashed_password: hashedPassword,
-      first_name: firstName,
-      last_name: lastName,
-      is_faculty: faculty,
-      phone_number: phoneNumber
-    })
-      .then((res) => {
-        console.log(res.data);
+  axios.post('http://3.22.78.154:3000/user/signup', {
+    email: email,
+    hashed_password: hashedPassword,
+    first_name: firstName,
+    last_name: lastName,
+    is_faculty: faculty,
+    phone_number: phoneNumber
+  })
+    .then((res) => {
+      console.log(res.data);
 
-        if (res.data.status) {
-          window.location = "register-success.html";
-        }
-      })
-      .catch((err) => {
-        document.getElementById("email-error").innerHTML = "Email already exists. Please enter another email.";
-        document.getElementById("email").style.border = "1px solid red";
-        console.log(err)
-      });
-  }
+      if (res.data.status) {
+        window.location = "register-success.html";
+      }
+    })
+    .catch((err) => {
+      document.getElementById("email-error").innerHTML = "Email already exists. Please enter another email.";
+      document.getElementById("email").style.border = "1px solid red";
+      console.log(err)
+    });
+
 }
 
 
