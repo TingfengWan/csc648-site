@@ -203,7 +203,7 @@ function loadSearchResults() {
         data[tmp[0]] = tmp[1];
     }
     var URL = 'http://3.22.78.154:3000/post/search?title=' + data.title + '&category=' + data.category;
-    URL = encodeURI(URL);
+    URL = decodeURI(URL);
 
     document.getElementById('search').value = decodeURI(data.title);
     fetch(
