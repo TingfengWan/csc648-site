@@ -10,7 +10,7 @@ function appendData(data) {
 
     var mainContainer = document.getElementById("list-results");
     var resultContainer = document.getElementById("results");
-    var userInput = document.getElementById('search').value;
+    var userInput = decodeURI(document.getElementById('search').value);
 
 
     if (data.posts.length == 0) {
@@ -205,7 +205,7 @@ function loadSearchResults() {
     var URL = 'http://3.22.78.154:3000/post/search?title=' + data.title + '&category=' + data.category;
     URL = encodeURI(URL);
 
-    document.getElementById('search').value = data.title;
+    document.getElementById('search').value = decodeURI(data.title);
     fetch(
         URL
     )
