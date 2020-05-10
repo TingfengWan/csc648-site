@@ -7,12 +7,48 @@
  * 
  */
 
+
+/**
+ * checks if recaptcha is valid
+ * if valid, send to createuser() to validate text fields and create user
+ */
+function validateForm() {
+  event.preventDefault();
+
+  const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
+  const url = `https://www.google.com/recaptcha/api/siteverify`;
+  const captcha = document.querySelector('#g-recaptcha-reponse').value;
+
+  //sends captcha response to google to verify that it's correct
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `secret=${key}&response=${captcha}`
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+
+      if (data.success) {
+        document.getElementById("recaptcha-error").innerHTML = "";
+        createUser();
+      }
+
+      else {
+        document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
+    });
+}
+
 /**
  * Takes the inputs from the form and puts them into the
  * database on the server using axios. 
  */
-function createUser(event) {
-  event.preventDefault();
+function createUser() {
 
   let email = document.forms['register']['email'].value;
   let hashedPassword = md5(document.forms['register']['password'].value);
@@ -48,6 +84,7 @@ function createUser(event) {
       });
   }
 }
+
 
 /**
 * checks if the all fields are filled and valid 
