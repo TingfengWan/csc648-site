@@ -148,7 +148,7 @@ function postDetails(data) {
     postTitleDiv.innerHTML = data.post.title;
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
-    postImage.src = data.media_preview;
+    postImage.src = data.post.media_preview;
 
     postDetails.appendChild(postPrice);
     postDetails.appendChild(postDesc);
