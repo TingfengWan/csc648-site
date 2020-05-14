@@ -28,9 +28,9 @@ function validateForm() {
     })
       .then((res) => res.json(data))
       .then((data) => {
-        console.log(res.data);
+        console.log(data);
 
-        if (res.data.success) {
+        if (data.success) {
           document.getElementById("recaptcha-error").innerHTML = "";
           createUser();
         }
