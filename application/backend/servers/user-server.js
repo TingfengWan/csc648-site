@@ -297,6 +297,7 @@ app.post('/user/signup', (req, res) => {
 });
 
 app.post('/user/authenticate', (req, res) => {
+    console.log(req.body.captcha);
     if (!req.body.captcha)
         return res.json({ success: false, msg: 'Please select captcha' });
 
@@ -304,10 +305,9 @@ app.post('/user/authenticate', (req, res) => {
     const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
 
     // Verify URL
-    const query = stringify({
+    const query = JSON.stringify({
         secret: secretKey,
-        response: req.body.captcha,
-        remoteip: req.connection.remoteAddress
+        response: req.body.captcha
     });
     const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
 
