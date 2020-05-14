@@ -106,6 +106,11 @@ function validateFields() {
     field.style.border = "";                  //removes error border if there is any
     console.log(field.id);
 
+    
+    if(field.id == "g-recaptcha-response" || field.id == "captcha") {
+      continue;
+    }
+
     if (field.id == "first-name" || field.id == "last-name") {
       if (field.value.trim().length == 0) {
         errorMsg = "Please enter a " + field.name + ".";
@@ -173,9 +178,7 @@ function validateFields() {
       }
     }
 
-    if(field.id != "g-recaptcha-response") {
-      document.getElementById(errorDiv).innerHTML = errorMsg;
-    }
+    document.getElementById(errorDiv).innerHTML = errorMsg;
   }
 
   return valid;
