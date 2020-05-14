@@ -7,6 +7,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
+const fetch = require('node-fetch');
 
 
 const {userServerPort, sanitizer, postMapper} = require('../documentation/lib/consts.js');
@@ -293,6 +294,39 @@ app.post('/user/signup', (req, res) => {
             message: 'Success!'
         });
     });
+});
+
+app.post('/user/authenticate', (req, res) => {
+    if (!req.body.captcha)
+        return res.json({ success: false, msg: 'Please select captcha' });
+
+    // Secret key
+    const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
+
+    // Verify URL
+    const query = stringify({
+        secret: secretKey,
+        response: req.body.captcha,
+        remoteip: req.connection.remoteAddress
+    });
+    const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
+
+    // Make a request to verifyURL
+    fetch(verifyURL)
+        .then(res => res.json())
+        .then(body => {
+            // If not successful
+            if (body.success !== undefined && !body.success)
+                return res.json({ success: false, msg: 'Failed captcha verification' });
+
+            // If successful
+            return res.json({ success: true, msg: 'Captcha passed' });
+        })
+        .catch(err => {
+            console.log('Err', err.message);
+            return res.status(400).json({ success: false, msg: 'Captcha failed' });
+        });
+    
 });
 
 app.listen(userServerPort, () => {
