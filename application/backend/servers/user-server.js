@@ -309,12 +309,14 @@ app.post('/user/authenticate', (req, res) => {
         secret: secretKey,
         response: req.body.captcha
     });
+    console.log(query);
     const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
 
     // Make a request to verifyURL
     fetch(verifyURL)
         .then(res => res.json())
         .then(body => {
+            console.log('Body', body);
             // If not successful
             if (body.success !== undefined && !body.success)
                 return res.json({ success: false, msg: 'Failed captcha verification' });
