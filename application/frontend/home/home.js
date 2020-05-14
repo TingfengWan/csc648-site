@@ -132,6 +132,7 @@ function postDetails(data) {
     let postPrice = document.createElement('div');
     let date = document.createElement('div');
 
+    postImage.classList.add("item");
     postDetails.innerHTML = "";
     postImageDiv.innerHTML = "";
 
