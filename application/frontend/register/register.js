@@ -23,7 +23,7 @@ function validateForm() {
     //sends captcha response to google to verify that it's correct
     fetch("http://3.22.78.154:3000/user/authenticate", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded"},
+      headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
       body: JSON.stringify({captcha: captcha})
     })
       .then((res) => res.json())
