@@ -21,7 +21,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- reCaptcha-->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
     <link rel="stylesheet" type="text/css" href="register.css">
 </head>
 
@@ -88,7 +87,7 @@
                 </label>
                 <div class="error" id="terms-and-cond-error"></div>
             </div>
-            <div class="g-recaptcha" data-callback='humanReponse' id="repcatcha" data-sitekey="6Le6Qe8UAAAAAPk1HVSYsqk5msbebOjyCb-eXV1m"></div>
+            <div class="g-recaptcha" data-callback='humanResponse' id="repcatcha" data-sitekey="6Le6Qe8UAAAAAPk1HVSYsqk5msbebOjyCb-eXV1m"></div>
             <input type="hidden" id="captcha" name="captcha" value="">
             <div class="error" id="recaptcha-error"></div>
 
@@ -107,5 +106,10 @@
     </form>
 
 </body>
-
+<script type="text/javascript"> 
+    function humanResponse(response) {
+    console.log(response);
+    document.getElementById('captcha').value = response; 
+    }
+</script>
 </html>

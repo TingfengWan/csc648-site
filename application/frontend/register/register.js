@@ -88,11 +88,6 @@ function createUser() {
 
 }
 
-function humanResponse(response) {
-  console.log(response);
-  document.getElementById('captcha').value = response; 
-}
-
 /**
 * checks if the all fields are filled and valid 
 * if any fields are invalid, puts a red border around the input field
