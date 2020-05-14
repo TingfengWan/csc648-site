@@ -14,19 +14,17 @@
  */
 function validateForm() {
   event.preventDefault();
-
-  const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
-  const url = `https://www.google.com/recaptcha/api/siteverify`;
+  
   let captcha = document.getElementById('captcha').value;
   console.log(captcha);
 
   if (validateFields()) {
 
     //sends captcha response to google to verify that it's correct
-    fetch(url, {
+    fetch("http://3.22.78.154:3000/user/authenticate", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded", "Access-Control-Allow-Origin": "*"},
-      body: `secret=${secretKey}&response=${captcha}`
+      headers: { "Content-Type": "application/x-www-form-urlencoded"},
+      body: JSON.stringify({"captcha": captcha})
     })
       .then((res) => res.json())
       .then((data) => {
@@ -104,9 +102,7 @@ function validateFields() {
     let errorDiv = field.id.concat("-error"); //id of error div
     let errorMsg = "";                        //removes error msg if exists
     field.style.border = "";                  //removes error border if there is any
-    console.log(field.id);
 
-    
     if(field.id == "g-recaptcha-response" || field.id == "captcha") {
       continue;
     }
