@@ -14,7 +14,7 @@
  */
 function validateForm() {
   event.preventDefault();
-  
+
   let captcha = document.getElementById('captcha').value;
   console.log(captcha);
 
@@ -24,7 +24,7 @@ function validateForm() {
     fetch("http://3.22.78.154:3000/user/authenticate", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded"},
-      body: JSON.stringify({"captcha": captcha})
+      body: JSON.stringify({captcha: captcha})
     })
       .then((res) => res.json())
       .then((data) => {
