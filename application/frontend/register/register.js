@@ -26,11 +26,10 @@ function validateForm() {
       headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
       body: {captcha: captcha}
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then((res) => {
+        console.log(res.data);
 
-        if (data.success) {
+        if (res.data.success) {
           document.getElementById("recaptcha-error").innerHTML = "";
           createUser();
         }
