@@ -24,7 +24,7 @@ function validateForm() {
     fetch("http://3.22.78.154:3000/user/authenticate", {
       method: "POST",
       headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
-      body: JSON.stringify({captcha: captcha})
+      body: {captcha: captcha}
     })
       .then((res) => res.json())
       .then((data) => {
