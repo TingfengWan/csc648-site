@@ -17,10 +17,12 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <script src="home.js"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="home.js"></script>
 </head>
 
-<body onload="getCategories()">
+<body onload="getCategories(); loadRecentPosts()">
   <!-- Navigation bar -->
   <div class="topnav">
     <a class="active" href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
@@ -60,118 +62,37 @@
   <!-- Display Items -->
   <div class="m-2 mb-2" id="itemBg">
     <br>
-    <div class="container-fluid mb-2">
-      <h1 class="text-white">Top Purchases</h1>
-      <div class="row">
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid pb-5">
-      <h1 class="text-white">Recent Posting</h1>
-      <div class="row">
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="itemContainer">
-            <div class="col pt-3">
-              <h1 class="itemname">Item Name</h1>
-              <img class="thumbnail">
-              <h3 class="itemname">$$$</h5>
-                <h3 class="itemname">Description</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1 class="text-white pl-5">Recent Posting</h1>
+    <div id="list-results" class="post-row text-white pb-5"></div>
   </div>
+
+  <!-- Modal for post details -->
+  <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="post-title">Post Title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-6" id="post-image"></div>
+                      <div class="col-md-6" id="post-details"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a class="btn btn-secondary text-white disabled" id='download'>Download</a>
+              <a class="btn btn-secondary text-white" id='contact'>Contact</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
 </body>
 
 </html>
