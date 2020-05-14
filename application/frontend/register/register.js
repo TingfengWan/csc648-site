@@ -15,36 +15,53 @@
 function validateForm() {
   event.preventDefault();
 
-  const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
-  const url = `https://www.google.com/recaptcha/api/siteverify`;
   let captcha = document.getElementById('captcha').value;
   console.log(captcha);
 
   if (validateFields()) {
 
     //sends captcha response to google to verify that it's correct
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded", "Access-Control-Allow-Origin": "*"},
-      body: `secret=${secretKey}&response=${captcha}`
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+  axios.post('http://3.22.78.154:3000/user/authenticate', {
+    captcha
+  })
+  .then((res) => {
+    console.log(res.data);
+    if (data.success) {
+      document.getElementById("recaptcha-error").innerHTML = "";
+      createUser();
+    }
 
-        if (data.success) {
-          document.getElementById("recaptcha-error").innerHTML = "";
-          createUser();
-        }
+    else {
+      document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+    document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
+  });
 
-        else {
-          document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
-      });
+    // fetch("http://3.22.78.154:3000/user/authenticate", {
+    //   method: "POST",
+    //   headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
+    //   body: {captcha: captcha}
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+
+    //     if (data.success) {
+    //       document.getElementById("recaptcha-error").innerHTML = "";
+    //       createUser();
+    //     }
+
+    //     else {
+    //       document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
+    //   });
   }
 }
 
@@ -104,9 +121,7 @@ function validateFields() {
     let errorDiv = field.id.concat("-error"); //id of error div
     let errorMsg = "";                        //removes error msg if exists
     field.style.border = "";                  //removes error border if there is any
-    console.log(field.id);
 
-    
     if(field.id == "g-recaptcha-response" || field.id == "captcha") {
       continue;
     }
