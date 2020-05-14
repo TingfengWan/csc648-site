@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 const fetch = require('node-fetch');
+const { stringify } = require('querystring');
 
 
 const {userServerPort, sanitizer, postMapper} = require('../documentation/lib/consts.js');
@@ -305,7 +306,7 @@ app.post('/user/authenticate', (req, res) => {
     const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
 
     // Verify URL
-    const query = JSON.stringify({
+    const query = stringify({
         secret: secretKey,
         response: req.body.captcha
     });
