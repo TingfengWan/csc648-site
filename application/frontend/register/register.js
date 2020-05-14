@@ -17,7 +17,8 @@ function validateForm() {
 
   const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
   const url = `https://www.google.com/recaptcha/api/siteverify`;
-  const captcha = document.querySelector('#g-recaptcha-reponse').value;
+  let captcha = document.getElementById('catpcha').value;
+  console.log(captcha);
 
   if (validateFields()) {
 
@@ -87,6 +88,10 @@ function createUser() {
 
 }
 
+function humanResponse(response) {
+  console.log(response);
+  document.getElementById('captcha').value = response; 
+}
 
 /**
 * checks if the all fields are filled and valid 
