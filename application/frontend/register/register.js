@@ -104,7 +104,8 @@ function validateFields() {
     let errorDiv = field.id.concat("-error"); //id of error div
     let errorMsg = "";                        //removes error msg if exists
     field.style.border = "";                  //removes error border if there is any
-
+    console.log(field.id);
+    
     if (field.id == "first-name" || field.id == "last-name") {
       if (field.value.trim().length == 0) {
         errorMsg = "Please enter a " + field.name + ".";
