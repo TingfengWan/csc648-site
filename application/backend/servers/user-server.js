@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 const fetch = require('node-fetch');
-const stringify = require('querystring')
+const { stringify } = require('querystring');
 
 
 const {userServerPort, sanitizer, postMapper} = require('../documentation/lib/consts.js');
