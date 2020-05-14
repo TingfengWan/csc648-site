@@ -25,7 +25,7 @@ function validateForm() {
     //sends captcha response to google to verify that it's correct
     fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { "Content-Type": "application/x-www-form-urlencoded", "Access-Control-Allow-Origin": "*"},
       body: `secret=${secretKey}&response=${captcha}`
     })
       .then((res) => res.json())
