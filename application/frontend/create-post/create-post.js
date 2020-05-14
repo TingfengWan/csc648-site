@@ -228,6 +228,7 @@ function displayImagePreview() {
 
     reader.addEventListener("load", function () {
         imgPreview.src = reader.result;
+        imgPreview.hidden = false;
         imgPreviewTxt.textContent = "";
     });
     if (file) {

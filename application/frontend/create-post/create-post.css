@@ -51,6 +51,11 @@
     float: right;
   }
 
+  #navBarLogo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
   #image {
     margin-bottom: 15px;
   }
@@ -68,6 +73,11 @@
     justify-content: center;
   }
 
+  #image-preview {
+    width: 100%;
+    height: auto;
+  }
+  
   .error {
     color: red;
   }
