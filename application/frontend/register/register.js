@@ -26,7 +26,7 @@ function validateForm() {
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${key}&response=${captcha}`
+      body: `secret=${secretKey}&response=${captcha}`
     })
       .then((res) => res.json())
       .then((data) => {
