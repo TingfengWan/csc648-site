@@ -72,6 +72,7 @@ function appendData(data) {
         var divCost = document.createElement('div');
         var divPostTime = document.createElement('div');
         const preview = document.createElement('img');
+        preview.classList.add("item");
 
         //assigning the elements from http://3.22.78.154:3000/post/search
         divTitle.innerHTML = `<h3>${post.title}</h3>`;

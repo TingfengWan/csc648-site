@@ -238,7 +238,7 @@ h3{
   font-size: 1rem;
 }
 
-img{
+img.item{
   width: 90%;
   display: block;
   margin-left: auto;
