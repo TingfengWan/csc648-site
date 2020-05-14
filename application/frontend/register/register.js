@@ -17,7 +17,7 @@ function validateForm() {
 
   const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
   const url = `https://www.google.com/recaptcha/api/siteverify`;
-  const captcha = document.querySelector('#g-recaptcha-reponse').value;
+  const captcha = document.getElementById('g-recaptcha-reponse').value;
 
   if (validateFields()) {
 
