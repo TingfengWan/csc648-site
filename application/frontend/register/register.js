@@ -17,7 +17,7 @@ function validateForm() {
 
   const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
   const url = `https://www.google.com/recaptcha/api/siteverify`;
-  let captcha = document.getElementById('catpcha').value;
+  let captcha = document.getElementById('captcha').value;
   console.log(captcha);
 
   if (validateFields()) {
@@ -88,11 +88,6 @@ function createUser() {
 
 }
 
-function humanResponse(response) {
-  console.log(response);
-  document.getElementById('captcha').value = response; 
-}
-
 /**
 * checks if the all fields are filled and valid 
 * if any fields are invalid, puts a red border around the input field
@@ -109,6 +104,7 @@ function validateFields() {
     let errorDiv = field.id.concat("-error"); //id of error div
     let errorMsg = "";                        //removes error msg if exists
     field.style.border = "";                  //removes error border if there is any
+    console.log(field.id);
 
     if (field.id == "first-name" || field.id == "last-name") {
       if (field.value.trim().length == 0) {
@@ -177,7 +173,9 @@ function validateFields() {
       }
     }
 
-    document.getElementById(errorDiv).innerHTML = errorMsg;
+    if(field.id != "g-recaptcha-response") {
+      document.getElementById(errorDiv).innerHTML = errorMsg;
+    }
   }
 
   return valid;
