@@ -73,6 +73,10 @@ const validatePostInput = (fields, files) => {
   if (fields.cost < 0 || fields.cost > 100000) {
     return {};
   }
+  // if no license provided...
+  if (!fields.license || fields.license === "") {
+    return {};
+  }
   if (!files.media_preview) {
     files["media_preview"] = {
       path: defaultMediaPreviewPath,
@@ -82,6 +86,7 @@ const validatePostInput = (fields, files) => {
   fields.title = sanitizer(fields.title) || "";
   fields.creator_email = sanitizer(fields.creator_email) || "";
   fields.post_body = sanitizer(fields.post_body) || "";
+  fields.license = sanitizer(fields.license);
 
   if (!fields.creator_email.endsWith("sfsu.edu")) {
     return {};
@@ -97,6 +102,7 @@ const validatePostInput = (fields, files) => {
     has_file: fields.has_file,
     cost: fields.cost || 0.0,
     post_body: fields.post_body,
+    license: fields.license
   };
 };
 app.get("/post", (req, res) => {
@@ -115,8 +121,8 @@ app.get("/post", (req, res) => {
       res.status(400);
       return res.send({ status: 400, message: "Broke at post query" });
     }
-    postResult = postMapper(postResult);
     postResult = postResult[0]; // extract single element from array
+    postResult = postMapper(postResult);
 
     // redact media_content...
     if (postResult.cost > 0) {
@@ -140,7 +146,7 @@ app.post("/post", (req, res) => {
     const queryParams = validatePostInput(fields, files); //
     console.log(queryParams);
     const query = `\
-            INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,file_type,has_file,cost,post_body) VALUES (\
+            INSERT INTO Posts(creator_email,create_time,title,media_preview,media_content,file_name,file_type,has_file,cost,post_body,license) VALUES (\
                     "${queryParams.creator_email}",\
                     "${queryParams.create_time}",\
                     "${queryParams.title}",\
@@ -151,6 +157,7 @@ app.post("/post", (req, res) => {
                     ${queryParams.has_file},\
                     ${queryParams.cost},\
                     "${queryParams.post_body}"\
+                    "${queryParams.license}"\
                 )\
             `;
     database.query(query, (err, result) => {
