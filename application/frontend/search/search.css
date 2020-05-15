@@ -194,3 +194,8 @@ p{
     display: grid;
     grid-template-columns: 70% 30%;
 }
+
+#navBarLogo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }

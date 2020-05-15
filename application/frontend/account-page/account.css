@@ -161,3 +161,8 @@ body {
   .p {
     text-indent: 5em;
   }
+
+  #navBarLogo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
