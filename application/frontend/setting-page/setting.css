@@ -156,3 +156,8 @@ Display Items
   tab-size: 16;
 }
 
+#navBarLogo {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
