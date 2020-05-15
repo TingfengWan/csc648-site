@@ -56,7 +56,8 @@ module.exports = {
                 media_preview: post.media_preview,
                 media_content: post.media_content,
                 locations: locations,
-                categories: categories
+                categories: categories,
+                license: post.license
             };
         });
     }
