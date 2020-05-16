@@ -22,7 +22,7 @@ if (getCookie("userAuth") != null) {
     settingButton.innerHTML = "Setting";
     accountButton.innerHTML = "Account Page";
     logoutButton.innerHTML = "Logout";
-    contact.innerHTML = "Message"
+    contact.innerHTML = "Message";
 
     createPost.setAttribute('href', 'http://3.22.78.154:3000/create-post/create-post.html');
     settingButton.href = "http://3.22.78.154:3000/setting-page/setting.html";
