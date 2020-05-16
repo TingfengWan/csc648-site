@@ -15,7 +15,7 @@ if (getCookie("userAuth") != null) {
         createPost.classList.add('active');
     }
     if(document.location.href == 'http://3.22.78.154:3000/contact-page/contact.html') {
-        createPost.classList.add('active');
+        contact.classList.add('active');
     }
 
     createPost.innerHTML = "Create Post";
