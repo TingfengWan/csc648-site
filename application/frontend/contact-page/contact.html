@@ -44,7 +44,7 @@ Made Mid May
     </script>
 </head>
 
-<body>
+<body onload="getMessages()">
     <!-- Navigation bar -->
     <div id="navbar" class="topnav text-white">
         <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
@@ -59,25 +59,37 @@ Made Mid May
         2020. For Demonstration Only</div>
 
     <!-- //TODO Message -->
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Messages</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="wrapper">
+                <!-- Sidebar -->
+                <nav id="sidebar">
+                    <div class="sidebar-header">
+                        <h3>Messages</h3>
+                    </div>
+
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="#">Send Message</a>
+                        </li>
+                        <li>
+                            <a onclick="displayInbox()" href="#">Inbox</a>
+                        </li>
+                        <li>
+                            <a onclick="displaySent()" href="#">Sent</a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
-
-            <ul class="list-unstyled components">
-                <button id="sendMessage" class="text-center">Send Message</button>
-                <li class="active">
-                    <a href="#homeSubmenu" aria-expanded="false" >Inbox</a>
-                </li>
-                <li>
-                    <a href="#">Sent</a>
-                </li>
-            </ul>
-        </nav>
-
+        </div>
+        <div class="col-sm-8">
+            <div class="container">asdfasf </div>
+        </div>
     </div>
+
+
+
 </body>
 
 </html>

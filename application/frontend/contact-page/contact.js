@@ -32,9 +32,20 @@ function getMessages() {
     axios.get(URL)
     .then(res => {
         console.log(res.data);
+        displayInbox(res.data);
+        displaySent(res.data);
     })
     .catch(err => {
         console.log(err);
     });
+}
+
+
+function displayInbox(data) {
+    
+}
+
+function displaySent(data) {
+
 }
 

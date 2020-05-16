@@ -148,14 +148,13 @@ p {
   color: #999;
 }
 
-#sidebar #sendMessage {
+#sendMessage {
   font-family: 'Poppins', sans-serif;
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
   color: white;
   padding: 10px;
-  display: block;
 }
 
 a, a:hover, a:focus, #sendMessage ,#sendMessage:hover #sendMessage:focus {
@@ -178,7 +177,6 @@ a, a:hover, a:focus, #sendMessage ,#sendMessage:hover #sendMessage:focus {
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #58195f;
 }
 
 #sidebar ul p {
