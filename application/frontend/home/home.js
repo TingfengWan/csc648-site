@@ -46,7 +46,6 @@ function loadRecentPosts() {
     
     axios.get(url)
     .then((res)=> {
-        console.log(res.data);
         appendData(res.data);
     })
 }
