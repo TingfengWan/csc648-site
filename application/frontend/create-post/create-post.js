@@ -9,11 +9,12 @@ function createPost() {
     let fileUpload = document.forms["create-post"]["file-upload"];
     let imagePreview = document.forms["create-post"]["image"];
     let location = document.forms["create-post"]["location"].value;
+    let license = document.forms["create-post"]["license"].value;
     let createTime = new Date();
     let fileName;
     let creatorEmail = parseCookie(document.cookie);
 
-    console.log(location);
+    console.log(license);
     if (validatePost()) {
         let formData = new FormData(); //holds all the data from the form
 
@@ -40,6 +41,7 @@ function createPost() {
         formData.set("approver_email", null);
         formData.set("locations", JSON.stringify([location]));
         formData.set("categories", JSON.stringify([category]));
+        formData.set("license", license);
 
 
         axios.post('http://3.22.78.154:3000/post', formData)
@@ -146,6 +148,10 @@ function validatePost() {
 
                 else if (field.id == "category") {
                     document.getElementById("category-error").innerHTML = errorMsg;
+                }
+
+                else if (field.id == "license") {
+                    document.getElementById("license-error").innerHTML = errorMsg;
                 }
 
             }
