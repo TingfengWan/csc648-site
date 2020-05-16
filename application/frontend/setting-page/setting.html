@@ -24,6 +24,15 @@
   <!-- Checks if user is logged in and changes navigation bar if there is a user -->
   <script defer src="../cookie-authentication/change-navbar.js"></script>
   <script src="../cookie-authentication/cookie-authentication.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166798695-1');
+  </script>
 </head>
 
 <body onload="setting()">
@@ -34,7 +43,7 @@
     <a id="registerButton" class="user" href="../register/register.html">Register</a>
     <a id="loginButton" class="user" href="../login/login.html">Login</a>
     <a id="createPostButton" class="user active" href="../create-post/create-post.html">Create Post</a>
-</div>
+  </div>
   <!-- Setting -->
 
   <div class="m-2 mb-4" id="itemBg">

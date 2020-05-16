@@ -22,6 +22,15 @@
   <script src="home.js"></script>
   <!-- Checks if user is logged in and changes navigation bar if there is a user -->
   <script defer src="../cookie-authentication/change-navbar.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166798695-1');
+  </script>
 </head>
 
 <body onload="getCategories(); loadRecentPosts()">

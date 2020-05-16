@@ -22,6 +22,15 @@
     <!-- reCaptcha-->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" type="text/css" href="register.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-166798695-1');
+    </script>
 </head>
 
 <body>
@@ -33,8 +42,9 @@
         <a class="user" href="../create-post/create-post.html">Create Post</a>
     </div>
 
-    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
-    
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+        2020. For Demonstration Only</div>
+
     <form class="container" id="register" onsubmit="validateForm()">
         <div class="container bigger-margin margin-top border">
             <h1 class="text-center">Register</h1>
@@ -67,7 +77,8 @@
             </div>
             <div class="form-group">
                 <label for="phone-number">Phone Number:*</label>
-                <input type="text" class="form-control"  name="phone number" id="phone-number" placeholder="Enter phone number">
+                <input type="text" class="form-control" name="phone number" id="phone-number"
+                    placeholder="Enter phone number">
                 <div class="error" id="phone-number-error"></div>
             </div>
             <div class="form-group">
@@ -87,7 +98,8 @@
                 </label>
                 <div class="error" id="terms-and-cond-error"></div>
             </div>
-            <div class="g-recaptcha" data-callback='humanResponse' id="repcatcha" data-sitekey="6Le6Qe8UAAAAAPk1HVSYsqk5msbebOjyCb-eXV1m"></div>
+            <div class="g-recaptcha" data-callback='humanResponse' id="repcatcha"
+                data-sitekey="6Le6Qe8UAAAAAPk1HVSYsqk5msbebOjyCb-eXV1m"></div>
             <input type="hidden" id="captcha" name="captcha" value="">
             <div class="error" id="recaptcha-error"></div>
 
@@ -106,10 +118,11 @@
     </form>
 
 </body>
-<script type="text/javascript"> 
+<script type="text/javascript">
     function humanResponse(response) {
-    console.log(response);
-    document.getElementById('captcha').value = response; 
+        console.log(response);
+        document.getElementById('captcha').value = response;
     }
 </script>
+
 </html>
