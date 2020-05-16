@@ -7,7 +7,7 @@
 
  // This shows what items the user purchased
 function accountPurchased(){
-    let email = parseCookie(document.cookie);
+    let email = getCookie("userAuth");
 
     let URL = "http://3.22.78.154:3000/user/purchases?email=" + email;
 
