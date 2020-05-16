@@ -121,8 +121,8 @@ app.get("/post", (req, res) => {
       res.status(400);
       return res.send({ status: 400, message: "Broke at post query" });
     }
-    postResult = postResult[0]; // extract single element from array
     postResult = postMapper(postResult);
+    postResult = postResult[0]; // extract single element from array
 
     // redact media_content...
     if (postResult.cost > 0) {
