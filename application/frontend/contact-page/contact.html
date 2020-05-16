@@ -31,8 +31,8 @@ Made Mid May
     <script src="contact.js"></script>
 
     <!-- Checks if user is logged in and changes navigation bar if there is a user -->
-    <script defer src="../cookie-authentication/change-navbar.js"></script>
-    <script src="../cookie-authentication/cookie-authentication.js"></script>
+    <!-- <script defer src="../cookie-authentication/change-navbar.js"></script> -->
+    <!-- <script src="../cookie-authentication/cookie-authentication.js"></script> -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
     <script>
@@ -45,22 +45,39 @@ Made Mid May
 </head>
 
 <body>
-    <!-- navbar -->
     <!-- Navigation bar -->
-  <div id="navbar" class="topnav text-white">
-    <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
-    <a href="../about/about.html">About</a>
-    <a id="registerButton" class="user" href="../register/register.html">Register</a>
-    <a id="loginButton" class="user" href="../login/login.html">Login</a>
-    <a id="createPostButton" class="user" href="../create-post/create-post.html">Create Post</a>
-  </div>
+    <div id="navbar" class="topnav text-white">
+        <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
+        <a href="../about/about.html">About</a>
+        <a id="registerButton" class="user" href="../register/register.html">Register</a>
+        <a id="loginButton" class="user" href="../login/login.html">Login</a>
+        <a id="createPostButton" class="user" href="../create-post/create-post.html">Create Post</a>
+    </div>
 
     <!-- Static Texts -->
-    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+    <div class="shadow-sm p-3 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
         2020. For Demonstration Only</div>
 
     <!-- //TODO Message -->
-   
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Messages</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <button id="sendMessage" class="text-center">Send Message</button>
+                <li class="active">
+                    <a href="#homeSubmenu" aria-expanded="false" >Inbox</a>
+                </li>
+                <li>
+                    <a href="#">Sent</a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
 </body>
 
 </html>
