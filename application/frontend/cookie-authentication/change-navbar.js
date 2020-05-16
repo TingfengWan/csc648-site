@@ -7,6 +7,9 @@ if (getCookie("userAuth") != null) {
 
     let createPost = document.createElement('a');
     createPost.classList.add('user');
+    if(document.location.href == 'http://3.22.78.154:3000/create-post/create-post.html') {
+        createPost.classList.add('active');
+    }
 
     createPost.innerHTML = "Create Post";
     settingButton.innerHTML = "Setting";

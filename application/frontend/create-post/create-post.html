@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Create Post | CSC648 </title>
+    <title>Create Post | CSC648</title>
 
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -21,26 +21,29 @@
     <link rel="stylesheet" type="text/css" href="create-post.css">
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Checks if user is logged in and changes navigation bar if there is a user -->
+    <script defer src="../cookie-authentication/change-navbar.js"></script>
     <script src="../cookie-authentication/cookie-authentication.js"></script>
 </head>
 
 <body onload="getCategories()">
     <!-- Navigation bar -->
-    <div class="topnav">
+    <div id="navbar" class="topnav text-white">
         <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
-        <a href="../about/about.html">About</a>
-        <a class="user" href="../register/register.html">Register</a>
-        <a class="user" href="../login/login.html">Login</a>
-        <a class="user active" href="../create-post/create-post.html">Create Post</a>
+        <a href="../about/about.html" class="active">About</a>
+        <a id="registerButton" class="user" href="../register/register.html">Register</a>
+        <a id="loginButton" class="user" href="../login/login.html">Login</a>
+        <a id="createPostButton" class="user" href="../create-post/create-post.html">Create Post</a>
     </div>
-    
-    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
+
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+        2020. For Demonstration Only</div>
 
     <form class="container" id="create-post" onsubmit="createPost()" novalidate>
         <div>
             <h1>Create a Post</h1>
             <p style="font-size: small;">* denotes required field</p>
-         
+
             <div class="form-group">
                 <label for="title">Title:*</label>
                 <input class="form-control half-width" id="title" name="title" placeholder="Enter title" required>
@@ -58,7 +61,8 @@
                 <select class="form-control half-width" id="license" name="license" required>
                     <option value=""></option>
                     <option value="free use and modification">Free use and modification</option>
-                    <option value="free but only allowed for SFSU related projects">Free but only allowed for SFSU related projects</option>
+                    <option value="free but only allowed for SFSU related projects">Free but only allowed for SFSU
+                        related projects</option>
                     <option value="for sale">For sale</option>
                 </select>
                 <div class="error" id="license-error"></div>
@@ -96,9 +100,10 @@
 
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea class="form-control" rows="4" id="description" placeholder="Enter description here..."></textarea>
+                <textarea class="form-control" rows="4" id="description"
+                    placeholder="Enter description here..."></textarea>
             </div>
-            
+
             <div class="form-group half-width" id="file-upload-div">
                 <div class="input-group">
                     <div class="input-group-prepend">

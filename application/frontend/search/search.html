@@ -21,18 +21,22 @@ Made on 04/04/20
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="search.js"></script>
+    <!-- Checks if user is logged in and changes navigation bar if there is a user -->
+    <script defer src="../cookie-authentication/change-navbar.js"></script>
 </head>
 
 <body onload="getCategories(); loadSearchResults();">
     <!-- Navigation bar -->
-    <div class="topnav">
+    <div id="navbar" class="topnav text-white">
         <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
         <a href="../about/about.html">About</a>
-        <a class="user" href="../register/register.html">Register</a>
-        <a class="user" href="../login/login.html">Login</a>
+        <a id="registerButton" class="user" href="../register/register.html">Register</a>
+        <a id="loginButton" class="user" href="../login/login.html">Login</a>
+        <a id="createPostButton" class="user" href="../create-post/create-post.html">Create Post</a>
     </div>
 
-    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring 2020.  For Demonstration Only</div>
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+        2020. For Demonstration Only</div>
 
     <!-- Search Bar -->
     <div class="container">

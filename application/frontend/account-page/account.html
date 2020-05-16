@@ -5,7 +5,7 @@
 <html>
 
 <head>
-  <title>My page</title>
+  <title>Account page | CSC648</title>
   <link rel="stylesheet" href="account.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,18 +21,19 @@
     crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="account.js"></script>
+  <!-- Checks if user is logged in and changes navigation bar if there is a user -->
   <script src="../cookie-authentication/cookie-authentication.js"></script>
+  <script defer src="../cookie-authentication/change-navbar.js"></script>
 </head>
 
 <body onload="accountPurchased();accountPost();userInfo()">
   <!-- Navigation bar -->
-  <div class="topnav">
+  <div id="navbar" class="topnav text-white">
     <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
-    <a href="../about/about.html">About</a>
-    <a href="contact">Contact</a>
-    <a class="user" href="../home/home.html">Logout</a>
-    <a class="active user" href="../account-page/account.html">Account Page</a>
-    <a class="user" href="../setting-page/setting.html">Setting</a>
+    <a href="../about/about.html" class="active">About</a>
+    <a id="registerButton" class="user" href="../register/register.html">Register</a>
+    <a id="loginButton" class="user active" href="../login/login.html">Login</a>
+    <a id="createPostButton"class="user" href="../create-post/create-post.html">Create Post</a>
   </div>
 <br>
   <!--account info -->
