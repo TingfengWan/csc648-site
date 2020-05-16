@@ -30,7 +30,7 @@ function accountPurchased(){
 
 //This shows what items the user posted
 function accountPost(){
-    let email = parseCookie(document.cookie);
+    let email = getCookie("userAuth");
 
     let URL = "http://3.22.78.154:3000/user/posts?email=" + email;
 
@@ -91,7 +91,18 @@ function formatDate(date) {
 
 }
 
-function parseCookie(cookie) {
-    var email = cookie.split('=').pop();
-    return email;
-}
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
