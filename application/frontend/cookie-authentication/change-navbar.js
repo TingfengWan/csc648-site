@@ -1,3 +1,6 @@
+//Author: John Joshua Gutierrez
+//Made Mid May
+
 if (getCookie("userAuth") != null) {
     console.log("a user is logged in");
     let navbar = document.getElementById('navbar');
@@ -6,6 +9,7 @@ if (getCookie("userAuth") != null) {
     let logoutButton = document.getElementById('registerButton');
 
     let createPost = document.createElement('a');
+    let contact = document.createElement('a');
     createPost.classList.add('user');
     if(document.location.href == 'http://3.22.78.154:3000/create-post/create-post.html') {
         createPost.classList.add('active');
@@ -15,10 +19,12 @@ if (getCookie("userAuth") != null) {
     settingButton.innerHTML = "Setting";
     accountButton.innerHTML = "Account Page";
     logoutButton.innerHTML = "Logout";
+    contact.innerHTML = "Message"
 
     createPost.setAttribute('href', 'http://3.22.78.154:3000/create-post/create-post.html');
     settingButton.href = "http://3.22.78.154:3000/setting-page/setting.html";
     accountButton.href = "http://3.22.78.154:3000/account-page/account.html";
+    contact.href = "http://3.22.78.154:3000/contact-page/contact.html";
     logoutButton.removeAttribute('href');
     logoutButton.onclick = logoutClick;
 

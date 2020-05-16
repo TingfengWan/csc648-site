@@ -1,3 +1,6 @@
+//Author: John Joshua Gutierrez
+//Made Mid May
+
 if(getCookie("userAuth") == null) {
     window.location = '../cookie-authentication/not-logged-in.html';
 }
