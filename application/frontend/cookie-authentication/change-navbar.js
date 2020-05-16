@@ -2,7 +2,6 @@
 //Made Mid May
 
 if (getCookie("userAuth") != null) {
-    console.log("a user is logged in");
     let navbar = document.getElementById('navbar');
     let settingButton = document.getElementById('createPostButton');
     let accountButton = document.getElementById('loginButton');
