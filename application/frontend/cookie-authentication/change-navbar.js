@@ -29,6 +29,7 @@ if (getCookie("userAuth") != null) {
     logoutButton.onclick = logoutClick;
 
     navbar.appendChild(createPost);
+    navbar.appendChild(contact);
 }
 
 function logoutClick() {
