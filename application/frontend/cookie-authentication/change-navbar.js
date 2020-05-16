@@ -24,16 +24,17 @@ if (getCookie("userAuth") != null) {
 
 function logoutClick() {
     document.cookie = "userAuth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
+    window.location.href = 'http://3.22.78.154:3000/home/home.html';
+    // let createPostButton = document.getElementById('createPostButton');
+    // let loginButton = document.getElementById('loginButton');
+    // let registerButton = document.getElementById('registerButton');
 
-    let createPostButton = document.getElementById('createPostButton');
-    let loginButton = document.getElementById('loginButton');
-    let registerButton = document.getElementById('registerButton');
+    // createPostButton.innerHTML = "Create Post";
+    // loginButton.innerHTML = "Login";
+    // registerButton.innerHTML = "Register";
 
-    createPostButton.innerHTML = "Create Post";
-    loginButton.innerHTML = "Login";
-    registerButton.innerHTML = "Register";
-
-    createPostButton.href = "http://3.22.78.154:3000/create-post/create-post.html";
+    // createPostButton.href = "http://3.22.78.154:3000/create-post/create-post.html";
 
 
 }
