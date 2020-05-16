@@ -156,7 +156,7 @@ app.post("/post", (req, res) => {
                     "${queryParams.file_type}",\
                     ${queryParams.has_file},\
                     ${queryParams.cost},\
-                    "${queryParams.post_body}"\
+                    "${queryParams.post_body}",\
                     "${queryParams.license}"\
                 )\
             `;
