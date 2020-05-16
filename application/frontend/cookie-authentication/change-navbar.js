@@ -14,6 +14,9 @@ if (getCookie("userAuth") != null) {
     if(document.location.href == 'http://3.22.78.154:3000/create-post/create-post.html') {
         createPost.classList.add('active');
     }
+    if(document.location.href == 'http://3.22.78.154:3000/contact-page/contact.html') {
+        createPost.classList.add('active');
+    }
 
     createPost.innerHTML = "Create Post";
     settingButton.innerHTML = "Setting";

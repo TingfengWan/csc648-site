@@ -7,7 +7,7 @@
 
  //Displays the basic info of the user
 function setting() {
-    let email = parseCookie(document.cookie);
+    let email = getCookie("userAuth");
     let URL = "http://3.22.78.154:3000/user?email=" + email;
 
     fetch(URL)
@@ -52,7 +52,7 @@ function showModal(id) {
 //This method is the one making the post request to change user info
 function updateInfo() {
     let modalTitle = document.getElementById("ModalLabel").innerHTML;
-    let email = parseCookie(document.cookie);
+    let email = getCookie("userAuth");
 
     if (modalTitle == "Password") {
         let hashed_password = md5(document.getElementById("modalInput").value);
@@ -104,9 +104,20 @@ function updateInfo() {
 
 }
 
-function parseCookie(cookie) {
-    var email = cookie.split('=').pop();
-    return email;
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
 // WE ARE BORROWING THIS MD5 CODE
 // THIS IS NOT OUR OWN HASH ALGORITHM
