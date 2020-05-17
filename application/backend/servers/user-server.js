@@ -300,7 +300,7 @@ app.post('/user/signup', (req, res) => {
 app.post('/user/authenticate', (req, res) => {
     console.log(req.body.captcha);
     if (!req.body.captcha)
-        return res.json({ success: false, msg: 'Please select captcha' });
+        return res.send({ success: false, msg: 'Please select captcha' });
 
     // Secret key
     const secretKey = '6Le6Qe8UAAAAAGqkMmm24EEU2MyPIbqlUUx4fttK';
@@ -320,14 +320,14 @@ app.post('/user/authenticate', (req, res) => {
             console.log('Body', body);
             // If not successful
             if (body.success !== undefined && !body.success)
-                return res.json({ success: false, msg: 'Failed captcha verification' });
+                return res.send({ success: false, msg: 'Failed captcha verification' });
 
             // If successful
-            return res.json({ success: true, msg: 'Captcha passed' });
+            return res.send({ success: true, msg: 'Captcha passed' });
         })
         .catch(err => {
             console.log('Err', err.message);
-            return res.status(400).json({ success: false, msg: 'Captcha failed' });
+            return res.status(400).send({ success: false, msg: 'Captcha failed' });
         });
     
 });
