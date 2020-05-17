@@ -71,8 +71,8 @@ function userInfo() {
 //A function that parses date to make it look nicer
 function formatDate(date) {
     let dateObj = new Date(date);
-    let month = dateObj.getMonth();
-    let day = dateObj.getDay();
+    let month = dateObj.getMonth() + 1;
+    let day = dateObj.getDate();
     let year = dateObj.getFullYear();
     let hours = dateObj.getHours();
     let minutes = dateObj.getMinutes();
