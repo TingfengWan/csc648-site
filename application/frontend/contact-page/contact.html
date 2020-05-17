@@ -44,7 +44,7 @@ Made Mid May
     </script>
 </head>
 
-<body onload="getMessages()">
+<body>
     <!-- Navigation bar -->
     <div id="navbar" class="topnav text-white">
         <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
@@ -60,7 +60,7 @@ Made Mid May
 
     <!-- //TODO Message -->
     <div class="row">
-        <div id="sidebarWrap" class="col-sm-2">
+        <div id="sidebarWrap" class="col">
             <!-- Sidebar -->
             <nav id="sidebar">
                 <div class="sidebar-header">
@@ -72,31 +72,31 @@ Made Mid May
                         <a href="#">Send Message</a>
                     </li>
                     <li>
-                        <a onclick="displayInbox()" href="#">Inbox</a>
+                        <a id="displayInbox" class="" onclick="displayInbox()" href="#">Inbox</a>
                     </li>
                     <li>
-                        <a onclick="displaySent()" href="#">Sent</a>
-                    </li>
+                        <a id="displaySent" class="" onclick="displaySent()" href="#">Sent</a>
+                    </li>   
                 </ul>
             </nav>
 
         </div>
-        <div class="col" id="inboxDiv">
-            <div class="container-fluid row">
-                <div class="col">
+        <div class="col">
+            <div class="container-xl row header">
+                <div class="col border font-weight-bold">
                     Email:
                 </div>
-                <div class="col">
+                <div class="col border font-weight-bold">
                     Messages:
                 </div>
-                <div class="col">
+                <div class="col border font-weight-bold">
                     Date:
                 </div>
             </div>
-            <!-- <div class="col" id="sentDiv">
-            <div class="container-fluid">asdfasf </div>
-        </div> -->
+            <div id="inboxDiv"></div>
+            <div id="sendDiv"></div>
         </div>
+    </div>
 
 
 
