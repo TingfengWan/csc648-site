@@ -29,9 +29,8 @@ function sendMessage() {
 }
 
 function getMessages() {
-    let email = getCookie("userAuth");
-    let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + email;
-    //let email = parseCookie(document.cookie);
+    let userEmail = getCookie("userAuth");
+    let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + userEmail;
     axios.get(URL)
         .then(res => {
             console.log(res.data);
@@ -57,7 +56,7 @@ function getMessages() {
                 date.classList.add('border');
                 date.classList.add('emailFont');
 
-                if (res.data.messages[i].sender_email == email) {
+                if (res.data.messages[i].sender_email == userEmail) {
                     email.innerHTML = `${res.data.messages[i].recipient_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
                     date.innerHTML = `${formatDate(res.data.messages[i].timestamp)}`;
@@ -66,7 +65,7 @@ function getMessages() {
                     container.appendChild(email);
                     container.appendChild(message);
                     container.appendChild(date);
-                } else if (res.data.messages[i].recipient_email == email) {
+                } else if (res.data.messages[i].recipient_email == userEmail) {
                     email.innerHTML = `${res.data.messages[i].sender_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
                     date.innerHTML = `${formatDate(res.data.messages[i].timestamp)}`;
