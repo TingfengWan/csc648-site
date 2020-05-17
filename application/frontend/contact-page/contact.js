@@ -173,7 +173,7 @@ function contactSeller() {
             tmp = params[i].split('=');
             data[tmp[0]] = tmp[1];
         }
-        $("messageModal").modal("show");
+        $("#messageModal").modal("show");
         document.getElementById('recipient-name').value = data.contact;
 
     }
