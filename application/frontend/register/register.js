@@ -21,13 +21,9 @@ function validateForm() {
   if (validateFields()) {
 
     //sends captcha response to google to verify that it's correct
-    axios.post("http://3.22.78.154:3000/user/authenticate", //{
-      //method: "POST",
-      //headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
-      //body: {captcha: captcha}
-    //}
-      { captcha }
-    )
+    axios.post("http://3.22.78.154:3000/user/authenticate", {
+      captcha
+    })
       .then((res) => {
         console.log(res.data);
         if (res.data.success) {
@@ -38,20 +34,6 @@ function validateForm() {
           document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
         }
       })
-      /**
-      .then((data) => {
-        console.log(data);
-
-        if (data.success) {
-          document.getElementById("recaptcha-error").innerHTML = "";
-          createUser();
-        }
-
-        else {
-          document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
-        }
-      })
-       */
       .catch((err) => {
         console.log(err);
         document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";

@@ -22,7 +22,6 @@ function sendMessage() {
         .catch(err => {
             console.log(err);
         });
-
 }
 
 function getMessages() {
