@@ -95,8 +95,6 @@ function displaySent() {
     var displayInbox = document.getElementById('displayInbox');
     document.getElementById('typeOfEmail').textContent = "Sent To:";
 
-    console.log(displaySent.classList.contains('active'));
-
     if (!displaySent.classList.contains('active')) {
         if (displayInbox.classList.contains('active')) {
             displayInbox.classList.remove('active');
@@ -114,8 +112,6 @@ function displayInbox() {
     var displaySent = document.getElementById('displaySent');
     var displayInbox = document.getElementById('displayInbox');
     document.getElementById('typeOfEmail').textContent = "Received From:";
-
-    console.log(displayInbox.classList.contains('active'));
 
     if (!displayInbox.classList.contains('active')) {
         if (displaySent.classList.contains('active')) {
@@ -170,11 +166,13 @@ function formatDate(date) {
 
 function contactSeller() {
     var url = document.location.href;
-    var params = url.split('?')[1].split('&');
-    var data = {}, tmp;
-    for (var i = 0, l = params.length; i < l; i++) {
-        tmp = params[i].split('=');
-        data[tmp[0]] = tmp[1];
+    if(url.indexOf("?") > -1) {
+        var params = url.split('?')[1].split('&');
+        var data = {}, tmp;
+        for (var i = 0, l = params.length; i < l; i++) {
+            tmp = params[i].split('=');
+            data[tmp[0]] = tmp[1];
+        }
+        console.log(data); 
     }
-    console.log(data); 
 }
