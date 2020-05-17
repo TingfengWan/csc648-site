@@ -29,7 +29,14 @@ function validateForm() {
       { captcha }
     )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        if (res.data.success) {
+          document.getElementById("recaptcha-error").innerHTML = "";
+          createUser();
+        }
+        else {
+          document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
+        }
       })
       /**
       .then((data) => {
