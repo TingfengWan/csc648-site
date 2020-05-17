@@ -217,3 +217,7 @@ ul ul a {
 .emailFont {
   font-size: x-large;
 }
+
+.active {
+  background-color: #58195f;
+}

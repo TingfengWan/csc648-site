@@ -33,7 +33,8 @@ function getMessages() {
         .then(res => {
             console.log(res.data);
             let inbox = document.getElementById('inboxDiv');
-            inbox.innerHTML = "";
+            let sent = document.getElementById('sentDiv');
+
             for (let i = 0; i < res.data.messages.length; i++) {
 
                 let container = document.createElement('div');
@@ -52,24 +53,32 @@ function getMessages() {
                 date.classList.add('col');
                 date.classList.add('border');
                 date.classList.add('emailFont');
+
                 if (res.data.messages[i].sender_email == "test@sfsu.edu") {
+                    email.innerHTML = `${res.data.messages[i].recipient_email}`;
+                    message.innerHTML = `${res.data.messages[i].message}`;
+                    date.innerHTML = `${res.data.messages[i].timestamp}`;
+
+                    sent.appendChild(container);
+                    container.appendChild(email);
+                    container.appendChild(message);
+                    container.appendChild(date);
+                } else if(res.data.messages[i].recipient_email == "test@sfsu.edu") {
                     email.innerHTML = `${res.data.messages[i].sender_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
                     date.innerHTML = `${res.data.messages[i].timestamp}`;
-                    console.log(date);
-                } else if(res.data.messages.recipient_email == "test@sfsu.edu") {
-                    email.innerHTML = `${res.data.messages[i].sender_email}`;
-                    message.innerHTML = `${res.data.messages[i].message}`;
-                    date.innerHTML = `${res.data.messages[i].timestamp}`;
-                    console.log(date);
                     
+                    inbox.appendChild(container);
+                    container.appendChild(email);
+                    container.appendChild(message);
+                    container.appendChild(date);
                 } 
 
-                inbox.appendChild(container);
-                container.appendChild(email);
-                container.appendChild(message);
-                container.appendChild(date);
             }
+
+            document.getElementById('displayInbox').classList.add('active');
+            document.getElementById('sentDiv').style.display = 'none';
+            
         })
         .catch(err => {
             console.log(err);
@@ -77,114 +86,39 @@ function getMessages() {
 }
 
 function displaySent() {
-    var x = document.getElementById("inboxDiv");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        let email = 'test@sfsu.edu';
-        let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + email;
-        //let email = parseCookie(document.cookie);
-        axios.get(URL)
-            .then(res => {
-                console.log(res.data);
-                let inbox = document.getElementById('inboxDiv');
-                inbox.innerHTML = "";
-                for (let i = 0; i < res.data.messages.length; i++) {
+    var sentDiv = document.getElementById('sentDiv');
+    var inboxDiv= document.getElementById('inboxDiv');
+    var displaySent = document.getElementById('displaySent');
+    var displayInbox = document.getElementById('displayInbox');
 
-                    if (res.data.messages[i].sender_email == "test@sfsu.edu") {
-                        let container = document.createElement('div');
-                        let email = document.createElement('div');
-                        let message = document.createElement('div');
-                        let date = document.createElement('div');
+    console.log(displaySent.classList.contains('active'));
 
-                        container.classList.add('container-xl');
-                        container.classList.add('row');
-                        email.classList.add('col');
-                        email.classList.add('border');
-                        email.classList.add('emailFont');
-                        message.classList.add('col');
-                        message.classList.add('border');
-                        message.classList.add('emailFont');
-                        date.classList.add('col');
-                        date.classList.add('border');
-                        date.classList.add('emailFont');
-
-
-                        email.innerHTML = `${res.data.messages[i].sender_email}`;
-                        message.innerHTML = `${res.data.messages[i].message}`;
-                        date.innerHTML = `${res.data.messages[i].timestamp}`;
-                        console.log(date);
-
-                        inbox.appendChild(container);
-                        container.appendChild(email);
-                        container.appendChild(message);
-                        container.appendChild(date);
-                    }
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    } else {
-        x.style.display = "none";
+    if(!displaySent.classList.contains('active')) {
+        if(displayInbox.classList.contains('active')) {
+            displayInbox.classList.remove('active');
+            inboxDiv.style.display = 'none';
+        }
+        displaySent.classList.add('active');
+        sentDiv.style.display = 'block';
     }
 }
 
 
 function displayInbox() {
-
-    var x = document.getElementById("inboxDiv");
-    var displayInbox = document.getElementById('displayInbox');
+    var sentDiv = document.getElementById('sentDiv');
+    var inboxDiv= document.getElementById('inboxDiv');
     var displaySent = document.getElementById('displaySent');
-    if (!displayInbox.classList.contains('active')) {
+    var displayInbox = document.getElementById('displayInbox');
+
+    console.log(displayInbox.classList.contains('active'));
+    
+    if(!displayInbox.classList.contains('active')) {
+        if(displaySent.classList.contains('active')) {
+            displaySent.classList.remove('active');
+            sentDiv.style.display = 'none';
+        }
         displayInbox.classList.add('active');
-        x.style.display = "block";
-        let email = 'test@sfsu.edu';
-        let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + email;
-        //let email = parseCookie(document.cookie);
-        axios.get(URL)
-            .then(res => {
-                console.log(res.data);
-                let inbox = document.getElementById('inboxDiv');
-                inbox.innerHTML = "";
-                for (let i = 0; i < res.data.messages.length; i++) {
-
-                    if (res.data.messages[i].recipient_email == "test@sfsu.edu") {
-                        let container = document.createElement('div');
-                        let email = document.createElement('div');
-                        let message = document.createElement('div');
-                        let date = document.createElement('div');
-
-                        container.classList.add('container-xl');
-                        container.classList.add('row');
-                        email.classList.add('col');
-                        email.classList.add('border');
-                        email.classList.add('emailFont');
-                        message.classList.add('col');
-                        message.classList.add('border');
-                        message.classList.add('emailFont');
-                        date.classList.add('col');
-                        date.classList.add('border');
-                        date.classList.add('emailFont');
-
-
-                        email.innerHTML = `${res.data.messages[i].sender_email}`;
-                        message.innerHTML = `${res.data.messages[i].message}`;
-                        date.innerHTML = `${res.data.messages[i].timestamp}`;
-                        console.log(date);
-
-                        inbox.appendChild(container);
-                        container.appendChild(email);
-                        container.appendChild(message);
-                        container.appendChild(date);
-                    }
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    } else {
-        displayInbox.classList.remove('active');
-        x.style.display = "none";
+        inboxDiv.style.display = 'block';
     }
 
 

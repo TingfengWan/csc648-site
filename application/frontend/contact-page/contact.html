@@ -44,7 +44,7 @@ Made Mid May
     </script>
 </head>
 
-<body>
+<body onload="getMessages()">
     <!-- Navigation bar -->
     <div id="navbar" class="topnav text-white">
         <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
@@ -72,10 +72,10 @@ Made Mid May
                         <a href="#">Send Message</a>
                     </li>
                     <li>
-                        <a id="displayInbox" class="" onclick="displayInbox()" href="#">Inbox</a>
+                        <a id="displayInbox" class="" onclick="displayInbox()">Inbox</a>
                     </li>
                     <li>
-                        <a id="displaySent" class="" onclick="displaySent()" href="#">Sent</a>
+                        <a id="displaySent" class="" onclick="displaySent()">Sent</a>
                     </li>   
                 </ul>
             </nav>
@@ -94,7 +94,7 @@ Made Mid May
                 </div>
             </div>
             <div id="inboxDiv"></div>
-            <div id="sendDiv"></div>
+            <div id="sentDiv"></div>
         </div>
     </div>
 
