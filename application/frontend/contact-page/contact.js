@@ -14,7 +14,7 @@ function sendMessage() {
     axios.post(URL, {
         sender_email: sender,
         recipient_email: recipient,
-        message: message
+        message: message,
     })
         .then(res => {
             console.log(res.data);
@@ -35,7 +35,7 @@ function getMessages() {
             let inbox = document.getElementById('inboxDiv');
             let sent = document.getElementById('sentDiv');
 
-            for (let i = 0; i < res.data.messages.length; i++) {
+            for (let i = res.data.messages.length -1; i >= 0; i--) {
 
                 let container = document.createElement('div');
                 let email = document.createElement('div');
@@ -57,7 +57,7 @@ function getMessages() {
                 if (res.data.messages[i].sender_email == "test@sfsu.edu") {
                     email.innerHTML = `${res.data.messages[i].recipient_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
-                    date.innerHTML = `${res.data.messages[i].timestamp}`;
+                    date.innerHTML = `${formatDate(res.data.messages[i].timestamp)}`;
 
                     sent.appendChild(container);
                     container.appendChild(email);
@@ -66,7 +66,7 @@ function getMessages() {
                 } else if(res.data.messages[i].recipient_email == "test@sfsu.edu") {
                     email.innerHTML = `${res.data.messages[i].sender_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
-                    date.innerHTML = `${res.data.messages[i].timestamp}`;
+                    date.innerHTML = `${formatDate(res.data.messages[i].timestamp)}`;
                     
                     inbox.appendChild(container);
                     container.appendChild(email);
@@ -139,5 +139,27 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function formatDate(date) {
+    let dateObj = new Date(date);
+    let month = dateObj.getMonth();
+    let day = dateObj.getDay();
+    let year = dateObj.getFullYear();
+    let hours = dateObj.getHours();
+    let minutes = dateObj.getMinutes();
+    let ampm = "am";
+
+    if (hours > 12) {
+        hours = hours % 12;
+        ampm = "pm";
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    let newDate = `${month}/${day}/${year} ${hours}:${minutes}${ampm}`
+    return newDate;
+
 }
 
