@@ -21,11 +21,13 @@ function validateForm() {
   if (validateFields()) {
 
     //sends captcha response to google to verify that it's correct
-    fetch("http://3.22.78.154:3000/user/authenticate", {
-      method: "POST",
-      headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
-      body: JSON.stringify({captcha: captcha})
-    })
+    axios.post("http://3.22.78.154:3000/user/authenticate", //{
+      //method: "POST",
+      //headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
+      //body: {captcha: captcha}
+    //}
+      captcha
+    )
       .then((res) => {
         console.log(res);
       })
