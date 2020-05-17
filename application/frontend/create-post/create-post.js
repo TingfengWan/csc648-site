@@ -12,7 +12,7 @@ function createPost() {
     let license = document.forms["create-post"]["license"].value;
     let createTime = new Date();
     let fileName;
-    let creatorEmail = parseCookie(document.cookie);
+    let creatorEmail = getCookie("userAuth");
 
     console.log(license);
     if (validatePost()) {
@@ -243,7 +243,18 @@ function displayImagePreview() {
 
 }
 
-function parseCookie(cookie) {
-    var email = cookie.split('=').pop();
-    return email;
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }

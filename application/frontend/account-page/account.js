@@ -44,7 +44,7 @@ function accountPost() {
             for (let i = 0; i < res.data.posts.length; i++) {
                 let post = res.data.posts[i];
                 let element = document.createElement("h3");
-                element.innerHTML = `Title:${post.title}: Date:${formatDate(post.create_time)} Cost:${post.cost}`;
+                element.innerHTML = `Title: ${post.title}, Date: ${formatDate(post.create_time)}, Cost: ${post.cost}`;
                 postDump.appendChild(element);
             }
 
@@ -71,8 +71,8 @@ function userInfo() {
 //A function that parses date to make it look nicer
 function formatDate(date) {
     let dateObj = new Date(date);
-    let month = dateObj.getMonth();
-    let day = dateObj.getDay();
+    let month = dateObj.getMonth() + 1;
+    let day = dateObj.getDate();
     let year = dateObj.getFullYear();
     let hours = dateObj.getHours();
     let minutes = dateObj.getMinutes();
