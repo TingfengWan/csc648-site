@@ -26,7 +26,10 @@ function validateForm() {
       headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
       body: JSON.stringify({captcha: captcha})
     })
-      .then((res) => res.json(data))
+      .then((res) => {
+        console.log(res);
+      })
+      /**
       .then((data) => {
         console.log(data);
 
@@ -39,6 +42,7 @@ function validateForm() {
           document.getElementById("recaptcha-error").innerHTML = "Incorrect recaptcha";
         }
       })
+       */
       .catch((err) => {
         console.log(err);
         document.getElementById("recaptcha-error").innerHTML = "Please verify that you are a human";
