@@ -33,7 +33,6 @@ function getMessages() {
     let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + userEmail;
     axios.get(URL)
         .then(res => {
-            console.log(res.data);
             let inbox = document.getElementById('inboxDiv');
             let sent = document.getElementById('sentDiv');
 
@@ -166,6 +165,7 @@ function formatDate(date) {
 
 function contactSeller() {
     var url = document.location.href;
+    let modal = document.getElementById('messageModal');
     if(url.indexOf("?") > -1) {
         var params = url.split('?')[1].split('&');
         var data = {}, tmp;
@@ -173,6 +173,8 @@ function contactSeller() {
             tmp = params[i].split('=');
             data[tmp[0]] = tmp[1];
         }
-        console.log(data); 
+        modal.modal("toggle");
+        document.getElementById('recipient-name').value = data.contact;
+
     }
 }
