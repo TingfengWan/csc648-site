@@ -28,8 +28,6 @@ body {
   font-weight: bold;
 }
 
-
-
 /* Change the color of links on hover */
 
 .topnav a:hover {
@@ -98,9 +96,10 @@ input, button {
 SIDE BAR 
 */
 
-.wrapper {
-  display: flex;
-  align-items: stretch;
+#sidebarWrap {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
 }
 
 #sidebar.active {
@@ -125,14 +124,14 @@ a[data-toggle="collapse"] {
   transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   #sidebar {
     margin-left: -250px;
   }
   #sidebar.active {
     margin-left: 0;
   }
-}
+} */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
@@ -157,7 +156,7 @@ p {
   padding: 10px;
 }
 
-a, a:hover, a:focus, #sendMessage ,#sendMessage:hover #sendMessage:focus {
+a, a:hover, a:focus, #sendMessage, #sendMessage:hover #sendMessage:focus {
   color: inherit;
   text-decoration: none;
   transition: all 0.3s;

@@ -60,33 +60,43 @@ Made Mid May
 
     <!-- //TODO Message -->
     <div class="row">
-        <div class="col-sm-4">
-            <div class="wrapper">
-                <!-- Sidebar -->
-                <nav id="sidebar">
-                    <div class="sidebar-header">
-                        <h3>Messages</h3>
-                    </div>
+        <div id="sidebarWrap" class="col-sm-2">
+            <!-- Sidebar -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>Messages</h3>
+                </div>
 
-                    <ul class="list-unstyled components">
-                        <li>
-                            <a href="#">Send Message</a>
-                        </li>
-                        <li>
-                            <a onclick="displayInbox()" href="#">Inbox</a>
-                        </li>
-                        <li>
-                            <a onclick="displaySent()" href="#">Sent</a>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="#">Send Message</a>
+                    </li>
+                    <li>
+                        <a onclick="displayInbox()" href="#">Inbox</a>
+                    </li>
+                    <li>
+                        <a onclick="displaySent()" href="#">Sent</a>
+                    </li>
+                </ul>
+            </nav>
 
+        </div>
+        <div class="col" id="inboxDiv">
+            <div class="container-fluid row">
+                <div class="col">
+                    Email:
+                </div>
+                <div class="col">
+                    Messages:
+                </div>
+                <div class="col">
+                    Date:
+                </div>
             </div>
+            <!-- <div class="col" id="sentDiv">
+            <div class="container-fluid">asdfasf </div>
+        </div> -->
         </div>
-        <div class="col-sm-8">
-            <div class="container">asdfasf </div>
-        </div>
-    </div>
 
 
 
