@@ -26,7 +26,7 @@ function validateForm() {
       //headers: { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json"},
       //body: {captcha: captcha}
     //}
-      captcha
+      { captcha }
     )
       .then((res) => {
         console.log(res);
