@@ -75,7 +75,8 @@ function getMessages() {
                 } 
 
             }
-
+            
+            document.getElementById('typeOfEmail').textContent = "Received From:";
             document.getElementById('displayInbox').classList.add('active');
             document.getElementById('sentDiv').style.display = 'none';
             
@@ -90,6 +91,7 @@ function displaySent() {
     var inboxDiv= document.getElementById('inboxDiv');
     var displaySent = document.getElementById('displaySent');
     var displayInbox = document.getElementById('displayInbox');
+    document.getElementById('typeOfEmail').textContent = "Sent To:";
 
     console.log(displaySent.classList.contains('active'));
 
@@ -109,6 +111,7 @@ function displayInbox() {
     var inboxDiv= document.getElementById('inboxDiv');
     var displaySent = document.getElementById('displaySent');
     var displayInbox = document.getElementById('displayInbox');
+    document.getElementById('typeOfEmail').textContent = "Received From:";
 
     console.log(displayInbox.classList.contains('active'));
     
