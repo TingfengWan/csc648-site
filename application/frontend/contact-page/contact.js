@@ -6,10 +6,10 @@
 
 function sendMessage() {
     const URL = 'http://3.22.78.154:3000/user/message';
-    let message = 'Gimme the goods';
+    let message = document.getElementById('message-text').value;
     //let sender = parseCookie(document.cookie);
-    let sender = 'test@sfsu.edu';
-    let recipient = 'student@sfsu.edu';
+    let sender = getCookie("userAuth");
+    let recipient = document.getElementById('recipient-name').value;
 
     axios.post(URL, {
         sender_email: sender,
@@ -18,6 +18,10 @@ function sendMessage() {
     })
         .then(res => {
             console.log(res.data);
+            if(res.data.message == "Message sent!") {
+                alert('Message sent!');
+                window.location.href = 'http://3.22.78.154:3000/contact-page/contact.html';
+            }
         })
         .catch(err => {
             console.log(err);
@@ -25,7 +29,7 @@ function sendMessage() {
 }
 
 function getMessages() {
-    let email = 'test@sfsu.edu';
+    let email = getCookie("userAuth");
     let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + email;
     //let email = parseCookie(document.cookie);
     axios.get(URL)
@@ -34,7 +38,7 @@ function getMessages() {
             let inbox = document.getElementById('inboxDiv');
             let sent = document.getElementById('sentDiv');
 
-            for (let i = res.data.messages.length -1; i >= 0; i--) {
+            for (let i = res.data.messages.length - 1; i >= 0; i--) {
 
                 let container = document.createElement('div');
                 let email = document.createElement('div');
@@ -53,7 +57,7 @@ function getMessages() {
                 date.classList.add('border');
                 date.classList.add('emailFont');
 
-                if (res.data.messages[i].sender_email == "test@sfsu.edu") {
+                if (res.data.messages[i].sender_email == email) {
                     email.innerHTML = `${res.data.messages[i].recipient_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
                     date.innerHTML = `${formatDate(res.data.messages[i].timestamp)}`;
@@ -62,23 +66,23 @@ function getMessages() {
                     container.appendChild(email);
                     container.appendChild(message);
                     container.appendChild(date);
-                } else if(res.data.messages[i].recipient_email == "test@sfsu.edu") {
+                } else if (res.data.messages[i].recipient_email == email) {
                     email.innerHTML = `${res.data.messages[i].sender_email}`;
                     message.innerHTML = `${res.data.messages[i].message}`;
                     date.innerHTML = `${formatDate(res.data.messages[i].timestamp)}`;
-                    
+
                     inbox.appendChild(container);
                     container.appendChild(email);
                     container.appendChild(message);
                     container.appendChild(date);
-                } 
+                }
 
             }
-            
+
             document.getElementById('typeOfEmail').textContent = "Received From:";
             document.getElementById('displayInbox').classList.add('active');
             document.getElementById('sentDiv').style.display = 'none';
-            
+
         })
         .catch(err => {
             console.log(err);
@@ -87,15 +91,15 @@ function getMessages() {
 
 function displaySent() {
     var sentDiv = document.getElementById('sentDiv');
-    var inboxDiv= document.getElementById('inboxDiv');
+    var inboxDiv = document.getElementById('inboxDiv');
     var displaySent = document.getElementById('displaySent');
     var displayInbox = document.getElementById('displayInbox');
     document.getElementById('typeOfEmail').textContent = "Sent To:";
 
     console.log(displaySent.classList.contains('active'));
 
-    if(!displaySent.classList.contains('active')) {
-        if(displayInbox.classList.contains('active')) {
+    if (!displaySent.classList.contains('active')) {
+        if (displayInbox.classList.contains('active')) {
             displayInbox.classList.remove('active');
             inboxDiv.style.display = 'none';
         }
@@ -107,15 +111,15 @@ function displaySent() {
 
 function displayInbox() {
     var sentDiv = document.getElementById('sentDiv');
-    var inboxDiv= document.getElementById('inboxDiv');
+    var inboxDiv = document.getElementById('inboxDiv');
     var displaySent = document.getElementById('displaySent');
     var displayInbox = document.getElementById('displayInbox');
     document.getElementById('typeOfEmail').textContent = "Received From:";
 
     console.log(displayInbox.classList.contains('active'));
-    
-    if(!displayInbox.classList.contains('active')) {
-        if(displaySent.classList.contains('active')) {
+
+    if (!displayInbox.classList.contains('active')) {
+        if (displaySent.classList.contains('active')) {
             displaySent.classList.remove('active');
             sentDiv.style.display = 'none';
         }
