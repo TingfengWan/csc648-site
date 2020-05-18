@@ -184,7 +184,7 @@ h3 {
     font-size: 1rem;
 }
 
-img {
+img.item {
     width: 90%;
     display: block;
     margin-left: auto;
@@ -206,6 +206,12 @@ p {
     width: 1.5rem;
     height: 1.5rem;
 }
+
+#titleLogo {
+    width: 8.5rem;
+    height: 8.5rem;
+}
+
 
 @media screen and (max-width: 1000px) {
     .post-row {
