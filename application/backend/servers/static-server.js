@@ -11,7 +11,11 @@ app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next()
-  });
+});
+
+app.get('/', (req, res) => {
+  res.redirect('/home/home.html');
+});
 
 app.use(express.static(path.join(__dirname, '../../frontend')));
 
@@ -20,25 +24,3 @@ app.get('*', (req, res) => {
 });
 
 app.listen(staticServerPort);
-
-function formatDate(date) {
-  let dateObj = new Date(date);
-  let month = dateObj.getMonth();
-  let day = dateObj.getDay();
-  let year = dateObj.getFullYear();
-  let hours = dateObj.getHours();
-  let minutes = dateObj.getMinutes();
-  let ampm = "am";
-
-  if(hours > 12) {
-      hours = hours%12;
-      ampm = "pm";
-  }
-  if(minutes < 10) {
-    minutes += "0"
-  }
-
-  let newDate = `${month}/${day}/${year} ${hours}:${minutes}${ampm}`
-  return newDate;
-
-}
