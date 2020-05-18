@@ -101,13 +101,13 @@ Search Bar
 */
 
 input.form-control {
-    background-color: #330033!important;
+    background-color: #58195f!important;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 select.form-control {
-    background: #58195f!important;
+    background: #330033!important;
     color: white!important;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
