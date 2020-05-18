@@ -125,6 +125,7 @@ function postDetails(data) {
     let postDetails = document.getElementById('post-details');
     let postImageDiv = document.getElementById('post-image');
     let download = document.getElementById('download');
+    let contact = document.getElementById('contact');
 
     let postImage = document.createElement('img');
     let postDesc = document.createElement('div');
@@ -150,6 +151,7 @@ function postDetails(data) {
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
     postImage.src = data.post.media_preview;
+    contact.onclick = function () { redirectToMessage(data.post.creator_email) };
 
     postDetails.appendChild(postPrice);
     postDetails.appendChild(postDesc);
@@ -192,4 +194,8 @@ function redirectToSearchResults() {
     var userInput = document.getElementById('userInput').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
     document.location.href =  encodeURI(url);
+}
+
+function redirectToMessage(userEmail) {
+    window.location.href = 'http://3.22.78.154:3000/contact-page/contact.html?contact=' + userEmail;
 }

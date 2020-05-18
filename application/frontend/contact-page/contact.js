@@ -33,7 +33,6 @@ function getMessages() {
     let URL = 'http://3.22.78.154:3000/user/message?userEmail=' + userEmail;
     axios.get(URL)
         .then(res => {
-            console.log(res.data);
             let inbox = document.getElementById('inboxDiv');
             let sent = document.getElementById('sentDiv');
 
@@ -95,8 +94,6 @@ function displaySent() {
     var displayInbox = document.getElementById('displayInbox');
     document.getElementById('typeOfEmail').textContent = "Sent To:";
 
-    console.log(displaySent.classList.contains('active'));
-
     if (!displaySent.classList.contains('active')) {
         if (displayInbox.classList.contains('active')) {
             displayInbox.classList.remove('active');
@@ -114,8 +111,6 @@ function displayInbox() {
     var displaySent = document.getElementById('displaySent');
     var displayInbox = document.getElementById('displayInbox');
     document.getElementById('typeOfEmail').textContent = "Received From:";
-
-    console.log(displayInbox.classList.contains('active'));
 
     if (!displayInbox.classList.contains('active')) {
         if (displaySent.classList.contains('active')) {
@@ -168,3 +163,18 @@ function formatDate(date) {
 
 }
 
+function contactSeller() {
+    var url = document.location.href;
+    //let modal = document.getElementById('messageModal');
+    if(url.indexOf("?") > -1) {
+        var params = url.split('?')[1].split('&');
+        var data = {}, tmp;
+        for (var i = 0, l = params.length; i < l; i++) {
+            tmp = params[i].split('=');
+            data[tmp[0]] = tmp[1];
+        }
+        $("#messageModal").modal("show");
+        document.getElementById('recipient-name').value = data.contact;
+
+    }
+}
