@@ -100,14 +100,14 @@ function postDetails(data) {
     let postTitleDiv = document.getElementById('post-title');
     let postDetails = document.getElementById('post-details');
     let postImageDiv = document.getElementById('post-image');
-    let postLicense = document.getElementById('post-license');
-    let postLocation = document.getElementById('post-location');
     let download = document.getElementById('download');
     let contact = document.getElementById('contact');
 
     let postImage = document.createElement('img');
     let postDesc = document.createElement('div');
     let postPrice = document.createElement('div');
+    let postLocation = document.createElement('div');
+    let postLicense = document.createElement('div');
     let date = document.createElement('div');
 
     postImage.classList.add("item");
@@ -116,7 +116,7 @@ function postDetails(data) {
     postImageDiv.innerHTML = "";
     postLicense.innerHTML = "";
     postLocation.innerHTML = "";
-
+    
 
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
@@ -146,7 +146,7 @@ function postDetails(data) {
         postDetails.appendChild(postLicense);
     }
 
-    if(data.post.locations != ""){
+    if(data.post.locations.length != 0){
         postLocation.innerHTML = `Meet up location: ${data.post.locations}`;
         postDetails.appendChild(postLocation);
     }
