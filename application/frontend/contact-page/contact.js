@@ -165,7 +165,6 @@ function formatDate(date) {
 
 function contactSeller() {
     var url = document.location.href;
-    //let modal = document.getElementById('messageModal');
     if(url.indexOf("?") > -1) {
         var params = url.split('?')[1].split('&');
         var data = {}, tmp;
