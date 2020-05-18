@@ -124,6 +124,8 @@ function postDetails(data) {
     let postTitleDiv = document.getElementById('post-title');
     let postDetails = document.getElementById('post-details');
     let postImageDiv = document.getElementById('post-image');
+    let postLicense = document.getElementById('post-license');
+    let postLocation = document.getElementById('post-location');
     let download = document.getElementById('download');
     let contact = document.getElementById('contact');
 
@@ -135,6 +137,8 @@ function postDetails(data) {
     postImage.classList.add("item");
     postDetails.innerHTML = "";
     postImageDiv.innerHTML = "";
+    postLicense.innerHTML = "";
+    postLocation.innerHTML = "";
 
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
@@ -158,6 +162,16 @@ function postDetails(data) {
     postDetails.appendChild(date);
 
     postImageDiv.appendChild(postImage);
+
+    if(data.post.license != null){
+        postLicense.innerHTML = `Licensing: ${data.post.license}`;
+        postDetails.appendChild(postLicense);
+    }
+
+    if(data.post.locations != ""){
+        postLocation.innerHTML = `Meet up location: ${data.post.locations}`;
+        postDetails.appendChild(postLocation);
+    }
 
 }
 
