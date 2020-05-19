@@ -6,7 +6,7 @@ function getCategories() {
     let URL = "http://3.22.78.154:3000/post/categories";
     fetch(
         URL
-      )
+    )
         .then(data => {
             return data.json();
         })
@@ -14,12 +14,12 @@ function getCategories() {
             const categories = data.categories;
             const categoriesSelect = document.getElementById("category-field");
             const departmentContainer = document.getElementById("categoryRow");
-            
-            for(let i = 0; i < categories.length; i++) {
+
+            for (let i = 0; i < categories.length; i++) {
                 let node = document.createElement("option");
                 let categoryCol = document.createElement("div");
                 let categoryLink = document.createElement("a");
-                
+
                 categoryCol.classList.add('col-sm');
                 categoryLink.classList.add('department');
                 categoryLink.href = encodeURI(`http://3.22.78.154:3000/search/search.html?title=&category=${categories[i].category}`);
@@ -43,11 +43,11 @@ function getCategories() {
 //shall be a function that displays 10 recent postings to the home page
 function loadRecentPosts() {
     let url = 'http://3.22.78.154:3000/post/recent?limit=10';
-    
+
     axios.get(url)
-    .then((res)=> {
-        appendData(res.data);
-    })
+        .then((res) => {
+            appendData(res.data);
+        })
 }
 
 function appendData(data) {
@@ -147,6 +147,7 @@ function postDetails(data) {
         download.removeAttribute('href');
     }
 
+    download.onclick = function () { checkCookie() };
     postTitleDiv.innerHTML = data.post.title;
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
@@ -158,6 +159,33 @@ function postDetails(data) {
     postDetails.appendChild(date);
 
     postImageDiv.appendChild(postImage);
+
+}
+
+function checkCookie() {
+    if (getCookie("userAuth") == null) {
+        window.location = '../cookie-authentication/not-logged-in.html';
+    }
+
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        }
+        else {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+        // because unescape has been deprecated, replaced with decodeURI
+        //return unescape(dc.substring(begin + prefix.length, end));
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
 
 }
 
@@ -193,7 +221,7 @@ function redirectToSearchResults() {
     var category = document.getElementById('category-field').value;
     var userInput = document.getElementById('userInput').value;
     var url = 'http://3.22.78.154:3000/search/search.html?title=' + userInput + '&category=' + category;
-    document.location.href =  encodeURI(url);
+    document.location.href = encodeURI(url);
 }
 
 function redirectToMessage(userEmail) {
