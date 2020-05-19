@@ -123,6 +123,7 @@ function postDetails(data) {
         download.classList.remove('disabled');
     }
     else {
+        document.getElementById('loginPLS').innerHTML = `In order to download free media, please login`;
         postPrice.innerHTML = `Price: $${data.post.cost}`;
         download.classList.add('disabled');
         download.removeAttribute('href');

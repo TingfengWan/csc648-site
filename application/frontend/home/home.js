@@ -146,6 +146,7 @@ function postDetails(data) {
         download.href = 'http://3.22.78.154:3000' + data.post.media_content;
         download.classList.remove('disabled');
     } else {
+        document.getElementById('loginPLS').innerHTML = `In order to download free media, please login`;
         postPrice.innerHTML = `Price: $${data.post.cost}`;
         download.classList.add('disabled');
         download.removeAttribute('href');
