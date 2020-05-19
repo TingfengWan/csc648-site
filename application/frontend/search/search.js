@@ -96,7 +96,6 @@ function postModal(id) {
  * and puts it into the modal
  */
 function postDetails(data) {
-
     let postTitleDiv = document.getElementById('post-title');
     let postDetails = document.getElementById('post-details');
     let postImageDiv = document.getElementById('post-image');
@@ -118,22 +117,23 @@ function postDetails(data) {
     postLocation.innerHTML = "";
 
     if (getCookie("userAuth") != null && data.post.cost == 0) {
-        postPrice.innerHTML = 'Price: Free';
+        postPrice.innerHTML = '<h4><strong>Price:</strong> Free</h4>';
         download.href = 'http://3.22.78.154:3000' + data.post.media_content;
         download.classList.remove('disabled');
     } else {
         document.getElementById('loginPLS').innerHTML = `Interested in buying the product? Contact the seller!`;
+        postPrice.innerHTML = `<h4><strong>Price:</strong> $${data.post.cost}</h4>`;
         if (data.post.cost == 0) {
+            postPrice.innerHTML = '<h4><strong>Price:</strong> Free</h4>';
             document.getElementById('loginPLS').innerHTML = `In order to download free media, please login.`;
         }
-        postPrice.innerHTML = `Price: $${data.post.cost}`;
         download.classList.add('disabled');
         download.removeAttribute('href');
     }
 
     postTitleDiv.innerHTML = data.post.title;
-    postDesc.innerHTML = `Description: ${data.post.post_body}`;
-    date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
+    postDesc.innerHTML = `<strong>Description:</strong> ${data.post.post_body} <p></p>`;
+    date.innerHTML = `<strong>Date created:</strong> ${formatDate(data.post.create_time)}`;
     postImage.src = data.post.media_preview;
     contact.onclick = function () { redirectToMessage(data.post.creator_email) };
 
@@ -144,12 +144,12 @@ function postDetails(data) {
     postImageDiv.appendChild(postImage);
 
     if (data.post.license != null) {
-        postLicense.innerHTML = `Licensing: ${data.post.license}`;
+        postLicense.innerHTML = `<strong>Licensing:</strong> ${data.post.license}`;
         postDetails.appendChild(postLicense);
     }
 
     if (data.post.locations.length != 0) {
-        postLocation.innerHTML = `Meet up location: ${data.post.locations}`;
+        postLocation.innerHTML = `<strong>Meet up location:</strong> ${data.post.locations}`;
         postDetails.appendChild(postLocation);
     }
 
@@ -197,7 +197,7 @@ function formatDate(date) {
         minutes = "0" + minutes;
     }
 
-    let newDate = `${month}/${day}/${year} ${hours}:${minutes}${ampm}`
+    let newDate = `${month}/${day}/${year}, ${hours}:${minutes}${ampm}`
     return newDate;
 
 }
