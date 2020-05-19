@@ -130,11 +130,17 @@ function postDetails(data) {
     let postImage = document.createElement('img');
     let postDesc = document.createElement('div');
     let postPrice = document.createElement('div');
+    let postLocation = document.createElement('div');
+    let postLicense = document.createElement('div');
     let date = document.createElement('div');
 
     postImage.classList.add("item");
+
     postDetails.innerHTML = "";
     postImageDiv.innerHTML = "";
+    postLicense.innerHTML = "";
+    postLocation.innerHTML = "";
+    
 
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
@@ -152,13 +158,23 @@ function postDetails(data) {
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
     postImage.src = data.post.media_preview;
-    contact.onclick = function () { redirectToMessage(data.post.creator_email) };
+    contact.onclick = function () { redirectToMessage(data.post.creator_email)};
 
     postDetails.appendChild(postPrice);
     postDetails.appendChild(postDesc);
     postDetails.appendChild(date);
 
     postImageDiv.appendChild(postImage);
+
+    if(data.post.license != null){
+        postLicense.innerHTML = `Licensing: ${data.post.license}`;
+        postDetails.appendChild(postLicense);
+    }
+
+    if(data.post.locations.length != 0){
+        postLocation.innerHTML = `Meet up location: ${data.post.locations}`;
+        postDetails.appendChild(postLocation);
+    }
 
 }
 
