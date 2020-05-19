@@ -140,14 +140,12 @@ function postDetails(data) {
     postImageDiv.innerHTML = "";
     postLicense.innerHTML = "";
     postLocation.innerHTML = "";
-    
-    download.onclick = function() {checkCookie();return false};
-    if (data.post.cost == 0) {
+
+    if (getCookie("userAuth") != null && data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
         download.href = 'http://3.22.78.154:3000' + data.post.media_content;
         download.classList.remove('disabled');
-    }
-    else {
+    } else {
         postPrice.innerHTML = `Price: $${data.post.cost}`;
         download.classList.add('disabled');
         download.removeAttribute('href');
@@ -157,7 +155,7 @@ function postDetails(data) {
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
     postImage.src = data.post.media_preview;
-    contact.onclick = function () { redirectToMessage(data.post.creator_email)};
+    contact.onclick = function () { redirectToMessage(data.post.creator_email) };
 
     postDetails.appendChild(postPrice);
     postDetails.appendChild(postDesc);
@@ -165,47 +163,38 @@ function postDetails(data) {
 
     postImageDiv.appendChild(postImage);
 
-    if(data.post.license != null){
+    if (data.post.license != null) {
         postLicense.innerHTML = `Licensing: ${data.post.license}`;
         postDetails.appendChild(postLicense);
     }
 
-    if(data.post.locations.length != 0){
+    if (data.post.locations.length != 0) {
         postLocation.innerHTML = `Meet up location: ${data.post.locations}`;
         postDetails.appendChild(postLocation);
     }
 
 }
 
-function checkCookie() {
-    if (getCookie("userAuth") == null) {
-        window.location = '../cookie-authentication/not-logged-in.html';
-    } else {
-        return true;
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
     }
-    
-
-    function getCookie(name) {
-        var dc = document.cookie;
-        var prefix = name + "=";
-        var begin = dc.indexOf("; " + prefix);
-        if (begin == -1) {
-            begin = dc.indexOf(prefix);
-            if (begin != 0) return null;
+    else {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+            end = dc.length;
         }
-        else {
-            begin += 2;
-            var end = document.cookie.indexOf(";", begin);
-            if (end == -1) {
-                end = dc.length;
-            }
-        }
-        // because unescape has been deprecated, replaced with decodeURI
-        //return unescape(dc.substring(begin + prefix.length, end));
-        return decodeURI(dc.substring(begin + prefix.length, end));
     }
-
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
 }
+
 
 function formatDate(date) {
     let dateObj = new Date(date);
