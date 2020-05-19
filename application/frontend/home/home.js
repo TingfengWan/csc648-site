@@ -141,7 +141,7 @@ function postDetails(data) {
     postLicense.innerHTML = "";
     postLocation.innerHTML = "";
     
-
+    download.onclick = function() {checkCookie();return false};
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
         download.href = 'http://3.22.78.154:3000' + data.post.media_content;
@@ -153,7 +153,6 @@ function postDetails(data) {
         download.removeAttribute('href');
     }
 
-    download.onclick = function () { checkCookie() };
     postTitleDiv.innerHTML = data.post.title;
     postDesc.innerHTML = `Description: ${data.post.post_body}`;
     date.innerHTML = `Date created: ${formatDate(data.post.create_time)}`;
