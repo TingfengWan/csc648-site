@@ -180,7 +180,10 @@ function postDetails(data) {
 function checkCookie() {
     if (getCookie("userAuth") == null) {
         window.location = '../cookie-authentication/not-logged-in.html';
+    } else {
+        return true;
     }
+    
 
     function getCookie(name) {
         var dc = document.cookie;

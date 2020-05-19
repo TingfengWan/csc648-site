@@ -117,7 +117,7 @@ function postDetails(data) {
     postLicense.innerHTML = "";
     postLocation.innerHTML = "";
     
-    download.onclick = function() {checkCookie();return false};
+    download.onclick = function() {checkCookie(); return false};
     if (data.post.cost == 0) {
         postPrice.innerHTML = 'Price: Free';
         download.href = 'http://3.22.78.154:3000' + data.post.media_content;
@@ -156,6 +156,8 @@ function postDetails(data) {
 function checkCookie() {
     if (getCookie("userAuth") == null) {
         window.location = '../cookie-authentication/not-logged-in.html';
+    } else {
+        return true;
     }
 
     function getCookie(name) {
