@@ -143,6 +143,14 @@ app.post("/post", (req, res) => {
       res.status(400);
       return res.send({ status: 400, message: "Could not parse request" });
     }
+    // SECURITY: CHMOD new files for Read permission ONLY For Owner
+    if ( files.media_content && files.media_content.path ) {
+      fs.chmodSync(files.media_content.path, 0400);
+    }
+    if ( files.media_preview && files.media_preview.path ) {
+      fs.chmodSync(files.media_preview.path, 0400);
+    }
+
     const queryParams = validatePostInput(fields, files); //
     console.log(queryParams);
     const query = `\
