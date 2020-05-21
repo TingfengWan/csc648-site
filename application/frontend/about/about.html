@@ -1,3 +1,6 @@
+<!-- Created by Marvin Nguyen -->
+<!-- Edited by John Joshua Gutierrez -->
+<!-- Made on Early April -->
 <!DOCTYPE HTML>
 
 
@@ -16,44 +19,137 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/5fe870a26f.js" crossorigin="anonymous"></script>
   <script src="about.js"></script>
   <link rel="stylesheet" type="text/css" href="about.css">
+  <!-- Checks if user is logged in and changes navigation bar if there is a user -->
+  <script defer src="../cookie-authentication/change-navbar.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166798695-1');
+  </script>
+
 </head>
 
 <body>
-  <div>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light" id="header">
+  <!-- Navigation bar -->
+  <div id="navbar" class="topnav text-white">
+    <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
+    <a href="../about/about.html" class="active">About</a>
+    <a id="registerButton" class="user" href="../register/register.html">Register</a>
+    <a id="loginButton" class="user" href="../login/login.html">Login</a>
+    <a id="createPostButton" class="user" href="../create-post/create-post.html">Create Post</a>
+  </div>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <!-- Static Texts -->
+  <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+    2020. For Demonstration Only</div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="white-font" href="about.html">About page</a>
-            </li>
-          </ul>
+  <div class="container">
+    <h3 class="text-center font-weight-bold">Team 03</h3>
+    <hr class="">
+    <img class="d-flex img-fluid" id="imgCenter" src="../GT-Logo.png">
+    <div class="row">
+      <div class="col col-4 span-4">
+        <div class="image-block">
+          <figure>
+
+          </figure>
         </div>
-      </nav>
-    </header>
+      </div>
+      <div class="col col-4 span-4">
 
-    <main class="container" id="about-body" role="main">
+      </div>
+      <div class="col col-4 span-4">
+
+      </div>
+    </div>
+  </div>
+
+  <div>
+      <main class="container" id="about-body" role="main">
       <div class="container">
-        <h1 class="border">About Team 03</h1>
         <p class="lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor
-          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          We are students from San Francisco State University that are trying to help each other as well as faculty
+          by providing a web service that can buy, sell and/or share digital media to its users.
         </p>
       </div>
+        <br>
+        <hr>
+        <h3 class="text-center font-weight-bold">Project Manager</h3>
+        <hr>
+        <br>
+        <div class="display-row">
+          <div class="team-lead">
+            <div id="team-lead">
+              <h2>Samuel Bahlibi</h2>
+              <h4>Team Lead</h4>
+              <p>I'm a graduating senior, from San Francisco State University, with a degree in Computer Science. I want to take the skills I've learned and apply them towards a Project Manager/ Product Manager role. I plan to take the PMP exam and get a certificate to further myself in the job market. Other than school, I love to spend my free time rock climbing and cooking. Below are my socials if you wish to connect with me!</p>
+              <a href="https://github.com/samuelbahlibi" title="GitHub">GitHub</a>
+              <a href="https://www.linkedin.com/in/samuel-bahlibi/" title="LinkedIn">LinkedIn</a>
+            </div>
+            <br>
+            <hr>
+            <h3 class="text-center font-weight-bold">Front End Team</h3>
+            <hr>
+            <br>
+            <div id="front-end">
+              <div class="front-end-team">
+                <h2>Marvin Nguyen</h2>
+                <h4>Front End Developer</h4>
+                <p>My name is Marvin Nguyen. I am a senior currently majoring in Computer Science..</p>
+                <a href="https://github.com/akirakana" title="GitHub">GitHub</a>
+                <a href="#" title="LinkedIn">LinkedIn</a>
+              </div>
+              <div class="front-end-team">
+                <h2>JJ Gutierrez</h2>
+                <h4>GitHub Master/Front End Developer</h4>
+                <p>My name is John Joshua Gutierrez. This is my 4th year studying Computer Science at San
+                  Francisco State. I'll try any food at least once except the crazy spicy peppers.</p>
+                <a href="https://github.com/jjgutierrez0314" title="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/john-joshua-b0a14117a/" title="LinkedIn">LinkedIn</a>
+              </div>
+              <div class="front-end-team">
+                <h2>Qian Hu</h2>
+                <h4>Front End Developer</h4>
+                <p>I'm in computer science major.</p>
+                <a href="https://github.com/huqian301" title="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/qian-hu-33aa91132/" title="LinkedIn">LinkedIn</a>
+              </div>
+            </div>
+            <br>
+            <hr>
+            <h3 class="text-center font-weight-bold">Back End Team</h3>
+            <hr>
+            <br>
+            <div id="back-end">
+              <div class="back-end-team">
+                <h2>Eric Ngo</h2>
+                <h4>Full Stack Developer</h4>
+                <p>I'm a 4th year Computer Science student from San Francisco State University. I like Subway.</p>
+                <a href="#" title="GitHub">GitHub</a>
+                <a href="#" title="LinkedIn">LinkedIn</a>
+              </div>
+              <div class="back-end-team">
+                <h2>Tingfeng Wan</h2>
+                <h4>Back End Developer</h4>
+                <p>I'm a senior Computer Science student from San Francisco State University.</p>
+                <a href="https://github.com/TingfengWan" title="GitHub">GitHub</a>
+                <a href="#" title="LinkedIn">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+  </div>
 
-      <!-- link about page in href="" -->
-      <div class="container">
+  <!-- link about page in href="" -->
+  <!-- <div class="container mt-5 ">
         <div class="row">
           <div class="col-sm">
             <a href="about-sam.html">
@@ -91,7 +187,7 @@
     <footer class="footer" id="footer">
       <a class="white-font" href="about.html">About page</a>
     </footer>
-  </div>
+  </div> -->
 
 </body>
 

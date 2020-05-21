@@ -1,11 +1,12 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Search test | CSC648 </title>
+    <title>Not Registered| CSC648 </title>
 
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+    <!-- redirects to home page after 3 seconds -->
+    <meta http-equiv="refresh" content="3; url=../login/login.html"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -17,31 +18,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="search.js"></script> 
-    <link rel="stylesheet" type="text/css" href="search.css">
+    
+    <link rel="stylesheet" type="text/css" href="register.css">
 </head>
 
 <body>
 
-    <div class="container">
-            <h1>Gator Trade Search</h1>
-            <h2>Team 03</h2>
-            <input id="search" class="form-control" type="text" placeholder="Search">
-
-            <select id="categories">
-                <option>Math</option>
-                <option>Science</option>
-                <option>Physical Education</option>
-                <option>Astronomy</option>
-                <option>Swimming</option>
-            </select>
-
-            <button onclick="search()">Submit</button>
+    <div>
+        <h1>You are not logged in!</h1>
+        <p> You will be redirected to the login page...<br>
+            If you are not redirected, please click <a href="../login/login.html">here</a>.
+        </p>
     </div>
 
-    <div class="container" id="search-results">
-        
-    </div>
 </body>
 
 </html>

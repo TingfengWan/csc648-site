@@ -1,0 +1,95 @@
+<!-- Created by John Joshua Gutierrez -->
+<!-- Made on Early April -->
+
+<html>
+
+<head>
+    <title>Login Page | CSC648</title>
+
+    <!-- bootstrap -->
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- local files -->
+    <link rel="stylesheet" type="text/css" href="../register/register.css">
+
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="login.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Checks if user is logged in and changes navigation bar if there is a user -->
+    <script defer src="../cookie-authentication/change-navbar.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-166798695-1');
+    </script>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div class="topnav">
+        <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
+        <a href="../about/about.html">About</a>
+        <a class="user " href="../register/register.html">Register</a>
+        <a class="user active" href="../login/login.html">Login</a>
+        <a class="user" href="../create-post/create-post.html">Create Post</a>
+    </div>
+
+    <!-- Static Texts -->
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+        2020. For Demonstration Only</div>
+
+    <!-- login input container -->
+    <form name="loginForm" class="container" onsubmit="loginUser(event)">
+        <div class="container bigger-margin margin-top border">
+            <h1 class="text-center">Gator Trade</h1>
+            <h2 class="text-center"> Login </h2>
+            <div class="form-group">
+                <label>Email:</label>
+                <input name="email" type="email" class="form-control" id="email-field" placeholder="email@sfsu.edu">
+                <div class="error" id="email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password-field">Password:</label>
+                <input name="password" type="password" class="form-control" id="password-field">
+                <div class="error" id="password-error"></div>
+            </div>
+            <!-- This is where user does not exist message appears -->
+            <h1 class="error text-center" id="login-error"></h1>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary margin-top">Login</button>
+            </div>
+
+            <div class="container text-center margin-top">
+                <p>
+                    <a href="../register/register.html"> Need an account?</a>
+                </p>
+                <p>
+                    <a href=""> Forgot your password?</a>
+                </p>
+            </div>
+        </div>
+    </form>
+
+</body>
+
+</html>

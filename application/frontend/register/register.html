@@ -1,0 +1,129 @@
+<html>
+
+<head>
+    <title>Register Page | CSC648</title>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="register.js"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- reCaptcha-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" type="text/css" href="register.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-166798695-1');
+    </script>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="../home/home.html"><img id="navBarLogo" src="../GT-Logo (new).png"></a>
+        <a href="../about/about.html">About</a>
+        <a class="user active" href="../register/register.html">Register</a>
+        <a class="user" href="../login/login.html">Login</a>
+        <a class="user" href="../create-post/create-post.html">Create Post</a>
+    </div>
+
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">SFSU Software Engineering Project CSC 648-848, Spring
+        2020. For Demonstration Only</div>
+
+    <form class="container" id="register" onsubmit="validateForm()">
+        <div class="container bigger-margin margin-top border">
+            <h1 class="text-center">Register</h1>
+            <p class="text-center">* denotes required field</p>
+
+            <div class="form-group">
+                <label>First Name:*</label>
+                <input type="text" class="form-control" name="first name" id="first-name"
+                    placeholder="Enter first name">
+                <div class="error" id="first-name-error"></div>
+            </div>
+            <div class="form-group">
+                <label>Last Name:*</label>
+                <input class="form-control" name="last name" id="last-name" placeholder="Enter last name">
+                <div class="error" id="last-name-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address:*</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+                <div class="error" id="email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="school-role">School Role:*</label>
+                <select class="form-control" name="school role" id="school-role">
+                    <option></option>
+                    <option value="Student">Student</option>
+                    <option value="Faculty">Faculty</option>
+                </select>
+                <div class="error" id="school-role-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Phone Number:*</label>
+                <input type="text" class="form-control" name="phone number" id="phone-number"
+                    placeholder="Enter phone number">
+                <div class="error" id="phone-number-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:*</label>
+                <input type="password" name="password" class="form-control" id="password">
+                <div class="error" id="password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:*</label>
+                <input type="password" class="form-control" name="confirm password" id="confirm-password">
+                <div class="error" id="confirm-password-error"></div>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="terms and conditions" id="terms-and-cond">
+                <label class="form-check-label" for="terms-and-cond">
+                    I accept the
+                </label>
+                <a href="#">terms and conditions</a> .*
+                <div class="error" id="terms-and-cond-error"></div>
+            </div>
+            <div class="g-recaptcha" data-callback='humanResponse' id="repcatcha"
+                data-sitekey="6Le6Qe8UAAAAAPk1HVSYsqk5msbebOjyCb-eXV1m"></div>
+            <input type="hidden" id="captcha" name="captcha" value="">
+            <div class="error" id="recaptcha-error"></div>
+
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary margin-top">Create Account</button>
+            </div>
+
+            <div class="container text-center margin-top">
+                <p>
+                    Already Registered? <br>
+                    <a href="../login/login.html"> Sign in</a>
+                </p>
+            </div>
+        </div>
+
+    </form>
+
+</body>
+<script type="text/javascript">
+    function humanResponse(response) {
+        console.log(response);
+        document.getElementById('captcha').value = response;
+    }
+</script>
+
+</html>

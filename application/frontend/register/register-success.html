@@ -1,10 +1,13 @@
-<!DOCTYPE HTML>
-
-
+<!-- Author: Marvin Nguyen Created on: 4/1/2020-->
 <html>
 
 <head>
-    <title>Home | CSC648</title>
+    <title>Register Successful | CSC648 </title>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <!-- redirects to home page after 3 seconds -->
+    <meta http-equiv="refresh" content="3; url=../home/home.html"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -16,25 +19,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166798695-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-166798695-1');
-    </script>
+    
+    <link rel="stylesheet" type="text/css" href="register.css">
 </head>
 
 <body>
-    <div class="container" id="about-page">
-        <h1>Team 03 Home page</h1>
-        <div class="col-sm">
-            <button onclick="document.location = '/../about/about.html'">About Us</button>
-        </div>
+
+    <div>
+        <h1>Your account has been successfully created.</h1>
+        <p> You will be redirected to home page...<br>
+            If you are not redirected, please click <a href="../home/home.html">here</a>.
+        </p>
     </div>
+
 </body>
 
 </html>
