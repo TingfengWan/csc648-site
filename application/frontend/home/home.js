@@ -57,49 +57,51 @@ function appendData(data) {
     for (var i = 0; i < data.posts.length; i++) {
 
         var post = data.posts[i];
-
-        var boarderContainer = document.createElement('div');
-        var listingContainer = document.createElement('div');
-        var fittingContainer = document.createElement('div');
-        boarderContainer.classList.add('post-border');
-        listingContainer.classList.add('listing');
-        fittingContainer.classList.add('fitting');
-
-
-        //creating elements to use
-        var divTitle = document.createElement('div');
-        var divCost = document.createElement('div');
-        var divPostTime = document.createElement('div');
-        const preview = document.createElement('img');
-        preview.classList.add("item");
-
-        //assigning the elements from http://3.22.78.154:3000/post/search
-        divTitle.innerHTML = `<h3>${post.title}</h3>`;
-        divPostTime.innerHTML = `<p>${formatDate(post.create_time)}</p>`;
-        if (post.cost == 0) {
-            divCost.innerHTML = '<p>Free</p>';
-        } else {
-            divCost.innerHTML = `<p>$${post.cost}</p>`;
+        
+        if(post.is_approved == 1) {
+            var boarderContainer = document.createElement('div');
+            var listingContainer = document.createElement('div');
+            var fittingContainer = document.createElement('div');
+            boarderContainer.classList.add('post-border');
+            listingContainer.classList.add('listing');
+            fittingContainer.classList.add('fitting');
+    
+    
+            //creating elements to use
+            var divTitle = document.createElement('div');
+            var divCost = document.createElement('div');
+            var divPostTime = document.createElement('div');
+            const preview = document.createElement('img');
+            preview.classList.add("item");
+    
+            //assigning the elements from http://3.22.78.154:3000/post/search
+            divTitle.innerHTML = `<h3>${post.title}</h3>`;
+            divPostTime.innerHTML = `<p>${formatDate(post.create_time)}</p>`;
+            if (post.cost == 0) {
+                divCost.innerHTML = '<p>Free</p>';
+            } else {
+                divCost.innerHTML = `<p>$${post.cost}</p>`;
+            }
+            preview.src = post.media_preview;
+    
+    
+            //sets id and uses it to get post details
+            boarderContainer.id = post.id;
+    
+            //makes modal appear when the container is clicked on
+            boarderContainer.setAttribute('data-toggle', 'modal');
+            boarderContainer.setAttribute('data-target', '#post');
+            boarderContainer.onclick = function () { postModal(this.id); };
+            boarderContainer.style = 'cursor: pointer';
+    
+            mainContainer.appendChild(boarderContainer);
+            boarderContainer.appendChild(listingContainer);
+            listingContainer.appendChild(divTitle);
+            listingContainer.appendChild(preview);
+            listingContainer.appendChild(fittingContainer);
+            fittingContainer.appendChild(divPostTime);
+            fittingContainer.appendChild(divCost);
         }
-        preview.src = post.media_preview;
-
-
-        //sets id and uses it to get post details
-        boarderContainer.id = post.id;
-
-        //makes modal appear when the container is clicked on
-        boarderContainer.setAttribute('data-toggle', 'modal');
-        boarderContainer.setAttribute('data-target', '#post');
-        boarderContainer.onclick = function () { postModal(this.id); };
-        boarderContainer.style = 'cursor: pointer';
-
-        mainContainer.appendChild(boarderContainer);
-        boarderContainer.appendChild(listingContainer);
-        listingContainer.appendChild(divTitle);
-        listingContainer.appendChild(preview);
-        listingContainer.appendChild(fittingContainer);
-        fittingContainer.appendChild(divPostTime);
-        fittingContainer.appendChild(divCost);
     }
 }
 
