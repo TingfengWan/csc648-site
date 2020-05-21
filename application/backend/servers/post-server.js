@@ -1,5 +1,5 @@
 /*
-Author: Eric Ngo, Ting Feng
+Author: Eric Ngo, Tingfeng Wan
 Date: April 1st, 2020
 */
 
