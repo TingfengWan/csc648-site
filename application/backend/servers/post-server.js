@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mysql = require("mysql");
 const formidable = require("formidable");
+const fs = require("fs");
 
 const {
   postServerPort,
